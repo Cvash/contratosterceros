@@ -1,0 +1,44 @@
+
+
+html, body {
+    height: 100%;
+}
+
+#sidebar {
+    height: 100%;
+    min-height: 100vh;
+    min-width: 180px;
+}
+
+.fa-redhat {
+    width: 100%;
+    height: 50px;;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.example-container {
+    height: 400px;
+    overflow: auto;
+}
+table {
+    width: 100%;
+}
+ng-container {
+    width:  150px;
+}
+
+.btn-whatsapp {
+    display:block;
+    width:50px;
+    height:50px;
+    color: #fff;
+    position: fixed;
+    right:20px;
+    bottom:20px;
+    border-radius:50%;
+    line-height:80px;
+    text-align:center;
+    z-index:999;
+}
+
