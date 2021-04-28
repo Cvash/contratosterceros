@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center" class="width: 70%;">
+  <div>
+    <!-- <div>{{data.lista_quiebres | json}}</div> -->
+    <form [formGroup]="motivoSubmotivoForm">
+      <div class="d-flex justify-content-center">
+        <div style="text-align: left;" class="mb-3 anuncio">
+          Fin de atención
+        </div>
+      </div>
+       <div class="mb-4">
+        <label for="" class="labels">Motivo</label>
+          <select name="motivo" id="motivo" class="select-ajuste custom-select custom-select-sm mb-3" (change)="onSelectMotivo($event.target.value)">
+            <option selected="true" disabled="disabled">Seleccione el motivo</option>
+            <option value="{{ motivo.id }}" *ngFor="let motivo of lista_motivos; index as i">{{ motivo.name }}</option>
+          </select>
+       </div>
+
+        <div class="mb-4">
+          <label for="" class="labels">Submotivo</label>
+          <select name="submotivo" id="submotivo" class="select-remedy custom-select custom-select-sm mb-3" (change)="onSelectSubMotivo($event.target.value)">
+            <option selected="true" disabled="disabled">Seleccione el submotivo</option>
+            <option value="{{ submotivo.id }}" *ngFor="let submotivo of lista_submotivos2; index as i">{{ submotivo.name }}</option>
+          </select>
+        </div>
+
+     <div class="d-flex justify-content-center mt-5">
+      <div class="d-flex justify-content-center mr-3" style="display: inline-block!; float: right;">
+        <button type="submit" [disabled]="motivoSubmotivoForm.invalid" mat-button  mat-raised-button color="primary" (click)="updateMotivoSubmotivo(motivoSubmotivoForm.value)">
+          Guardar
+        </button>
+      </div>
+      <div class="d-flex justify-content-center" style="display: inline-block;" >
+        <button mat-button mat-dialog-close mat-dialog-close="false" mat-raised-button color="warn">
+          Cancelar
+        </button>
+      </div>
+     </div>
+    </form>
+  </div>
+</div>

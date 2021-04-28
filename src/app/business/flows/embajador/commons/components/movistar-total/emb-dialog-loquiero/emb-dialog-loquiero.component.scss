@@ -1,0 +1,49 @@
+.te-llamamos {
+	background-color: #5bc500;
+	color: #fff;
+	border: 0;
+	display: block;
+	width: 280px;
+	padding: 12px !important;
+	font-size: 18px !important;
+	border-radius: 6px;
+	margin-top: 4px !important;
+	text-align: center;
+	cursor: pointer;
+	font-family: MovistarText, Telefonica, sans-serif !important;
+}
+
+.caja-texto {
+	border: 1px solid #bbb !important;
+	background-color: #eee !important;
+	border-radius: 4px !important;
+	padding: 5px !important;
+	display: block;
+	width: 280px !important;
+	margin-bottom: 18px !important;
+	height: inherit !important;
+	max-width: inherit !important;
+}
+
+.labels {
+	color: #777;
+	font-weight: 400 !important;
+	display: inline-block !important;
+	margin-bottom: 4px !important;
+	font-size: 16px;
+}
+
+.anuncio {
+	text-align: center;
+	color: #777;
+	width: inherit !important;
+	margin: 10px 0 20px 0 !important;
+}
+
+.titulo {
+	font-size: 26px;
+	text-align: center;
+	color: #777;
+	width: inherit !important;
+	margin: 2px 0 10px 0 !important;
+}

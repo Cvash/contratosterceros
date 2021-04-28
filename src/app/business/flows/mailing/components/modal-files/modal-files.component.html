@@ -1,0 +1,63 @@
+<div >
+    <span class="modalheader mb-3 main-title">Carga de archivos
+        <span style="flex: 1 1 auto"></span>
+        <span  (click)="closeModal()" class="modalclosebutton"> <em class="flaticon2-delete"></em> </span>
+    </span>
+    <div class="modal_body">
+        
+        <p class="sub-title" style="text-decoration: underline;">Archivos cargados :</p>
+        <div style="flex-wrap: wrap;display: flex;justify-content: flex-end;">
+            <span (click)="removeAllAttach()" style="display: block;border-radius: 4px;
+            background-color: #dc3545;color: #ffffff;
+            padding: 6px 3px;cursor: pointer; margin-bottom: 5px;">
+                Remover todos los archivos</span></div>
+        <div class="row tab_overflow">  
+            
+            <table  aria-describedby="filesUpload" class="table_files table table-hover">
+                <thead>
+                    <tr>                
+                        <th scope="file" class="tb_r">Archivo</th>
+                        <th scope="status" >Estado</th>
+                        <th scope="empty"></th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="!loading">
+                    <tr *ngFor="let obj of atachedFiles">
+                        <td>{{obj.name}}</td>
+                        <td *ngIf="obj.loading">  
+                            <mat-spinner diameter="20" style="margin: auto;" ></mat-spinner> 
+                        </td>
+                        <td *ngIf="!obj.loading">  
+                            <em *ngIf="obj.status === 2" style="color: #5BC500;" class="flaticon2-check-mark"></em>
+                            <em *ngIf="obj.status === 3" style="color: #dc3545;" class="flaticon2-delete"></em>
+                        </td>
+                        <td>
+                            <button (click)="removeAttach(obj.id)" class="btn_delete">
+                                <em *ngIf="!obj.loading" class="flaticon2-trash"></em>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody  *ngIf="loading">                
+                    <tr style="border-bottom: none;"><td colspan="3">
+                        <mat-spinner style="margin: auto;" ></mat-spinner>
+                    </td></tr>
+                </tbody>
+            </table>    
+        </div>
+        <div class="row">
+           
+            <button (click)="clickAttachFile()" mat-raised-button class="filebuton mb-3">
+                Agregar archivos
+            </button>
+            <div style="flex: 1 1;"></div>
+            <!-- <button  mat-raised-button class="filebuton2 mb-3">
+                Borrar todos
+            </button> -->
+            <button (click)="closeModal()" mat-raised-button class="filebuton2 mb-3">
+                Aceptar
+            </button>
+            <input #atachfileInput multiple="multiple" class="fileinput" type="file" (change)="attachFileChange($event)"/>
+        </div>
+    </div>
+</div>

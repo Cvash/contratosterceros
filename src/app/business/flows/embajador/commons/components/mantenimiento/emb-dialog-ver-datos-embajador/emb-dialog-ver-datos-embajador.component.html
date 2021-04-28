@@ -1,0 +1,35 @@
+<h2 mat-dialog-title class="titulo text-center main-title">Datos del embajador</h2>
+
+<mat-dialog-content>
+	<div class="d-flex justify-content-center">
+		
+    <table aria-describedby="verDatos" class="table table-hover table-bordered">
+      <thead>
+        <tr>
+          <th scope="col"><strong>Nombre:</strong></th>
+          <td>{{ userName }}</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- <div>{{ data.element | json }}</div> -->
+          <th scope="row"><strong>Celular:</strong></th>
+          <td>{{data.element.id_dhr_red_incident.cell_emb}}</td>
+        </tr>
+        <tr>
+          <th scope="row"><strong>Correo electrónico:</strong></th>
+          <td>{{data.element.id_dhr_red_incident.mail_emb}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    
+  </div>
+  <div class="d-flex justify-content-center">
+    <div>
+      <button mat-raised-button color="warn" mat-dialog-close mat-dialog-close="true">
+        Salir
+      </button>
+    </div>
+  </div>
+</mat-dialog-content>

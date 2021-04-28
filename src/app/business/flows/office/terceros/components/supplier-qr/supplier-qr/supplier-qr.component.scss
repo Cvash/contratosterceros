@@ -1,0 +1,76 @@
+.mqr-cip{
+    text-align: center;
+    color: #00a9e0;
+    font-size: 14px;
+}
+.mqr-info{
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    align-items: center;
+}
+.qr-status{
+    background-color: #5bc500;
+    color: #fff;
+    padding: 1px 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+}
+.qr-vencimiento{
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    color: #979797;
+}
+.qr-recomendaciones-list{
+    font-size: 12px;
+    line-height: 20px;
+    text-align: justify;
+    color: #979797;
+}
+.qr-block{
+    width: 150px;
+    margin: 15px auto;
+    /* background: #000; */
+    font-size: 80px;
+    text-align: center;
+    color: #ad8e36;
+}
+.button-terceros-cont {
+    display: flex;
+    width: 100%;
+}
+.button-terceros-primary{
+    width: 90%;
+    display: block;
+    margin: 5px auto;
+    color: #fff;
+    background-color: #5bc500;
+}
+.button-terceros-secondary{
+    width: 90%;
+    display: block;
+    margin: 5px auto;
+    border: solid 2px #5bc500;
+    color: #5bc500;
+    background-color: transparent;
+}
+.close-qr{
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 12px;
+    border: none;
+    color: #979797;
+    font-size: 12px;
+}
+.title-form-access{ 
+    text-align: center;font-size: 15px;
+}

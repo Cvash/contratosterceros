@@ -1,10 +1,14 @@
 import  {Component, ViewEncapsulation } from '@angular/core';
-import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { PageEvent } from '@angular/material/paginator';
+
+
+/* llamamos al service del back */
+import { TercerosService } from '../service/terceros.service';
+
 import { MatDialog } from '@angular/material/dialog';
-
-
-
+import { DialogContentExampleDialogComponent } from '../popup/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { VerGestoresComponent } from '../popup/ver-gestores/ver-gestores.component';
 export interface PeriodicElement {
   position: number;
   name: string;
@@ -20,20 +24,15 @@ export interface PeriodicElement {
   costoTerceros: string;
   comentarios: string;
   contactar: number;
+  contagiados: number;
+  recuperados: number;
+  vacunados: number;
+  riesgo: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', subActividad: 'ejemplo', descripcion: 'H', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '132456', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456},
-  {position: 2, name: 'Helium', subActividad: 'ejemplo', descripcion: 'He', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '132456', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456},
-  {position: 3, name: 'Lithium', subActividad: 'ejemplo', descripcion: 'Li', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '132456', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456},
-  {position: 4, name: 'Beryllium', subActividad: 'ejemplo', descripcion: 'Be', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '132456', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456},
-  {position: 5, name: 'Boron', subActividad: 'ejemplo', descripcion: 'B', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '132456', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456},
-  {position: 6, name: 'Carbon', subActividad: 'ejemplo', descripcion: 'C', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '132456', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456},
-  {position: 7, name: 'Nitrogen', subActividad: 'ejemplo', descripcion: 'N', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '132456', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456},
-  {position: 8, name: 'Oxygen', subActividad: 'ejemplo', descripcion: 'O', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '132456', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456},
-  {position: 9, name: 'Fluorine', subActividad: 'ejemplo', descripcion: 'F', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '132456', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456},
-  {position: 10, name: 'Neon', subActividad: 'ejemplo', descripcion: 'Ne', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '132456', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456},
-];
+  {position: 1, name: 'Hydrogen', subActividad: 'ejemplo', descripcion: 'H', editar:'Hola', numContrato: '1', gestor: 'hola', fechaInicio:'01/01/21', fechaFin: '01/02/21', ftes: '1', estado: 'solido', costoTerceros: '15', comentarios:'mensaje', contactar: 123456, contagiados: 123, recuperados: 123, vacunados: 132, riesgo: 'riesgo'},
+ ];
 
 
 @Component({
@@ -43,15 +42,100 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class TablaComponent {
 
-  displayedColumns: string[] = ['position', 'name', 'subActividad', 'descripcion', 'editar', 'numContrato', 'gestor', 'fechaInicio', 'fechaFin', 'ftes', 'estado', 'costoTerceros', 'comentarios', 'contactar'];
+
+
+  displayedColumns: string[] = ['position', 'name', 'subActividad', 'descripcion', 'editar', 'numContrato', 'gestor', 'fechaInicio', 'fechaFin', 'ftes', 'estado', 'costoTerceros', 'comentarios', 'contactar', 'contagiados', 'recuperados', 'vacunados', 'riesgo'];
   dataSource = ELEMENT_DATA;
 
   faCoffee = faCoffee;
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog,
+    /* Se crea una varaiable del tipo del servcio, en este caso de terceroService y se usa en el ngOnInit */
+    private tercerosService: TercerosService,
+    ) {}
+
+     listarTerceros: any = [];
+     listarContractExp: any = [];
+
+    ngOnInit(): void {
+      this.sumaFtes(),
+      this.sumaGastoTotal()
+
+     this.listarUsusarios();
+
+    }
+
+    listarUsusarios(){
+
+       /* codigo para el backend el suscribe es para recibir una respuesta y el error */
+       this.tercerosService.getTerceros().subscribe(
+        (res) =>{
+          this.listarTerceros = res;
+          console.log(this.listarTerceros);
+        }, (err)=> {
+          console.log("Error de prueba", err);
+       }
+      );
+    }
 
 
-  openDialog(){}
+
+/* Inicio de PopUp */
+  openDialog(){
+    const dialogRef = this.dialog.open( DialogContentExampleDialogComponent );
+
+    dialogRef.afterClosed().subscribe( result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  /* Fin de PopUp */
+
+  verGestores() {
+    const ver_gestores = this.dialog.open( VerGestoresComponent );
+
+      ver_gestores.afterClosed().subscribe( result => {
+      console.log(`Dialog result: ${result}`)
+    });
+  }
+
+
+
+
+  /* Inicio de los totales acumulados en en los valores de 1Q, 2Q */
+  totalCantTrabajadoresTerciarizados: number = 0;
+  totalGastosTotales: number = 0;
+
+  sumaFtes(){
+    ELEMENT_DATA.forEach( element => {
+      this.totalCantTrabajadoresTerciarizados += Number(element.ftes)
+    });
+  }
+
+  sumaGastoTotal() {
+    ELEMENT_DATA.forEach ( element => {
+      this.totalGastosTotales += Number( element.costoTerceros );
+    });
+  }
+
+  /*  Inicio de la paginacion de la tabla  */
+
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
+  }
+
+  /*  Fin de la paginacion de la tabla  */
+
 
 
 }

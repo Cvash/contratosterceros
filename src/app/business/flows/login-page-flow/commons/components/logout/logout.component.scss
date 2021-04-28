@@ -1,0 +1,113 @@
+@import '../../../../../../../assets/styles/variables.scss';
+
+
+.btn-view-logout:hover {
+	background-color: #e9426d;
+	border: 2px groove #e9426d;
+	border-radius: 5px;
+	margin-left: 10px;
+	transition: 0.7s;
+	color: #ffffff;
+}
+.dropdown-menu-back {
+	background-color: $color-celeste;
+	transition: 0.4s;
+	width: auto;
+	margin-top: -2px;
+}
+.dropdown-menu:active {
+	transition: 0.4s;
+}
+.back {
+	bottom: 0;
+	position: fixed;
+}
+
+.href-logo {
+	margin: auto;
+	display: flex;
+}
+.size-image {
+	width: 120px;
+}
+
+.elipse-css {
+	padding-left: 0;
+	justify-content: center;
+}
+
+.menu-drow-show {
+	width: 350px;
+	min-width: 70px;
+	margin-top: 15px;
+}
+.emp-name {
+	margin-top: 34px;
+	margin-left: 10px;
+	font-size: 13px;
+}
+
+.change-password {
+	margin-top: 50px;
+	font-size: 11px;
+}
+
+.clear-line {
+	height: 1px;
+	width: 100%;
+	background-color: #c59d9d;
+	margin-bottom: 10px;
+}
+
+
+.icon-profile {
+	color: #fff;
+	font-size: 60px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	margin-top: 30px;
+}
+
+.btn-view-profile {
+	color: $color-celeste;
+	border: 2px groove $color-celeste;
+	border-radius: 5px;
+	margin-left: 10px;
+	transition: 0.7s;
+	font-size: 13px;
+	vertical-align: middle;
+}
+.user-name-pop-up {
+	color: #fff;
+	text-align: center;
+}
+
+.btn-view-profile:hover {
+	background-color: $color-celeste;
+	border: 2px groove $color-celeste;
+	border-radius: 5px;
+	margin-left: 10px;
+	transition: 0.7s;
+	color: #ffffff;
+}
+
+.btn-view-logout {
+	color: #e9426d;
+	border: 2px groove #e9426d;
+	border-radius: 5px;
+	margin-left: 10px;
+	transition: 0.7s;
+	font-size: 13px;
+	vertical-align: middle;
+}
+
+@media(max-width:500px){
+	.icon-profile {
+		color: #fff;
+		font-size: 60px;
+
+	}
+	.emp-name {
+		font-size: 13px;
+	}
+}

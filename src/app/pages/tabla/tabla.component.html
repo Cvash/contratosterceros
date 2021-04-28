@@ -1,206 +1,207 @@
 
+<!--  Inicio de breadcrumb -->
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="#">Tabla</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Gráficos</li>
+  </ol>
+</nav>
+
+<!--  Fin de breadcrumb -->
+
+
 
 <p>La ultima actualizacion fue: 01/01/21</p>
 
 
-  <!-- Aqui inicia los cuadros de los trimestres -->
+<!-- Aqui inicia los cuadros de los trimestres -->
 
-  <div class="container">
-    <div class="row">
-      <div class="col-10">
-        <table class="table table-striped table-bordered table-hover">
-          <thead>
-            <tr>
-              <th></th>
-              <th>1Q</th>
-              <th>2Q</th>
-              <th>3Q</th>
-              <th>4Q</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>FTES</td>
-              <td>Suma</td>
-              <td>Suma</td>
-              <td>Suma</td>
-              <td>Suma</td>
-            </tr>
-            <tr>
-              <td>Cant. de contratos</td>
-              <td>Suma</td>
-              <td>Suma</td>
-              <td>Suma</td>
-              <td>Suma</td>
-            </tr>
-            <tr>
-              <td>Gasto Total</td>
-              <td>Suma</td>
-              <td>Suma</td>
-              <td>Suma</td>
-              <td>Suma</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-2">
-        <button type="button" class="btn btn-outline-primary">Editar Encabezados</button>
-      </div>
+<div class="container" style="text-align: center;">
+  <div class="row">
+    <div class="col-10">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th></th>
+            <th>1Q</th>
+            <th>2Q</th>
+            <th>3Q</th>
+            <th>4Q</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>FTES</td>
+            <td>{{ totalCantTrabajadoresTerciarizados }}</td>
+            <td>suma</td>
+            <td>Suma</td>
+            <td>Suma</td>
+          </tr>
+          <tr>
+            <td>Cant. de contratos</td>
+            <td>Suma</td>
+            <td>Suma</td>
+            <td>Suma</td>
+            <td>Suma</td>
+          </tr>
+          <tr>
+            <td>Gasto Total</td>
+            <td>{{totalGastosTotales}}</td>
+            <td>Suma</td>
+            <td>Suma</td>
+            <td>Suma</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <!-- <div class="col-2">
+      <button type="button" class="btn btn-outline-primary">Editar Encabezados</button>
+    </div> -->
   </div>
-
-  
-
-  <!-- Aqui finaliza los cuadros de los trimestres -->
-
-  <div class="espace" style="margin: 50px  auto;">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-10 col-lg-8">
-      <form class="card card-sm">
-        <div class="card-body row no-gutters align-items-center">
-          <div class="col-auto">
-            <i class="fas fa-search h4 text-body"></i>
-              </div>
-              <!--end of col-->
-                <div class="col">
-                  <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Busqueda general...">
-                </div>
-                  <!--end of col-->
-                <div class="col-auto">
-                <button class="btn btn-lg btn-success" type="submit">Buscar</button>
-          </div>
-          <!--end of col-->
-        </div>
-      </form>
-      </div>
-    <!--end of col-->
-    </div>
-
-  
-  </div>
-
-  <!-- Botones -->
-
-    <section>
-      
-      <div class="example-button-row">
-        <button class="buttom" mat-raised-button color="primary">Enviar Por Correo</button>
-        <button class="buttom" mat-button (click)="openDialog()" mat-raised-button color="primary">Lista de Gestores Pendientes</button>
-        <button class="buttom" mat-raised-button color="primary">Ver Gráficos</button>
-        <button class="buttom" mat-raised-button color="primary">Configuración de Periodo</button>
-        <button class="buttom" mat-raised-button color="primary">Ver Gestores</button>
-        <button class="buttom" mat-raised-button color="primary">Ver Base Histórica</button>
-        <button class="buttom" mat-raised-button color="primary">Descargar</button>
-      </div>
-     
-    </section>
-
-  <!-- Fin de botones -->
-
-<br>
-<div class="example-container mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" >
-
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-  
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-  
-    <!-- Weight Column -->
-    <ng-container matColumnDef="subActividad">
-      <th mat-header-cell *matHeaderCellDef> Sub Actividad </th>
-      <td mat-cell *matCellDef="let element"> {{element.subActividad}} </td>
-    </ng-container>
-  
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="descripcion">
-      <th mat-header-cell *matHeaderCellDef> Descripcion </th>
-      <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
-    </ng-container>
-
-    <!-- Editar -->
-    <ng-container matColumnDef="editar">
-      <th mat-header-cell *matHeaderCellDef> Editar </th>
-      <td mat-cell *matCellDef="let element"> {{element.editar}} </td>
-    </ng-container>
-
-    <!-- Numero de Contrato -->
-    <ng-container matColumnDef="numContrato">
-      <th mat-header-cell *matHeaderCellDef> Número de Contrato </th>
-      <td mat-cell *matCellDef="let element"> {{element.numContrato}} </td>
-    </ng-container>
-
-    <!-- Gestor -->
-    <ng-container matColumnDef="gestor">
-      <th mat-header-cell *matHeaderCellDef> Gestor </th>
-      <td mat-cell *matCellDef="let element"> {{element.gestor}} </td>
-    </ng-container>
-
-    <!-- Fecha de Inicio -->
-    <ng-container matColumnDef="fechaInicio">
-      <th mat-header-cell *matHeaderCellDef> Fecha de Inicio </th>
-      <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
-    </ng-container>
-
-    <!-- Fecha Fin -->
-    <ng-container matColumnDef="fechaFin">
-      <th mat-header-cell *matHeaderCellDef> Fecha Fin </th>
-      <td mat-cell *matCellDef="let element"> {{element.fechaFin}} </td>
-    </ng-container>
-
-    <!-- FTES -->
-    <ng-container matColumnDef="ftes">
-      <th mat-header-cell *matHeaderCellDef> FTES </th>
-      <td mat-cell *matCellDef="let element"> {{element.ftes}} </td>
-    </ng-container>
-
-    <!-- Estado -->
-    <ng-container matColumnDef="estado">
-      <th mat-header-cell *matHeaderCellDef> Estado</th>
-      <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
-    </ng-container>
-
-    <!-- Costos Terceros -->
-    <ng-container matColumnDef="costoTerceros">
-      <th mat-header-cell *matHeaderCellDef> Costo Terceros </th>
-      <td mat-cell *matCellDef="let element"> {{element.costoTerceros}} </td>
-    </ng-container>
-
-    <!-- Comentarios -->
-    <ng-container matColumnDef="comentarios">
-      <th mat-header-cell *matHeaderCellDef> Comentarios </th>
-      <td mat-cell *matCellDef="let element"> {{element.comentarios}} </td>
-    </ng-container>
-
-    <!-- Contactar -->
-    <ng-container matColumnDef="contactar">
-      <th mat-header-cell *matHeaderCellDef> Contactar </th>
-      <td mat-cell *matCellDef="let element"> 
-        <i class="fa fa-whatsapp" aria-hidden="true"></i>
-        <!-- <fa-icon [icon] = "faCoffee"></fa-icon> -->
-        <i class="fab fa-whatsapp"></i>
-        {{element.contactar}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
 </div>
 
-  <!-- Prueba  del boton de Whatsapp-->
-  <div class="btn-whatsapp">
-    <a href="https://api.whatsapp.com/send?phone=51902257704" target="_blank">
-    <img src="http://s2.accesoperu.com/logos/btn_whatsapp.png" alt="">
-    </a>
+
+
+<!-- Aqui finaliza los cuadros de los trimestres -->
+
+<div class="espace" style="margin: 50px  auto; text-align: center;">
+<div class="row justify-content-center">
+  <div class="col-12 col-md-10 col-lg-8">
+    <form class="card card-sm">
+      <div class="card-body row no-gutters align-items-center">
+        <div class="col-auto">
+          <i class="fas fa-search h4 text-body"></i>
+            </div>
+            <!--end of col-->
+              <div class="col">
+                <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Busqueda general...">
+              </div>
+                <!--end of col-->
+              <div class="col-auto">
+                <button class="btn btn-lg movistar-celeste"
+                        type="submit"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Se podrá buscar por:
+                        -Dirección usuaria
+                        -Gerencia usuaria
+                        -Gestor
+                        -Proceso
+                        -Sub actividad
+                        -Canal/Colectivo
+                        - Proveedor
+                        -nivel de riesgo">Buscar</button>
+              </div>
+        <!--end of col-->
+      </div>
+    </form>
+    </div>
+  <!--end of col-->
   </div>
 
+
+</div>
+
+<!-- Botones -->
+
+  <section>
+
+    <div class="example-button-row">
+      <button class="buttom movistar-celeste" mat-raised-button >Enviar Por Correo</button>
+      <button class="buttom movistar-celeste" mat-button (click)="openDialog()" mat-raised-button >Lista de Gestores Pendientes</button>
+      <button class="buttom movistar-celeste" mat-button (click)="verGestores()" mat-raised-button >Ver Gráficos</button>
+      <button class="buttom movistar-celeste" mat-raised-button >Configuración de Periodo</button>
+      <button class="buttom movistar-celeste" mat-raised-button >Ver Gestores</button>
+      <button class="buttom movistar-celeste" mat-raised-button >Ver Base Histórica</button>
+      <button class="buttom movistar-celeste" mat-raised-button >Descargar</button>
+    </div>
+
+  </section>
+
+<!-- Fin de botones -->
+
+<br>
+
+
+
+
+
+<!-- Tabla para la muestra de los datos de la base de datos -->
+<div id="tabla1">
+  <div>
+  <table class="table table-striped  table-responsive ">
+    <thead class="movistar-celeste">
+      <tr>
+        <th class="col">#</th>
+        <th class="col">Name</th>
+        <th class="col">Sub Actividad</th>
+        <th class="col">Descripción</th>
+        <th class="col">Editar</th>
+        <th class="col">Número de contrato</th>
+        <th class="col">Gestor</th>
+        <th class="col">Fecha Inicio</th>
+        <th class="col">Fecha Fin</th>
+        <th class="col">FTES</th>
+        <th class="col">Estado</th>
+        <th class="col">Costos terceros</th>
+        <th class="col">Comentarios</th>
+        <th class="col">Contactar</th>
+        <th class="col">Contagiados</th>
+        <th class="col">Recuperados</th>
+        <th class="col">Vacunados</th>
+        <th class="col">Riesgos</th>
+      </tr>
+    </thead>
+
+    <tbody class="table-light">
+
+
+      <tr *ngFor=" let terceros of listarTerceros; index as i; " >
+
+        <th scope="col">{{ i + 1 }}</th>
+
+        <td>{{ terceros.id_contract_expenses.name }}</td>
+        <td>{{ terceros.canal }}</td>
+        <td>{{ terceros.description }}</td>
+        <td>{{ terceros.description }}</td>
+        <td>{{ terceros.description }}</td>
+        <td>{{ terceros.manager }}</td>
+        <td>{{ terceros.start_date }}</td>
+        <td>{{ terceros.end_date }}</td>
+        <td>{{ terceros.description }}</td>
+        <td>{{ terceros.description }}</td>
+        <td>{{ terceros.description }}</td>
+        <td>{{ terceros.comments }}</td>
+        <td>{{ terceros.description }}</td>
+        <td>{{ terceros.description }}</td>
+        <td>{{ terceros.description }}</td>
+        <td>{{ terceros.description }}</td>
+        <td>{{ terceros.description }}</td>
+      </tr>
+
+
+    </tbody>
+  </table>
+  </div>
+
+</div>
+<div class="cont-pagination">
+  <!-- Inicio Paginacion -->
+<div id="pagination">
+  <mat-paginator [length]="length"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page)="pageEvent = $event">
+  </mat-paginator>
+
+  <div *ngIf="pageEvent">
+    <h5>Page Change Event Properties</h5>
+    <div>List length: {{pageEvent.length}}</div>
+    <div>Page size: {{pageEvent.pageSize}}</div>
+    <div>Page index: {{pageEvent.pageIndex}}</div>
+  </div>
+</div>
+<!-- Fin Paginacion -->
+</div>

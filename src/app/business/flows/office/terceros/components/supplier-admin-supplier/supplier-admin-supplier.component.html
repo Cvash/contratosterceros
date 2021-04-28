@@ -1,0 +1,227 @@
+<div style="width: 90%;margin-left: auto;margin-right: auto;" [formGroup]="supplierForm.supplierAdmin">
+    <div class="titlecomp">
+        <div style="display: flex;">
+            <div>
+                <p class="main-title">Panel de administración </p>
+                <p class="sub-title">Administra a tu equipo</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div *ngIf="!loading && deshabilitados.length > 0" class="cardtdp">
+        <div class="cardtdp-header" style="background-color: #de5151;"> ACCIONES REQUERIDAS | {{company.companyName  + " - " +  company.name}}</div>  
+        <div class="cardtdp-content">
+            <div style="overflow: auto;">
+                <table aria-describedby="supplierAdminSupplier" class="terceros-table">
+                    <thead>
+                        <tr>
+                            <th scope="DNI">DNI</th>
+                            <th scope="NAME">Nombre</th>
+                            <th scope="MAIL">Correo</th>
+                            <th scope="CODE">Código</th>
+                            <th scope="STATUS">Estado</th>
+                            <th scope="DETAILS">Detalle</th>
+                            <th scope="DATE">Fecha</th>
+                            <th scope="ACTION">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sup of deshabilitados">
+                            <td><strong>{{sup.nationalId}}</strong></td>
+                            <td>{{sup.name + ' ' + sup.lastName1}}</td>
+                            <td>{{sup.mail}}</td>
+                            <td>{{sup.codeCompany}}</td>
+                            <td><strong>{{getCoronaStatus(sup.coronaStatus)}}</strong></td>        
+                            <td>{{sup.statusDetail}}</td>                 
+                            <td><strong> {{sup.updatedAt | date:'dd/MM/yyyy'}} </strong></td>
+                            <td>
+                                <button (click)="habilitar(sup)" class="link-edit">Habilitar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div [hidden]="loading" class="cardtdp">
+        <div class="cardtdp-header"> Lista de empleados</div>  
+        <div class="cardtdp-content">
+            <div class="panel-row">
+                <div>
+                    <img style="background-color: #5bc500; width: 50px; border-radius: 25px;"
+                    alt="supplier"  src="../../../../../../assets/images/media/logos/terceros.png">
+                </div>
+                <div style="padding: 4px 10px;">
+                    <div style="font-size: 14px;font-weight: 500;"> <strong>Empresa:</strong> {{companyName}}</div>
+                    <div style="font-size: 14px;font-weight: 500;"> <strong>Servicio:</strong> 
+                        <mat-form-field class="text-center" style="width: 250px;">
+                            <mat-label class="text-center text-primary"></mat-label>
+                            <mat-select formControlName="serviceId" (selectionChange)="laodData(1)">
+                                <mat-option *ngIf="suppliersCompanyService.length>1" [value]="0">Mostrar todos..</mat-option>
+                              <mat-option *ngFor="let value of suppliersCompanyService" [value]="value.id">
+                                {{value.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+    
+                </div>
+                <div style="flex:  1 1;"></div>
+                <div class="panel-search-terceros">
+                    <div>
+                        <button  (click)="newTercero()"  class="btn-cahrgesupp"><em class="fas fa-user-plus"></em> Nuevo usuario</button>
+                        <button  (click)="masiveChargeModal()" class="btn-cahrgesupp-fill"><em class="far fa-file-excel"></em> Carga masiva</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <img src="../../../../../../assets/images/media/formSections/company.png"
+                      alt="company"
+                      class="img rounded mx-auto d-block">
+                      <h3 class="text-center" style="color: #00a9e0;">Usuarios Disponibles</h3>
+              </div>
+            </div>
+            <div class="panel-search-terceros" style="width: 100%;">
+                <label class="panel-terceros-label">Buscar colaborador tercero</label>               
+                    <mat-form-field appearance="fill">
+                        <mat-label>Buscar por..</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar por correo, dni, codigo de empresa, etc" style="width: 100%;" #input>
+                    </mat-form-field>
+                
+            </div>
+            <div style="overflow: auto;">
+                <table aria-describedby="supplierAdminSupplier2" mat-table [dataSource]="dataSource" class="terceros-table table-bordered table-hover">
+                    <ng-container matColumnDef="DOCUMENT">
+                      <th scope="DNI" mat-header-cell *matHeaderCellDef> Dni </th>
+                      <td mat-cell *matCellDef="let element"> {{element.nationalId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="NAME">
+                      <th scope="NAME" mat-header-cell *matHeaderCellDef> Nombre </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name + ' ' + element.lastName1}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="MAIL">
+                      <th scope="MAIL" mat-header-cell *matHeaderCellDef> Correo </th>
+                      <td mat-cell *matCellDef="let element"> {{element.mail}} </td>
+                    </ng-container>
+                  
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="CODECOMPANY">
+                      <th scope="CODE_COMPANY" mat-header-cell *matHeaderCellDef> Código empresa </th>
+                      <td mat-cell *matCellDef="let element"> {{element.codeCompany}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="SEX">
+                        <th scope="GENDER" mat-header-cell *matHeaderCellDef> Genero </th>
+                        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="SERVICE">
+                        <th scope="SERVICE" mat-header-cell *matHeaderCellDef> Servicio </th>
+                        <td mat-cell *matCellDef="let element"> {{element.serviceName}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="STATUS">
+                        <th scope="STATUS" mat-header-cell *matHeaderCellDef> Estado </th>
+                        <td mat-cell *matCellDef="let element"> <strong>{{getCoronaStatus(element.coronaStatus)}}</strong> </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="CHECKING">
+                        <th scope="CHECKING" mat-header-cell *matHeaderCellDef> Pase de ingreso </th>
+                        <td mat-cell *matCellDef="let element" > 
+                        <span *ngIf="element.statusToken=='Generado'" style="background-color: #5bc500;color: #ffffff;padding: 5px 8px;border-radius: 5px;">{{element.statusToken}}</span> 
+                        <span *ngIf="element.statusToken=='Bloqueado'" style="background-color: #e87171;color: #ffffff;padding: 5px 8px;border-radius: 5px;">{{element.statusToken}}</span> 
+                        <span *ngIf="element.statusToken=='Pendiente'" style="background-color: #00a9e0;;color: #ffffff;padding: 5px 8px;border-radius: 5px;">{{element.statusToken}}</span> 
+        
+                    </td>
+                      </ng-container>
+                      <ng-container matColumnDef="ACTION">
+                        <th scope="ACTION" mat-header-cell *matHeaderCellDef> Acciones </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <button *ngIf="element.id" (click)="editSupplier(element)" class="link-edit">Editar</button>
+                            <button *ngIf="element.id" (click)="deleteSupplier(element.id,'D')" class="link-delete">Eliminar</button>
+                        </td>
+                      </ng-container>
+                      <ng-container *ngIf="serviceId!==0" matColumnDef="ADDGESTOR">
+                        <th scope="MANAGER_SUP" mat-header-cell *matHeaderCellDef> Gestor Tercero </th>
+                        <td mat-cell *matCellDef="let element"> 
+                          <button class="link-add" *ngIf="element.mgn==0" (click)="asignNewGestor(element)">Asignar</button>
+                          <p *ngIf="element.mgn==1" style="color: #5bc500;"><strong>Asignado</strong></p>
+                        </td>
+                      </ng-container>      
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                  </table>
+                  <mat-paginator [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+    </div>
+    <br>
+    <!--begin service disabled-->
+    <div class="cardtdp" style="padding-top: 10px;padding-left: 20px;padding-right: 20px;">
+        <section  [hidden]="!(suppliersServiceDisabled.length>0)">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <img src="../../../../../../assets/images/media/formSections/optimization.png" alt="optimization" class="img rounded mx-auto d-block">
+                    <h3 class="text-center" style="color: #db5151;">Usuarios inhabilitados</h3>
+            </div>
+          </div>
+          <div class="panel-search-terceros" style="width: 100%;">
+            <label class="panel-terceros-disabled-label">Buscar usuarios inhabilitados</label>               
+                <mat-form-field appearance="fill">
+                    <mat-label>Buscar por..</mat-label>
+                    <input matInput (keyup)="applyFilter2($event)" placeholder="Buscar por nombre del servicio, compañia, estado, etc" style="width: 100%;" #input2>
+                </mat-form-field>
+            
+        </div>
+            <div style="overflow: auto;">
+                <table mat-table aria-describedby="supplierAdminSupplier3" [dataSource]="dataSourceService" class="terceros-table table-hover table-bordered">
+                  
+                  <ng-container matColumnDef="SUPPLIERNAME">
+                    <th scope="supplierName" mat-header-cell *matHeaderCellDef> Nombre del colaborador </th>
+                    <td mat-cell *matCellDef="let element"> {{element.supplierName}} </td>
+                  </ng-container>
+    
+                    <ng-container matColumnDef="COMPANYNAME">
+                      <th scope="companyName" mat-header-cell *matHeaderCellDef> Nombre de compañia </th>
+                      <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="SERVICENAME">
+                      <th scope="serivceName" mat-header-cell *matHeaderCellDef> Nombre del servicio </th>
+                      <td mat-cell *matCellDef="let element"> {{element.serviceName}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="CONDITION">
+                      <th scope="status" mat-header-cell *matHeaderCellDef> Estado </th>
+                      <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.condition=='No disponible'" 
+                        style="background-color: #e87171;color: #ffffff;padding: 5px 8px;border-radius: 5px;">
+                        {{element.condition}}</span> 
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="ACTION">
+                        <th  scope="action" mat-header-cell *matHeaderCellDef> Acciones </th>
+                        <td mat-cell *matCellDef="let element"> 
+                          <button  (click)="deleteSupplier(element.idSupplier,'E')"class="link-edit">Habilitar</button>
+                        </td>
+                      </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayColumnsService"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayColumnsService;"></tr>
+                  
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                  </table>
+                  <mat-paginator #MatPaginatorDisabled [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons></mat-paginator>
+    
+            </div>
+    
+        </section>
+    </div>
+    
+</div>

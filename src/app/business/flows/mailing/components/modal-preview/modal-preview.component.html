@@ -1,0 +1,22 @@
+
+
+<p class="main-title">{{template.subject?template.subject:"Sin asunto"}}</p>
+<div class="datos">
+    <strong>Para : </strong> {{ correo }}  
+    <div style="flex: 1 1;"></div>
+    <span *ngIf="total>1" (click)="nextPreview()" class="next fas fa-angle-right"></span>
+</div>
+<div *ngIf="template.cc !== '' "  class="datos"><strong>CC:</strong> {{template.cc}}</div>
+<div *ngIf="template.cco !== '' " class="datos"><strong>CCO:</strong> {{template.cco}}</div>
+<div *ngIf="!loading" class="attach_cont">
+    <div  *ngFor="let obj of attach" (click)="getFileAttach(obj.azurename,obj.name)" class="attach"><em class="fas fa-paperclip"></em><div class="attach_text">{{obj.name}}</div></div>
+</div>
+<div *ngIf="loading" class="attach_cont">
+    <div>Verificando archivos...</div>
+</div>
+<div class="cuerpo"  layout="row">
+    <div [innerHTML]="template.body | keepHtml"></div>
+</div>	  
+<div id="footer" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
+    <button (click)="closeModalPreview()" class="close_preview">Cerrar</button>
+</div>

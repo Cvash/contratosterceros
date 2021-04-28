@@ -1,0 +1,178 @@
+<block-ui>
+	<div style="width: 100%; height: 100%; overflow-y: auto;background-image: url({{backgroundImage}});background-attachment: fixed;background-size: cover;vertical-align: middle;">
+		<!-- <div class="body-row">
+			<div class="title-login">{{titleLogin}}</div>
+			<div class="img-contenedor">
+				<img style="height: 100%;" [src]="logoLogin" alt="logo" />
+			</div>
+		</div>
+
+		<div *ngIf="showPassword" class="login-form-container"  [formGroup]="loginFormReactive.loginForm">
+			<div style="width: 100%;height: auto;;display: flex;flex-wrap: wrap;justify-content: center;position: relative;margin: 0;">
+				<img [src]="logoLogin" alt="logo" width="280px" height="250px" style="position: relative;top: -120px;">
+			</div>
+			<div style="position: relative;top: -80px;">
+				<div class="login-form-label">Nombre de Usuario</div>
+			<tdp-st-input-text id="user" styleinput="outline" label="Usuario" formControlName="email" autocomplete="off"
+				>
+			</tdp-st-input-text>
+			<div class="login-form-label">Contraseña</div>
+			<tdp-st-input-text id="pass" styleinput="outline" type="password" label="Contraseña" autocomplete="off"
+				formControlName="password" >
+			</tdp-st-input-text>
+			<div style="display: flex;flex-wrap: wrap;justify-content: flex-start;padding: 2;">
+				<re-captcha style="width: 100px;" class="mt-2"
+					(resolved)="resolved($event)"
+					(error)="onError($event)"
+					errorMode="handled"
+					></re-captcha>
+			</div>
+			<button  class="btn btn-login-pass" id="executeLogin" (click)="
+					login(
+						loginFormReactive.loginForm.get('email').value,
+						loginFormReactive.loginForm.get('password').value
+					)
+				">
+				Ingresar
+			</button>
+			
+			<br />
+			<p class="btn-link font-reset-password" (click)="showResetPassword(1)">
+				¿Olvidaste tu contraseña?
+			</p>
+			</div>
+		</div> -->
+		<!--begin::Head--
+<div class="kt-login__head">
+	<span class="kt-login__signup-label">Don't have an account yet?</span>&nbsp;&nbsp;
+	<a href="javascript:;" routerLink="/auth/register" class="kt-link kt-login__signup-link">{{ 'AUTH.GENERAL.SIGNUP_BUTTON' | translate }}</a>
+</div>
+--end::Head-->
+<block-ui>
+	<div *ngIf="showPassword" class="row" id="loginPage" nop>
+		<div
+			class="login-form-container"
+		>
+			<!--
+		<div class="titleContainer">
+				<div class="title">RH DIGITAL</div>
+			</div>
+		
+			-->
+			<div id="header_login" class="header_login">
+				<img
+					class="img-fluid mx-auto d-block"
+					id="img"
+					style="width: 180px; height: 165px;"
+					[src]="logoLogin" alt="logo"
+				/>
+			</div>
+
+			<kt-auth-notice></kt-auth-notice>
+			<div id="body_login">
+				<form
+					class="kt-form"
+					 [formGroup]="loginFormReactive.loginForm"
+					autocomplete="off"
+				>
+					<div class="wrapInput">
+						<em
+							class="flaticon2-user"
+							style="
+								font-size: 30px;
+								margin-right: 5px;
+								color: rgb(0, 169, 224);
+								font-weight: bold;
+							"
+						></em>
+						<input
+							class="form-control text-center"
+							type="text"
+							id="user_email"
+							formControlName="email"
+							autocomplete="off"
+							placeholder="xxxxxxxxx@telefonica.com"
+						/>
+					</div>
+					<div class="wrapInput">
+						<em
+							class="flaticon2-lock"
+							style="
+								font-size: 30px;
+								margin-right: 5px;
+								color: rgb(0, 169, 224);
+							"
+							aria-label="true"
+						></em>
+						<input
+							class="form-control text-center"
+							type="password"
+							formControlName="password"
+							autocomplete="off"
+							placeholder="xxxxxxxxxxxx"
+						/>
+					</div>
+					<div style="display: flex;flex-wrap: wrap;justify-content: center;padding: 0;width: 100%;">
+						<re-captcha class="mt-0 mr-2"
+							(resolved)="resolved($event)"
+							(error)="onError($event)"
+							errorMode="handled"
+							></re-captcha>
+					</div>
+					<div class="submitContainer">
+						<div class="form-group" id="btn-submit">
+							<button
+								type="submit"
+								class="primary_btn btn-block"
+								(click)="
+					login(
+						loginFormReactive.loginForm.get('email').value,
+						loginFormReactive.loginForm.get('password').value
+					)"
+							>
+								INGRESAR
+							</button>
+						</div>
+						<div>
+							<p class="btn-link font-reset-password" (click)="showResetPassword(1)">
+								¿Olvidaste tu contraseña?
+							</p>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div id="footer_login"></div>
+		</div>
+	</div>
+</block-ui>
+
+		<!--Reset password-->
+		<div *ngIf="!showPassword" [formGroup]="loginFormReactive.loginForm" class="container-reset-password">
+			<div
+				class="resetCard col-xs-10 offset-xs-1 col-sm-10 offset-sm-1 col-md-4 col-lg-4 offset-md-4 offset-lg-4">
+				<img class="img-fluid mx-auto d-block" id="img" style="width: 120px; height: 105px;margin-top: 10px;" [src]="logoReset"
+					alt="imagen-logo-reset" />
+				<mat-card-title class="centerContent tittle">
+					¿Olvidaste tu Contraseña?
+				</mat-card-title>
+				<mat-card-subtitle class="subcenterContent">
+					Coloca tu usuario y te enviaremos un correo con tu código de acceso.
+				</mat-card-subtitle>
+				<div>
+					<div class="input-group" style="margin-top: 8px;margin-bottom: 8px;">
+						<input class="form-control" name="user" id="user" matInput formControlName="email" required
+							placeholder="Ingresa tu usuario" autocomplete="off" />
+					</div>
+
+					<button id="requestCode" type="submit" class="btn-reset-pass btn"
+						(click)="executeGetCodeGenerate()">
+						Solicitar código
+					</button>
+					<button id="returnLogin" class="btn-link return-login" (click)="showResetPassword(0)">
+						Volver al login
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</block-ui>

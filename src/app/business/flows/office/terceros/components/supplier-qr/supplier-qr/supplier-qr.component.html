@@ -1,0 +1,24 @@
+<div style="position: relative;">
+
+    <button (click)="closeDialog()" class="close-qr"> <em class="flaticon2-delete"></em> </button>
+</div>
+<div>
+    <p class="title-form-access">{{myName}}</p>
+    <div class="mqr-cip">¡Es mejor que permanezcas en casa!</div>
+    <div class="qr-block">
+        <em class="fas fa-shield-virus"></em>
+    </div>
+    <div>
+        <p class="title-form-access">¡Tu <strong>salud</strong> es primero!</p>
+        <p style="color: #000000;margin-left: 10px;">En el cuestionario que llenaste reportaste posibles síntomas de COVID-19, por ello te recomendamos comunicarte con tu médico ocupacional y seguir todas sus indicaciones.<br>
+        Podrás generar tu acceso cuando el gestor de tu empresa reporte que te encuentras mejor.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button mat-flat-button class="btn button-terceros-secondary" (click)="closeDialog()" >Cancelar</button>
+        </div> 
+        <div class="col-md-6">
+            <button mat-flat-button class="btn button-terceros-primary" (click)="acept()" >Confirmar y finalizar</button>
+        </div>       
+    </div>
+</div>

@@ -1,0 +1,613 @@
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+	<ol class="carousel-indicators">
+		<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+		<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+		<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+	</ol>
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img class="d-block w-100" src="../../../../../../../assets/images/movil1-desk.jpg" alt="First slide"/>
+		</div>
+		<div class="carousel-item">
+			<img class="d-block w-100" src="../../../../../../../assets/images/movil2-desk.jpg" alt="Second slide"/>
+		</div>
+		<div class="carousel-item">
+			<img class="d-block w-100" src="../../../../../../../assets/images/movil3-desk.jpg" alt="Third slide"/>
+		</div>
+	</div>
+	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
+</div>
+
+<div style="width: 90%;margin-left: auto;margin-right: auto;">
+	<div class="pt-4" style="width: 100%;justify-content: center;display: flex;flex-wrap: wrap;">
+		<div class="row d-flex justify-content-center">
+			<div class="w-100 text-center d-flex justify-content-center" style="max-width: 800px">
+				<h1 class="nuevos-planes">
+					Nuevos planes Postpago. Utiliza tus GIGAS en lo que quieras
+				</h1>
+			</div>
+			<div class="d-flex justify-content-center w-100">
+				<p class="pt-2 disfruta-paquetes-corporativos">
+					Disfruta de los mejores paquetes corporativos:
+				</p>
+			</div>
+		</div>
+
+		<div class="mt-5">
+			<div class="col-md-12 d-none d-sm-block">
+				<div class="row d-flex justify-content-center mt-5">
+					
+					<div class="col-xs-12 col-sm-6 col-md-4 d-flex justify-content-center" style="border-radius: 50px !important" *ngFor="let plan of plansMovil">
+						<div class="card tarjeta-plan" style="width: 18rem;">
+							<div class="card-body cabecera">
+								<!-- <h5 class="card-title precio-embajador">S/ {{plan.emb_price | number:'1.0-2'}}</h5> -->
+								<h5 class="card-title precio-embajador">S/ {{ plan.emb_price }}</h5>
+								<div class="label-embajador">Precio Embajador</div>
+								<div class="precio-regular mb-3">
+									Precio Regular: S/ {{ plan.regular_price }}
+								</div>
+								<div class="btn-block">
+									<button class="call-button" (click)="showForm(plan, userId)">
+										Lo quiero
+									</button>
+								</div>
+							</div>
+							<div class="d-flex justify-content-center" *ngIf="mostrarInformacionPlanes">
+								<img src="../../../../../../../assets/images/beneficios_movil_4x.PNG"
+									style="width: 95%; border-bottom: 1px solid #f4f4f3" alt="" />
+							</div>
+							<div *ngIf="!mostrarInformacionPlanes" style="border-bottom: 1px solid #f4f4f3">
+								<div class="ml-3 mt-3">
+									<div class="d-flex align-items-center" style="margin-bottom: 33px">
+										<img src="../../../../../../../assets/images/emb-roaming.png" alt="Telefonica" />
+										<div style="display: inline-block" class="ml-2">
+											<div class="detalles-planes">Roaming</div>
+											<div>
+												<strong>({{ plan.cant_mbps }})</strong>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-center" style="margin-bottom: 33px">
+										<img src="../../../../../../../assets/images/emb-pasagigas.png" alt="Telefonica" />
+										<div style="display: inline-block" class="ml-2">
+											<div class="detalles-planes">Pasagigas</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-center" style="margin-bottom: 33px">
+										<img src="../../../../../../../assets/images/emb-wifi.png" alt="Telefonica" />
+										<div style="display: inline-block" class="ml-2">
+											<div class="detalles-planes">
+												<strong>Navegación en alta velocidad</strong>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-body ver-detalle" (click)="mostrarDetalles()">
+								<a class="card-link">Ver detalle
+									<!-- <em class="fa fa-chevron-down" aria-hidden="true"></em> -->
+									<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+								</a>
+							</div>
+							<div class="d-flex justify-content-center mb-3" *ngIf="rolAdministrador">
+								<button class="btn btn-primary mr-3" (click)="showEditarPlanHogar(plan, userId)">
+									Editar
+								</button>
+								<button class="btn btn-danger" (click)="eliminarLogico(plan)">
+									Eliminar
+								</button>
+							</div>
+							<div class="tipo-plan">
+								<span style="font-size: 28px">{{ plan.plan_type }} Gb</span>
+								<span class="plan-type">ilimitados</span>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Inicio slider -->
+			<div class="col-md-12">
+
+				<div style="" class="mt-1 d-block d-sm-none">
+					<div id="carouselExampleIndicators5" class="carousel slide" data-ride="carousel">
+						<!-- <ol class="carousel-indicators">
+							<li data-target="#carouselExampleIndicators5" data-slide-to="0" class="active"></li>
+							<li data-target="#carouselExampleIndicators5" data-slide-to="1"></li>
+							<li data-target="#carouselExampleIndicators5" data-slide-to="2"></li>
+							<li data-target="#carouselExampleIndicators5" data-slide-to="3"></li>
+						</ol> -->
+						<div class="carousel-inner">
+							<div class="carousel-item active" data-interval="3500">
+								<div class="col-md-2 d-flex justify-content-center">
+									<h5
+										style="color: rgb(200, 200, 200, 0.8); font-size: 200px; line-height: 200px; position: relative;">
+										<em class="flaticon2-right-arrow">
+										</em>
+									</h5>
+									<p style="position: absolute; z-index: 1; top: 90px; max-width: 250px; font-size: 24px;">Planes Embajador</p>
+								</div>
+							</div>
+
+							<div class="carousel-item" data-interval="3000" *ngFor="let plan of plansMovil">
+								<div class="col-xs-12 col-sm-6 col-md-4 d-flex justify-content-center" style="border-radius: 50px !important">
+									<div class="card tarjeta-plan" style="width: 18rem;">
+										<div class="card-body cabecera">
+											<!-- <h5 class="card-title precio-embajador">S/ {{plan.emb_price | number:'1.0-2'}}</h5> -->
+											<h5 class="card-title precio-embajador">S/ {{ plan.emb_price }}</h5>
+											<div class="label-embajador">Precio Embajador</div>
+											<div class="precio-regular mb-3">
+												Precio Regular: S/ {{ plan.regular_price }}
+											</div>
+											<div class="btn-block">
+												<button class="call-button" (click)="showForm(plan, userId)">
+													Lo quiero
+												</button>
+											</div>
+										</div>
+										<div class="d-flex justify-content-center" *ngIf="mostrarInformacionPlanes">
+											<img src="../../../../../../../assets/images/beneficios_movil.PNG"
+												style="width: 95%; border-bottom: 1px solid #f4f4f3" alt="" />
+										</div>
+										<div *ngIf="!mostrarInformacionPlanes" style="border-bottom: 1px solid #f4f4f3">
+											<div class="ml-3 mt-3">
+												<div class="d-flex align-items-center" style="margin-bottom: 33px">
+													<img src="../../../../../../../assets/images/emb-roaming.png" alt="Telefonica" />
+													<div style="display: inline-block" class="ml-2">
+														<div class="detalles-planes">Roaming</div>
+														<div>
+															<strong>({{ plan.cant_mbps }})</strong>
+														</div>
+													</div>
+												</div>
+												<div class="d-flex align-items-center" style="margin-bottom: 33px">
+													<img src="../../../../../../../assets/images/emb-pasagigas.png" alt="Telefonica" />
+													<div style="display: inline-block" class="ml-2">
+														<div class="detalles-planes">Pasagigas</div>
+													</div>
+												</div>
+												<div class="d-flex align-items-center" style="margin-bottom: 33px">
+													<img src="../../../../../../../assets/images/emb-wifi.png" alt="Telefonica" />
+													<div style="display: inline-block" class="ml-2">
+														<div class="detalles-planes">
+															<strong>Navegación en alta velocidad</strong>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="card-body ver-detalle" (click)="mostrarDetalles()">
+											<a class="card-link">Ver detalle
+												<!-- <em class="fa fa-chevron-down" aria-hidden="true"></em> -->
+												<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+											</a>
+										</div>
+										<div class="d-flex justify-content-center mb-3" *ngIf="rolAdministrador">
+											<button class="btn btn-primary mr-3"  (click)="showEditarPlanHogar(plan, userId)">
+												Editar
+											</button>
+											<button class="btn btn-danger" (click)="eliminarLogico(plan)">
+												Eliminar
+											</button>
+										</div>
+										<div class="tipo-plan">
+											<span style="font-size: 28px">{{ plan.plan_type }} Gb</span>
+											<span class="plan-type">ilimitados</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						 
+
+							
+
+						</div>
+						<a class="carousel-control-prev pt-5" href="#carouselExampleIndicators5" role="button" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: #019bf2; height: 35px; border-radius: 50%;" ></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="carousel-control-next pt-5" href="#carouselExampleIndicators5" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true" style="background-color: #019bf2; height: 35px; border-radius: 50%;" ></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+
+				</div>
+
+			</div>
+
+				
+			<!-- Fin slider -->
+
+			
+			<div style="height: 300px; background-color: #00a9e0"
+				class="mt-5 d-flex align-items-center justify-content-center">
+				<div class="">
+					<div class="row d-flex justify-content-center text-center">
+						<h1 class="adquiere-plan">
+							Adquiere tu plan en nuestros canales de venta
+						</h1>
+					</div>
+					<div class="row d-flex justify-content-center">
+						<h1 class="identificate-cliente">
+							Identifícate como cliente Movistar con tu DNI. No es necesario señalar
+							el descuento empleado
+						</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div style="background-color: #ffffff" class="col-md-12">
+			<div class="col-md-12">
+				<div class="row d-flex justify-content-center">
+					<h1 class="preguntas-frecuentes-movil">Preguntas más frecuentes</h1>
+				</div>
+				<div class="row d-flex justify-content-center mt-3">
+					<div class="col-lg-8 col-sm-12">
+						<div id="accordion">
+							<div class="">
+								<div class="" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link p-4" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" style="width: 100%; text-decoration: none; border-bottom: 1px solid rgb(200, 200, 200, 0.8);">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="pregunta1"> 
+													¿Cómo puedo afiliarme a este beneficio?
+												</div>
+												<!-- <em class="flaticon2-arrow-down"></em> -->
+												<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+											</div>
+										</button>
+									</h5>
+								</div>
+								<!-- class="collapse show" -->
+								<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+									<div class="card-body">
+										<ul class="respuesta1">
+											<li class="mb-2">
+												No tienes que hacer ninguna afiliación. Haz tu
+												pedido con el precio regular y automáticamente se te
+												hará el descuento de S/ 70 en tu factura.
+											</li>
+											<li class="mb-2">
+												Solo asegúrate de contratar un Trío de la Oferta
+												Fija actual, de S/ 169.90 o más, que la línea esté a
+												tu nombre y que no cuentes con deudas pendientes.
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="" id="headingTwo">
+									<h5 class="mb-0">
+										<button class="btn btn-link p-4" data-toggle="collapse" data-target="#collapseTwo"
+											aria-expanded="true" aria-controls="collapseTwo" style="
+												width: 100%;
+												text-decoration: none;
+												border-bottom: 1px solid rgb(200, 200, 200, 0.8);
+											">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="pregunta2">
+													¿Cómo puedo cambiar mi plan o realizar una
+													portabilidad?
+												</div>
+												<!-- <em class="flaticon2-arrow-down"></em> -->
+												<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+											</div>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+									<div class="card-body">
+										<h3>IMPORTANTE</h3>
+										<ul class="respuesta2">
+											<li class="mb-2" >
+												Recuerda que puedes realizar la migración a través
+												de nuestros canales digitales (Mi Movistar y nuestro
+												canal online)..
+											</li>
+											<li class="mb-2" >
+												Para altas nuevas o portabilidad haz clic aquí.
+											</li>
+											<li class="mb-2" >
+												Para realizar una migración up, migración down o
+												cambio de plan haz clic aquí.
+											</li>
+											<li class="mb-2" >
+												Para realizar una migración down llamar al 104.
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="" id="headingThree">
+									<h5 class="mb-0">
+										<button class="btn btn-link p-4" data-toggle="collapse" data-target="#collapseThree"
+											aria-expanded="true" aria-controls="collapseThree" style="
+												width: 100%;
+												text-decoration: none;
+												border-bottom: 1px solid rgb(200, 200, 200, 0.8);
+											">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="pregunta3">
+													¿Cuándo se activa el descuento del 30%?
+												</div>
+												<!-- <em class="flaticon2-arrow-down"></em> -->
+												<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+											</div>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+									<div class="card-body">
+										<ul class="respuesta3">
+											<li class="mb-2">
+												El descuento del 30% se activará automáticamente en cada
+												ciclo de facturación en el plan que elijas. Nosotros nos
+												encargaremos de verificar todas las líneas de los
+												empleados que estarán aptas para este beneficio.
+											</li>
+											<li class="mb-2">
+												De acuerdo a tu ciclo, puede ser que en la primera
+												factura se pague el monto completo.
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="" id="headingFour">
+									<h5 class="mb-0">
+										<button class="btn btn-link p-4" data-toggle="collapse" data-target="#collapseFour"
+											aria-expanded="true" aria-controls="collapseFour" style="
+												width: 100%;
+												text-decoration: none;
+												border-bottom: 1px solid rgb(200, 200, 200, 0.8);
+											">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="pregunta4">
+													Tengo una línea Caribú ¿cómo hago?
+												</div>
+												<!-- <em class="flaticon2-arrow-down"></em> -->
+												<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+											</div>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+									<div class="card-body">
+										<div class="respuesta4">
+											En el caso tengas una línea Caribú, la migración deberá
+											ser gestionada en Tienda, no es posible realizar el
+											cambio de plan o migración a través de Mi Movistar.
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="" id="headingFive">
+									<h5 class="mb-0">
+										<button class="btn btn-link p-4" data-toggle="collapse" data-target="#collapseFive"
+											aria-expanded="true" aria-controls="collapseFive" style="
+												width: 100%;
+												text-decoration: none;
+												border-bottom: 1px solid rgb(200, 200, 200, 0.8);
+											">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="pregunta5">
+													Quiero pasar de una línea Prepago a Postpago
+													¿qué hago?
+												</div>
+												<!-- <em class="flaticon2-arrow-down"></em> -->
+												<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+											</div>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+									<div class="card-body">
+										<div class="respuesta5">
+											En el caso quieras migrar de una línea Prepago a una
+											Postpago, deberás gestionarla en Tienda, no es posible
+											realizar el cambio de plan o migración a través de Mi
+											Movistar.
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="" id="headingSix">
+									<h5 class="mb-0">
+										<button class="btn btn-link p-4" data-toggle="collapse" data-target="#collapseSix"
+											aria-expanded="true" aria-controls="collapseSix" style="
+												width: 100%;
+												text-decoration: none;
+												border-bottom: 1px solid rgb(200, 200, 200, 0.8);
+											">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="pregunta6">
+													Tengo una línea antigua o dificultades al
+													realizar mi cambio ¿qué hago?
+												</div>
+												<!-- <em class="flaticon2-arrow-down"></em> -->
+												<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+											</div>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+									<div class="card-body">
+										<div class="respuesta6">
+											En el caso tengas dificultades en mi movistar, deberás
+											gestionar tu cambio en Tienda, no es posible realizar el
+											cambio de plan o migración a través de Mi Movistar.
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="" id="headingSeven">
+									<h5 class="mb-0">
+										<button class="btn btn-link p-4" data-toggle="collapse" data-target="#collapseSeven"
+											aria-expanded="true" aria-controls="collapseSeven" style="
+												width: 100%;
+												text-decoration: none;
+												border-bottom: 1px solid rgb(200, 200, 200, 0.8);
+											">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="pregunta7">
+													¿Cuántas líneas puedo tener?
+												</div>
+												<!-- <em class="flaticon2-arrow-down"></em> -->
+												<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+											</div>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+									<div class="card-body">
+										<div class="respuesta7">
+											Podrás contratar las líneas que el sistema de evaluación
+											crediticio te permita.
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="" id="headingEight">
+									<h5 class="mb-0">
+										<button class="btn btn-link p-4" data-toggle="collapse" data-target="#collapseEight"
+											aria-expanded="true" aria-controls="collapseEight" style="
+												width: 100%;
+												text-decoration: none;
+												border-bottom: 1px solid rgb(200, 200, 200, 0.8);
+											">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="pregunta8">
+													¿Cuándo pierdo estos beneficios?
+												</div>
+												<!-- <em class="flaticon2-arrow-down"></em> -->
+												<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+											</div>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+									<div class="card-body">
+										<div class="respuesta8">
+											Si dejas de ser empleado pierdes los beneficios
+											embajador, en todas las líneas que se encuentren a tu
+											nombre.
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="">
+								<div class="" id="headingNine">
+									<h5 class="mb-0">
+										<button class="btn btn-link p-4" data-toggle="collapse" data-target="#collapseNine"
+											aria-expanded="true" aria-controls="collapseNine" style="
+												width: 100%;
+												text-decoration: none;
+												border-bottom: 1px solid rgb(200, 200, 200, 0.8);
+											">
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="pregunta9">
+													Tengo un contrato vigente ¿puedo realizar una
+													migración?
+												</div>
+												<!-- <em class="flaticon2-arrow-down"></em> -->
+												<img src="../../../../../../../assets/images/arrow_down.png" alt="" class="pl-1" style="width: 14px;">
+											</div>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
+									<div class="card-body">
+										<div class="respuesta9">
+											Si tienes un contrato vigente, solo puedes realizar
+											migraciones up, no puedes realizar una migración down.
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="width: 100%;height: 125px; box-shadow: 0 0 5px #ccc;" class="mt-5 d-flex align-items-center">
+		<div class="col-md-6">
+			<div class="row d-flex justify-content-center">
+				<div>
+					<img src="../../../../../../../assets/images/una-marca-telefonica.png" alt="Telefonica"
+						style="height: 38px;">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+		
+			
+				<div style="width: 100%;height: auto;display: flex;flex-wrap: wrap; justify-content: space-around;">
+					<div class="indication-text" style="float: left;">
+						
+					<div style="display: flex;flex-wrap: wrap;padding: 5px">
+						<div style="width: 20%;display: flex;flex-wrap: wrap;justify-content: center;margin-top: auto;margin-bottom: auto;">
+							<img src="../../../../../../../assets/images/libro.svg" alt="Libro Telefonica" class="pr-2"
+						style="height: 38px;" />
+						</div>
+						<div style="width: 80%;">
+							<div class="pr-4 d-flex align-items-center">
+								<div><a href="https://www.movistar.com.pe/libro-de-reclamaciones?_ga=2.158644730.1152811104.1607007479-1033982718.1600024193" style="text-decoration: none; color: #86888C;">Libro de reclamaciones</a></div>
+							</div>
+							<div class="pr-4 d-flex align-items-center">
+								<div><a href="https://www.movistar.com.pe/soporte-reclamos-disconformidad/registro-de-reclamos" style="text-decoration: none; color: #86888C;">Reclamos</a></div>
+							</div>
+							<div class="pr-4 d-flex align-items-center">
+								<div><a href="https://www.movistar.com.pe/atencion-al-cliente/reclamos/reporte-virtual?_ga=2.158644730.1152811104.1607007479-1033982718.1600024193" style="text-decoration: none; color: #86888C;">Consulta de reclamos</a></div>
+							</div>
+							<div class="pr-4 d-flex align-items-center">
+								<div><a href="https://www.movistar.com.pe/informacion-a-abonados-y-usuarios?_ga=2.166703358.1152811104.1607007479-1033982718.1600024193" style="text-decoration: none; color: #86888C;">Informacón abonados y usuarios</a></div>
+							</div>
+						</div>
+					</div>
+					</div>
+
+					<div class="social-network" style="float: right;margin-top: auto;margin-bottom: auto;">
+						<div style="display: flex;flex-wrap: wrap;justify-content: center;">
+							<a href="https://www.facebook.com/movistarperu"><img src="../../../../../../../assets/images/facebook.svg" alt="Libro Telefonica" class="pr-2"
+								style="height: 21px;" /></a>
+							<a href="https://twitter.com/MovistarPeru"><img src="../../../../../../../assets/images/twitter.svg" alt="Libro Telefonica" class="pr-2"
+								style="height: 21px;" /></a>
+							<a href="https://www.instagram.com/movistarperu/"><img src="../../../../../../../assets/images/instagram.svg" alt="Libro Telefonica" class="pr-2"
+								style="height: 21px;" /></a>
+							<a href="https://www.youtube.com/user/CanalMovistarPeru"><img src="../../../../../../../assets/images/youtube.svg" alt="Libro Telefonica" class="pr-2"
+								style="height: 21px;" /></a>
+						</div>
+					</div>
+					
+				</div>
+</div>

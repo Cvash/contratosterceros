@@ -1,0 +1,46 @@
+
+<p class="modalheader">Aviso del Sistema
+    <span style="flex: 1 1 auto"></span>
+    <span (click)="onNoClick()" class="modalclosebutton" style="float: right;"><em class="flaticon2-delete"></em> </span>
+</p>
+<div [formGroup]="supplierForm.managerSupplier" class="container-question-remove">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3">
+                <img src="../../../../../../../assets/images/media/formSections/question-mark.png" alt="question-mark" class="rounded mx-auto d-block">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                
+                <div class="input-group">
+                    <p *ngIf="typeAction==='D'" class="text-center"><strong>¿Desea deshabilitar al colaborador {{supplierName}} del servicio? :</strong></p>
+                    <p *ngIf="typeAction==='E'" class="text-center"><strong>¿Desea habilitar algunos de los servicios al colaborador {{supplierName}}? :</strong></p>
+                        <mat-form-field class="text-center" style="margin-top: -10px;width: 100%;" appearance="fill">
+                        <mat-label class="text-center text-primary"></mat-label>
+                        <mat-select [disabled]="conditionService" formControlName="serviceId"  multiple>
+                            <mat-option *ngIf="suppliersCompanyService.length>0" (click)="selectAll()">All..</mat-option>
+                          <mat-option *ngFor="let value of suppliersCompanyService" (onSelectionChange)="getValues($event)"  style="color: rgb(0, 169, 224);" [value]="value.id">
+                            {{value.name}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+                <div *ngIf="typeAction==='D'" class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <button class="btn btn-danger btn-block" (click)="deleteSupplier('D')">Sí, deseo eliminar</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <button class="btn btn-success btn-block" (click)="onNoClick()">No, deseo eliminar</button>
+                    </div>
+                </div>
+                <div *ngIf="typeAction==='E'" class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <button class="btn btn-danger btn-block" (click)="deleteSupplier('E')">Sí, deseo habilitar</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <button class="btn btn-success btn-block" (click)="onNoClick()">No, deseo habilitar</button>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+</div>

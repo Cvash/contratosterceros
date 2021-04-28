@@ -1,0 +1,772 @@
+<div style="width: 96%; margin-left: 4%; margin-right: auto">
+	<mat-horizontal-stepper #stepper>
+		<mat-step label="Atender" id="atenderQuiebre">
+			<div class="d-flex justify-content-center align-items-center mt-4">
+				<!-- <button mat-button matStepperPrevious class="btn btn-primary mr-5">Retroceder</button> -->
+				<button mat-raised-button matStepperNext color="primary">Siguiente</button>
+			</div>
+
+			<div class="row d-flex justify-content-center">
+				<div>
+					<h1 class="mt-4 titulo">1. Atender los quiebres</h1>
+				</div>
+			</div>
+
+
+			<div class="d-flex justify-content-center mt-4">
+				<div class="mr-5">
+					<button (click)="traerQuiebres()" class="btn btn-success mb-4">
+						Refrescar
+					</button>
+					<!-- <button class="bubbly-button" (click)="animarBoton()">Click me!</button> -->
+					
+				</div>
+				<!-- <div>
+					<button mat-raised-button color="primary" (click)="exportAsXLSX()">Export</button>
+				</div> -->
+				<!-- <div>
+					<button mat-raised-button (click)="exporter.exportTable('xlsx')">Reporte Excel</button>
+				</div> -->
+				<div>
+					<button mat-raised-button (click)="showReporteExcel()">Reportes</button>
+				</div>
+			</div>
+
+			<mat-card [formGroup]="fechasFormQuiebres" class="container-form mat-elevation-z8">
+				<mat-card-content>
+					<div class="row">
+						<div class="col-md-8">
+							<h5 class="title-search-date" style="font-size: 14px">
+								Buscar por rango de fecha :
+							</h5>
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-6">
+									<div class="form-inline">
+										<input class="text-center form-control inputFechaInicio col-xs-12 col-sm-10 col-md-10 col-lg-10"
+											[matDatepicker]="picker1" name="fecha1" formControlName="date1" placeholder="Desde..." />
+										<mat-datepicker-toggle class="iconoFechaInicio col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker"
+											matSuffix [for]="picker1">
+										</mat-datepicker-toggle>
+										<mat-datepicker #picker1></mat-datepicker>
+									</div>
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-6">
+									<div class="form-inline">
+										<input class="text-center form-control inputFechaFin col-xs-12 col-sm-10 col-md-10 col-lg-10"
+											[matDatepicker]="picker2" name="fecha2" formControlName="date2" placeholder="Hasta..." />
+										<mat-datepicker-toggle class="iconoFechaFin col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker"
+											matSuffix [for]="picker2">
+										</mat-datepicker-toggle>
+										<mat-datepicker #picker2></mat-datepicker>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<h5 class="font-style"></h5>
+							<br />
+							<!-- <button class="btn btn-block btn_savedatamasive" (click)="showData(txt_start_date,txt_end_date)">Buscar</button> -->
+							<button class="btn btn-block btn_savedatamasive bg-search-date" mat-raised-button
+								(click)="showDataQuiebres(fechasFormQuiebres.value)">
+								Buscar
+							</button>
+						</div>
+					</div>
+				</mat-card-content>
+			</mat-card>
+
+			<div class="mt-5 mat-elevation-z8 table-responsive" style="overflow-x: scroll; width: 100%">
+				<mat-form-field class="ml-5">
+					<mat-label>Filter</mat-label>
+					<input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+				</mat-form-field>
+				<table aria-describedby="table1" class="table table-hover table-striped table-bordered" mat-table [dataSource]="dataSourceIncidentDetails"
+					matSort #exporter1="matTableExporter" matTableExporter>
+					<!-- ID de la tabla dhr_red_incident_details -->
+					<ng-container matColumnDef="id">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id_dhr_red_incident.id }}</td> -->
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id }}
+						</td>
+					</ng-container>
+
+					<!-- ID de la tabla dhr_red_incident -->
+					<!-- <ng-container matColumnDef="id_incidente">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Id Incidente</th>
+						<td mat-cell *matCellDef="let element"> {{ element.id_dhr_red_incident.id }}</td>
+					</ng-container> -->
+
+					<ng-container matColumnDef="Nombres">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Titular</th>
+
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.name_titular }}
+						</td>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.razon_social }}
+						</td>
+						<mat-footer-cell *matFooterCellDef class="mobile-hide"></mat-footer-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="DNI">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+
+						<td mat-cell *matCellDef="let element" style="font-size: 12px" >
+							{{ element.id_dhr_red_incident.dni_titular }}
+						</td>
+						
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Correo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.mail_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Red Quiebre">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Red Quiebre</th>
+						<td mat-cell *matCellDef="let element">
+
+								<em style="position: relative; display: flex; justify-content: center"
+									class="bg-quiebre flaticon2-magnifier-tool text-success"
+									(click)="showVerRutasQuiebres(element, userId)">
+									<div class="container-show">Ver quiebre...</div>
+								</em>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono_contacto">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono cont</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Datos_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Datos Embajador</th>
+						<td mat-cell *matCellDef="let element">
+
+								<em style="position: relative; display: flex; justify-content: center"
+									class="bg-data-emb flaticon2-magnifier-tool text-primary"
+									(click)="showVerDatosEmbajador(element, userId)">
+									<div class="container-show">Ver datos...</div>
+								</em>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Comentario">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Comentario</th>
+						<td mat-cell *matCellDef="let element">
+						
+							<em
+								style=" position: relative; display: flex; justify-content: center"
+								class="bg-comment flaticon2-magnifier-tool text-dark" (click)="
+									showVerComentario(
+										element.id_dhr_red_incident.description,
+										userId
+									)
+								">
+								<div class="container-show">Ver comentario...</div>
+								</em>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Creado">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Creación</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.createdAt | date: 'dd-MM-yyyy' }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Actualización">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Actualización</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.updatedAt | date: 'dd-MM-yyyy h:mm:ss a' }}
+						</td>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.updatedAt | date:'short' }}</td> -->
+					</ng-container>
+
+					<ng-container matColumnDef="Estado">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_status.name }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Acciones">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+						<td mat-cell *matCellDef="let element" style="padding-left: 15px; padding-top: 5px">
+							<div class="btn-group bg-danger">
+								<button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">
+									<mat-icon>list</mat-icon>
+								</button>
+								<div class="dropdown-menu">
+									<!-- <i class="flaticon-photo-camera-1"></i> -->
+
+								
+												<span><button class="dropdown-item accion-iniciar-atencion flaticon2-writing"
+														(click)="showInicioAtencion(element, userId, stepper, '1', 'Iniciar')">
+														Inicio Atención
+													</button></span>
+												<span><button class="dropdown-item accion-no-corresponde flaticon2-poll-symbol"
+														(click)="showNoCorresponde(element, userId, stepper)">
+														No Corresponde
+													</button></span>
+												<span><button class="dropdown-item accion-eliminar flaticon2-trash"
+														(click)="borrarIncident_Details(element.id)">
+														Eliminar
+													</button></span>
+								</div>
+							</div>
+						</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="Columns_Incident_Details"></tr>
+					<tr mat-row *matRowDef="let row; columns: Columns_Incident_Details"></tr>
+				</table>
+				<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+			</div>
+
+			<!-- SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP-->
+		</mat-step>
+		<mat-step label="En proceso">
+			<div class="d-flex justify-content-center align-items-center mt-4">
+				<button mat-raised-button matStepperPrevious color="primary" class="mr-2">
+					Retroceder
+				</button>
+				<button mat-raised-button matStepperNext color="primary">Siguiente</button>
+			</div>
+
+			<div class="row d-flex justify-content-center">
+				<div>
+					<h1 style="font-size: 32px" class="mt-4">2. En proceso</h1>
+				</div>
+			</div>
+
+			<div class="d-flex justify-content-center mt-4">
+				<div class="mr-5">
+					<button (click)="traerQuiebres()" class="btn btn-success mb-4">
+						Refrescar
+					</button>
+				</div>
+				<div>
+					<button mat-raised-button (click)="showReporteExcel()">Reportes</button>
+				</div>
+			</div>
+
+			<mat-card [formGroup]="fechasFormEnProceso" class="container-form mat-elevation-z8">
+				<mat-card-content>
+					<div class="row">
+						<div class="col-md-8">
+							<h5 class="font-style title-search-date">
+								Buscar por rango de fecha :
+							</h5>
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-6">
+									<div class="form-inline">
+										<input class="text-center form-control inputFechaInicio col-xs-12 col-sm-10 col-md-10 col-lg-10"
+											[matDatepicker]="picker3" name="fecha1" formControlName="date3" placeholder="Desde..." />
+										<mat-datepicker-toggle class="iconoFechaInicio col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker"
+											matSuffix [for]="picker3">
+										</mat-datepicker-toggle>
+										<mat-datepicker #picker3></mat-datepicker>
+									</div>
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-6">
+									<div class="form-inline">
+										<input class="text-center form-control inputFechaFin col-xs-12 col-sm-10 col-md-10 col-lg-10"
+											[matDatepicker]="picker4" name="fecha2" formControlName="date4" placeholder="Hasta..." />
+										<mat-datepicker-toggle class="iconoFechaFin col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker"
+											matSuffix [for]="picker4">
+										</mat-datepicker-toggle>
+										<mat-datepicker #picker4></mat-datepicker>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<h5 class="font-style"></h5>
+							<br />
+							<!-- <button class="btn btn-block btn_savedatamasive" (click)="showData(txt_start_date,txt_end_date)">Buscar</button> -->
+							<button class="btn btn-block btn_savedatamasive bg-search-date" mat-raised-button
+								(click)="showDataEnProceso(fechasFormEnProceso.value)">
+								Buscar
+							</button>
+						</div>
+					</div>
+				</mat-card-content>
+			</mat-card>
+
+			<div class="mt-5 mat-elevation-z8 table-responsive" style="overflow-x: scroll; width: 100%">
+				<table aria-describedby="table2" class="table-hover table-striped" mat-table [dataSource]="dataSourceIncidentDetails2" matSort
+					#exporter2="matTableExporter" matTableExporter>
+					<!-- ID de la tabla dhr_red_incident_details -->
+					<ng-container matColumnDef="id">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id_dhr_red_incident.id }}</td> -->
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id }}
+						</td>
+					</ng-container>
+
+					<!-- ID de la tabla dhr_red_incident -->
+					<!-- <ng-container matColumnDef="id_incidente">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Id Incidente</th>
+						<td mat-cell *matCellDef="let element">
+							{{ element.id_dhr_red_incident.id }}
+						</td>
+					</ng-container> -->
+
+					<ng-container matColumnDef="Nombres">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Titular</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.name_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="DNI">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.dni_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Correo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.mail_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Red Quiebre">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Red Quiebre</th>
+						<td mat-cell *matCellDef="let element">
+
+								<em style="position: relative; display: flex; justify-content: center"
+									class="bg-quiebre flaticon2-magnifier-tool text-success"
+									(click)="showVerRutasQuiebres(element, userId)">
+									<div class="container-show">Ver quiebre...</div>
+								</em>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono_contacto">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Datos_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Datos Embajador</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+
+								<em style="position: relative; display: flex; justify-content: center"
+									class="bg-data-emb flaticon2-magnifier-tool text-primary"
+									(click)="showVerDatosEmbajador(element, userId)">
+									<div class="container-show">Ver datos...</div>
+								</em>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Comentario">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Comentario</th>
+						<td mat-cell *matCellDef="let element">
+						
+							<em
+								style=" position: relative; display: flex; justify-content: center"
+								class="bg-comment flaticon2-magnifier-tool text-dark" (click)=" showVerComentario(element.id_dhr_red_incident.description,userId)">
+								<div class="container-show">Ver comentario...</div>
+								</em>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Creado">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Creación</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.createdAt | date: 'dd-MM-yyyy' }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Actualización">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Acualización</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.updatedAt | date: 'dd-MM-yyyy h:mm:ss a' }}
+						</td>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.updatedAt | date:'short'}}</td> -->
+					</ng-container>
+
+					<!-- <ng-container matColumnDef="Situacion_quiebre">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Situacion quiebre</th>
+						<td mat-cell *matCellDef="let element">
+							 {{ element.id_dhr_red_status.name }}
+							 {{ element.situacion_quiebre }}
+						</td>
+					</ng-container> -->
+
+					<!-- <ng-container matColumnDef="Estado">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_status.name }}
+						</td>
+					</ng-container> -->
+
+					<ng-container matColumnDef="Comentario_dinamico">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+							Comentario dinámico
+						</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.comment }}
+						</td>
+					</ng-container>
+
+					<!-- <ng-container matColumnDef="Motivo y Submotivo">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Motivo y submotivo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							<button btn-sm class="btn btn-success" style="font-size: 12px;" (click)="showMotivoSubmotivo(element, userId)">Motivo y Submotivo</button>
+						</td>
+					</ng-container> -->
+
+					<!-- <ng-container matColumnDef="No_Contacto">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>No Contacto</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							<button btn-sm class="btn btn-success" style="font-size: 12px;" (click)="showNoContacto(element, userId, stepper)">No Contacto</button>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="No_FFTT">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>No FFTT</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							<button btn-sm class="btn btn-success" style="font-size: 12px;" (click)="showNoFFTT(element, userId, stepper)">No FFTT</button>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Fin_atencion">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Fin Atención</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							<button btn-sm class="btn btn-success" style="font-size: 12px;"(click)="showFinAtencion(element, userId, stepper)" >Fin de atención</button>
+						</td>
+					</ng-container> -->
+
+					<ng-container matColumnDef="Acciones">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+						<td mat-cell *matCellDef="let element">
+							<div class="btn-group">
+								<button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">
+									<mat-icon>list</mat-icon>
+								</button>
+								<div class="dropdown-menu">
+									<span>
+										<button btn-sm class="dropdown-item accion-no-fftt flaticon2-writing" style="font-size: 13px"
+											(click)="showNoFFTT(element, userId, stepper)">No FFTT
+										</button>
+									</span>
+									<span>
+										<button btn-sm class="dropdown-item accion-no-contacto flaticon2-warning" style="font-size: 13px"
+											(click)="showNoContacto(element, userId, stepper)">No Contacto
+										</button>
+									</span>
+									<span>
+										<button btn-sm class="dropdown-item accion-fin-atencion flaticon2-laptop" style="font-size: 13px"
+											(click)="showFinAtencion(element, userId, stepper)">Fin de atención
+										</button>
+									</span>
+									<span>
+										<button btn-sm class="dropdown-item accion-comentario-dinamico flaticon2-laptop" style="font-size: 13px"
+											(click)="showComentarioDinamico(element, userId, stepper)">Comentario dinámico
+										</button>
+									</span>
+								</div>
+							</div>
+						</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="Columns_Incident_Details2"></tr>
+					<tr mat-row *matRowDef="let row; columns: Columns_Incident_Details2"></tr>
+				</table>
+
+				<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+			</div>
+		</mat-step>
+
+		<mat-step label="Registros">
+			<div class="d-flex justify-content-center align-items-center mt-4">
+				<button mat-raised-button matStepperPrevious color="primary">Retroceder</button>
+				<!-- <button mat-button matStepperNext class="btn btn-primary">Siguiente</button> -->
+			</div>
+
+			<div class="row d-flex justify-content-center">
+				<div>
+					<h1 style="font-size: 32px" class="mt-4">3. Registros</h1>
+				</div>
+			</div>
+
+			<div class="d-flex justify-content-center mt-4">
+				<div class="mr-5">
+					<button (click)="traerQuiebres()" class="btn btn-success mb-4">
+						Refrescar
+					</button>
+				</div>
+				<!-- <div>
+					<button mat-raised-button color="primary" (click)="exportAsXLSX()">Export
+					</button>
+				</div> -->
+				<!-- <div>
+					<button mat-raised-button (click)="exporter3.exportTable('xlsx')">Reporte Excel</button>
+				</div> -->
+				<div>
+					<button mat-raised-button (click)="showReporteExcel()">Reportes</button>
+				</div>
+			</div>
+
+			<mat-card [formGroup]="fechasFormRegistro" class="container-form mat-elevation-z8">
+				<mat-card-content>
+					<div class="row">
+						<div class="col-md-8">
+							<h5 class="font-style title-search-date">
+								Buscar por rango de fecha :
+							</h5>
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-6">
+									<div class="form-inline">
+										<input class="text-center form-control inputFechaInicio col-xs-12 col-sm-10 col-md-10 col-lg-10"
+											[matDatepicker]="picker5" name="fecha5" formControlName="date5" placeholder="Desde..." />
+										<mat-datepicker-toggle class="iconoFechaInicio col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker"
+											matSuffix [for]="picker5">
+										</mat-datepicker-toggle>
+										<mat-datepicker #picker5></mat-datepicker>
+									</div>
+								</div>
+
+								<div class="col-xs-12 col-sm-12 col-md-6">
+									<div class="form-inline">
+										<input class="text-center form-control inputFechaFin col-xs-12 col-sm-10 col-md-10 col-lg-10"
+											[matDatepicker]="picker6" name="fecha6" formControlName="date6" placeholder="Hasta..." />
+										<mat-datepicker-toggle class="iconoFechaFin col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker"
+											matSuffix [for]="picker6">
+										</mat-datepicker-toggle>
+										<mat-datepicker #picker6></mat-datepicker>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<h5 class="font-style"></h5>
+							<br />
+							<!-- <button class="btn btn-block btn_savedatamasive" (click)="showData(txt_start_date,txt_end_date)">Buscar</button> -->
+							<button class="btn btn-block btn_savedatamasive bg-search-date" mat-raised-button
+								(click)="showDataRegistro(fechasFormRegistro.value)">
+								Buscar
+							</button>
+						</div>
+					</div>
+				</mat-card-content>
+			</mat-card>
+
+			<div class="mt-5 mat-elevation-z8 table-responsive" style="overflow-x: scroll; width: 100%">
+				<table aria-describedby="table4" class="table table-hover table-striped" mat-table [dataSource]="dataSourceIncidentDetails3" matSort
+					#exporter3="matTableExporter" matTableExporter>
+					<!-- ID de la tabla dhr_red_incident_dertails -->
+					<ng-container matColumnDef="id">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id_dhr_red_incident.id }}</td> -->
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id }}
+						</td>
+					</ng-container>
+
+					<!-- ID de la tabla dhr_red_incident -->
+					<!-- <ng-container matColumnDef="id_incidente">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Id Incidente</th>
+						<td mat-cell *matCellDef="let element">
+							{{ element.id_dhr_red_incident.id }}
+						</td>
+					</ng-container> -->
+
+					<ng-container matColumnDef="Nombres">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Titular</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.name_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="DNI">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.dni_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Correo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.mail_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Red Quiebre">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Red Quiebre</th>
+						<td mat-cell *matCellDef="let element">
+							<em style="position: relative; display: flex; justify-content: center"
+								class="bg-quiebre flaticon2-magnifier-tool text-success"
+								(click)="showVerRutasQuiebres(element, userId)">
+								<div class="container-show">Ver quiebre...</div>
+							</em>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono_contacto">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Datos_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Datos Embajador</th>
+						<td mat-cell *matCellDef="let element">
+
+							<em style="position: relative; display: flex; justify-content: center"
+								class="bg-data-emb flaticon2-magnifier-tool text-primary"
+								(click)="showVerDatosEmbajador(element, userId)">
+								<div class="container-show">Ver datos...</div>
+							</em>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Comentario">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Comentario</th>
+						<td mat-cell *matCellDef="let element">
+
+							<em style=" position: relative; display: flex; justify-content: center"
+								class="bg-comment flaticon2-magnifier-tool text-dark" (click)="
+									showVerComentario(
+										element.id_dhr_red_incident.description,
+										userId
+									)
+								">
+								<div class="container-show">Ver comentario...</div>
+							</em>
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Creado">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Creación</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_red_incident.createdAt | date: 'dd-MM-yyyy' }}
+						</td>
+						<!-- <td mat-cell *matCellDef="let element">{{ element.id_dhr_red_incident.createdAt | date:'short' }}</td> -->
+						<!-- <td mat-cell *matCellDef="let element">Hola</td> -->
+					</ng-container>
+
+					<ng-container matColumnDef="Actualización">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Actualización</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.updatedAt | date: 'dd-MM-yyyy h:mm:ss a' }}
+						</td>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.updatedAt | date:'short'}}</td> -->
+					</ng-container>
+
+					<!-- <ng-container matColumnDef="Situacion_quiebre">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Situacion quiebre</th>
+						<td mat-cell *matCellDef="let element">
+							{{ element.situacion_quiebre }}
+						</td>
+					</ng-container> -->
+
+					<ng-container matColumnDef="Comentario_inicio_atencion">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Inicio atención</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.comentario_inicio_atencion }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Estado">
+						<th  scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							 {{ element.id_dhr_red_status.name }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Motivo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Motivo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_incident_submotivo.id_dhr_incident_motivo.name }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Submotivo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Submotivo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.id_dhr_incident_submotivo.name }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="No_corresponde">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>No Corresponde</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.comentario_no_corresponde }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="No_contacto">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>No Contacto</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.comentario_no_contacto }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="No_FFTT">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>No FFTT</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px">
+							{{ element.comentario_no_fftt }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Fin_de_atencion">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Fin de atención</th>
+						<td mat-cell *matCellDef="let element">
+							<button class="btn btn-primary" style="font-size: 12px" (click)="showDatosFinAtencion(element, userId)">
+								Ver Datos Fin de Atención
+							</button>
+						</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="Columns_Incident_Details3"></tr>
+					<tr mat-row *matRowDef="let row; columns: Columns_Incident_Details3"></tr>
+				</table>
+
+				<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+			</div>
+
+			<!-- TERCER STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP-->
+		</mat-step>
+	</mat-horizontal-stepper>
+</div>

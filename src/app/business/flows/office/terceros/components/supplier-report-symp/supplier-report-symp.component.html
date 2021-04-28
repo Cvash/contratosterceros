@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="titlecomp">
+        <div style="display: flex;">
+            <div>
+                <p class="main-title">Reporte de síntomas</p>
+                <p  class="sub-title">Tu salud es lo primero</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div *ngIf="ready" class="cardtdp">
+        <div class="form-baner-terceros">
+            <div class="title-form-access" style="flex: 1 1; text-align: center;">{{formMessage}}</div>
+        </div>
+        <div *ngIf="dailyReview.pass && viewStatus===2" class="cardtdp-content">
+            <p class="title-form-access">{{myName}}</p>
+            <p class="title_question">¿Presentas alguno de los siguientes sintomas?</p>
+            <ul class="form-list-sintomas">
+                <li *ngFor="let s of sympFormReport">
+                    <div class="sintoma-icon"> <img style="width: 100%;" [src]="s.icon" alt="iconSymp"> </div>
+                    <div class="sintoma-text">{{s.description}}</div>
+                    <div (click)="changeSymptomOption(s.id,true)" [ngClass]="{'sintoma-resp-active': s.option && s.touched}" class="sintoma-resp">Sí</div>
+                    <div (click)="changeSymptomOption(s.id,false)" [ngClass]="{'sintoma-resp-active': !s.option && s.touched}" class="sintoma-resp">No</div>
+                </li>
+            </ul>
+            <div class="button-terceros-cont">
+                <button mat-flat-button class="btn button-terceros-primary" (click)="reportSypmtoms()" >Reportar síntomas</button>
+            </div>
+        </div>  
+        <div *ngIf="!formenable && viewStatus!=0" class="cardtdp-content">
+            <h5 style="text-align: center;">{{myName}}</h5>
+            <p style="text-align: center;">Aún no has generado tu pase de ingreso.</p>
+            <button mat-flat-button class="btn button-terceros-primary" (click)="generatePass()" >Generar pase de ingreso</button>        
+        </div>       
+    </div>
+    <div *ngIf="!ready" style="text-align:center;">
+        Estamos preparando todo...
+    </div>
+
+</div>

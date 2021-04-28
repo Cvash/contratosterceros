@@ -1,0 +1,130 @@
+
+/*  MODALES  */
+.modal_body{
+    padding: 10px 20px;
+}
+.tab_overflow{
+    overflow: auto;
+    height: 250px;
+}
+.revocar_color{
+    color: rgb(233,66,108);
+  }
+  
+  .btn_movistarceleste{
+    background-color:#00a9e0; 
+    color: #fff;
+    margin-top: 10px;
+  }
+  
+  .modalheader{
+    display: flex;
+    background-color: #00a9e0;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 15px;
+    color: #fff;
+    font-size: 17px;
+    line-height: 30px;
+    margin: 0;
+  }
+  .modalclosebutton{
+  width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background: #ffffff42;
+    text-align: center;
+    color: #fff;
+    transition: ease-out 0.15s;
+    line-height: 32px;
+  }
+  .modalclosebutton i{
+    font-size: 10px;
+    display: block;
+    margin: auto;
+  }
+  .modalclosebutton:hover{
+    cursor: pointer;
+    background: #ffffff88;
+  }
+  .tab_container{
+    width: 600px;
+    max-height: 213px;
+    overflow: auto;
+    margin: auto;
+  }
+  .cuerpo{
+    margin: 0 25px;
+    padding: 30px;
+}
+.table_files{
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+.table_files tr{
+    border-bottom: 1px solid #ddd;
+}
+.table_files td, .table_files th{
+    padding: 5px;
+}
+.tb_r{
+    width: 25%;
+}
+.tb_l{
+    width: 50%;
+}
+.tb_inp{
+    width: 90%;
+    margin-right: -1px;
+    padding: 2px 10px;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    border: solid 1px #aaa;
+}
+.input_items{
+    display: flex;
+    vertical-align: middle;
+}
+.btn_copy{
+    font-size: 16px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: solid 1px #aaa;
+    color: #00a9e0;
+    background-color: #f2f3f8;
+    transition: ease-in-out .15s;
+}
+.btn_copy:hover{
+    background-color: #00a9e0;
+    color: #fff;
+}
+.btn_delete{
+    font-size: 16px;
+    border-radius: 3px;
+    border: solid 1px #d2d2d2;
+    color: #ce837e;
+    background-color: #f2f3f8;
+    transition: ease-in-out .15s;
+}
+.btn_delete:hover{
+    background-color: #E9426D;
+    color: #fff;
+}
+.fileinput{
+    display: none;
+}
+.filebuton{
+    background-color:  #00a9e0;
+    color: #ffffff;
+}
+.filebuton2{
+    background-color:  #ddd;
+    color: #323232;
+    margin-right: 10px;
+}
+
+table thead tr th{
+    color: #00a9e0;
+    text-decoration: underline;
+}

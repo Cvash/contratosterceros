@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-center" style="overflow: auto;">
+  <div>
+    <!-- <div>{{data.lista_quiebres | json}}</div> -->
+    <form [formGroup]="quiebreForm">
+      <div class="d-flex justify-content-center">
+        <div style="text-align: left;" class="mb-3 anuncio">
+          Comentario
+        </div>
+      </div>
+      <label for="" class="labels">Comentario dinámico es un comentario que servirá para que el colaborador se entere como va su proceso.</label>
+        <textarea formControlName="comment" class="form-control" id="comentario_inicio_atencion" rows="3" placeholder=""></textarea>
+
+      <div class="d-flex justify-content-center mt-5">
+        <div class="d-flex justify-content-center mr-3" style="display: inline-block!; float: right;">
+          <button type="submit" [disabled]="quiebreForm.invalid" mat-button  mat-raised-button color="primary" (click)="updateComentarioDinamico(quiebreForm.value)">
+            Guardar
+          </button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button mat-dialog-close mat-dialog-close="false" mat-raised-button color="warn">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+.datos{
+    width: 100%;
+    font-size: 12px;
+    display: flex;
+}
+.next{
+    cursor: pointer;
+}
+.datos b{
+    width: 60px;
+    padding: 0 3px;
+}
+.cuerpo{
+    margin-top: 10px;
+    padding: 10px;
+    border: solid 1px #ddd;
+    height: 60vh;
+    overflow: auto;
+}
+.attach{
+    height: 34px;
+    line-height: 34px;
+    border: solid 1px #aaa;
+    padding: 0 10px;
+    margin: 3px;
+    border-bottom: solid 2px #00a9e0;
+    display: flex;
+    align-items: center;
+    color: #898989;
+    transition: 0.3s;
+}
+.attach:hover{
+    cursor: pointer;
+    background-color: #fafafa;
+    color: #5BC500;
+}
+.attach_text{    
+    max-width: 120px;
+    white-space:nowrap;
+    overflow: hidden;
+}
+.attach_cont{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.close_preview{
+    display: inline-block;padding: 5px 7px;border-radius: 5px;background-color: #00a9e0;color:#ffffff;cursor: pointer;
+}

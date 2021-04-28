@@ -1,0 +1,63 @@
+<div class="main-title">
+	<h4 style="padding: 10px; text-align: center;">{{ termsConditionTitle }}</h4>
+</div>
+<mat-card>
+	<div id="form-terms-conditions" [formGroup]="termsFormReactive.termsForm">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 offset-md-2 offset-lg-2">
+				<img
+					src="../../../../../../../assets/images/lock.png"
+					alt="lock"
+					class="img rounded img-fluid mx-auto d-block"
+					style="margin-top: 5px;"
+				/>
+			</div>
+		</div>
+		<div style="height: 260px; overflow-y: scroll; margin-top: 5px;">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 offset-md-1 offset-lg-1">
+					<p>
+						<strong>{{ termsConditionSubTitle }}</strong>
+					</p>
+					<mat-divider></mat-divider>
+					<section
+						id="terms"
+						style="
+							padding-left: 10px;
+							padding-right: 10px;
+							padding-top: 8px;
+							font-size: 15px;
+						"
+					>
+						<p class="text-justify" style="font-size: 13px;">
+							{{ termsConditionMessage }}
+						</p>
+					</section>
+					<section class="example-section">
+						<mat-checkbox class="chk_terms" formControlName="acceptTerm"
+							>Acepto</mat-checkbox
+						>
+					</section>
+				</div>
+			</div>
+			<div id="group-buttom" style="margin-top: 10px;">
+				<div
+					class="form-group"
+					style="display: flex; justify-content: center; align-items: center;"
+				>
+					<button
+						class="btn link-success"
+						(click)="
+							saveUserTermsCondition(
+								termsFormReactive.termsForm.get('acceptTerm').value
+							)
+						"
+					>
+						Aceptar
+					</button>
+					<button class="btn link-cancel" (click)="logOut()">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</mat-card>

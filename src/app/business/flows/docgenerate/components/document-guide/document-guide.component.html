@@ -1,0 +1,86 @@
+<div class="container-mailing">
+    <div class="cuerpo">
+        <div>
+            <p class="main-title">Contenido</p>
+            <ul>           
+                <li>Preparando el Excel</li>
+                <li>Generando documentos</li>
+                <li>Creando y guardando templates</li>
+                <li>Usando condicionales</li>
+            </ul>
+        </div>
+        <div>
+            <p class="sub-title">Preparando el excel</p>
+            <div class="par">
+                Lo primero que necesitamos es preparar el archivo Excel con la información que usaremos para generar los documentos. Los datos deben ser ordenados en una tabla simple donde cada columna tenga un encabezado que la identifique. Podemos agregar las columnas que queramos siempre y cuando se respete la estructura de tabla. Las únicas restricciones del archivo son:
+                <ul class="guide_list">
+                    <li>La hoja en la que está la información debe ser nombrada como "Hoja1".</li>                    
+                    <li>Formatos especiales como fechas debe escribirse como texto (con el prefijo: ' )</li>
+                </ul>
+                <div class="guide_img">
+                    <img src="../../../../../../assets/images/media/images/mailing_guide/guide_1.png" alt="guide_1"/>  
+                </div>                    
+                En este ejemplo, nuestro archivo tiene 6 columnas: DNI, Correo, Copia, Nombre, Secreto y Fecha; y además, cumple con las tres restricciones.
+            </div>
+            <p class="sub-title">Generando documentos</p>
+            <div class="par">
+                Ahora que tenemos nuestro excel listo, el siguiente paso es cargarlo en la aplicación. Para eso vamos a la sección Generador, buscamos el botón "<strong>seleccionar Excel</strong>" y cargamos nuestro libro.
+                <div class="guide_img">
+                    <img src="../../../../../../assets/images/media/images/mailing_guide/guide_2.png" alt="guide_2"/>  
+                </div>  
+                La aplicación mapeará automáticamente nuestra tabla. Para validar que todo salió bien, podemos hacer click en <span style="color: #00a9e0;">(ver disponibles)</span>. Esto abrirá un pop-up con la lista de <strong>palabras clave</strong> disponibles. Una palabra clave tiene la forma ["@" + encabezado] y servirá para poder hacer referencia a una columna de nuestro archivo. En nuestro ejemplo, si queremos hacer referencia a la columna con los nombres de las personas tendríamos que escribir: @Nombre.
+                <br><br>
+                Ahora que cargamos el archivo, ¡es momento de crear el correo usando las palabras clave! 
+                <div class="guide_img">
+                    <img src="../../../../../../assets/images/media/images/mailing_guide/guide_3.png" alt="guide_3"/>  
+                </div> 
+                Como vemos, podemos usar [@+encabezado] en cualquier parte del documento. En este caso usamos ...
+                <br><br>
+                Antes de generar los documentos podemos generar una <strong>pre visualización</strong> para verificar que las palaras clave se están reemplazando correctamente. Al hacer click en preview, automaticamente se generará un documento de prueba con los datos de la primera fila de nuestro excel.
+                <div class="guide_img">
+                    <img src="../../../../../../assets/images/media/images/mailing_guide/guide_4.png" alt="guide_4"/>  
+                </div> 
+                Si todo está bien, solo quedaría hacer click en <strong>Generar</strong> y listo. 
+                <div class="guide_hightlight">
+                    <strong>¡Recuerda!</strong> Los documentos se generarán desde la <strong>nube</strong>, por lo que no es necesario dejar la aplicación abierta. 
+                    En cualquier momento podemos revisar el estado de la generación, y saber si ya está lista la descarga en la pestaña <strong>Estado</strong>.</div>
+            </div>
+            <p class="sub-title">Creando y usando plantillas</p>
+            <div class="par">
+                Si creamos un documento que será recurrente, tenemos la posibilidad de crear plantillas. Las plantillas que guardemos serán almacenadas por la aplicación para usarlas las veces que sean necesarias en el futuro. 
+                <br>
+                No es necesario cargar un excel para crear una plantilla, las plantillas son independientes. Si luego cargamos una plantilla, debemos asegurarnos que nuestra hoja de excel contenga todas las columnas a las que estamos haciendo referencia.     
+                <h5>Guardar plantilla:</h5>
+                Para guardar una plantilla primero debemos ponerle un título con el que la identificaremos y luego hacer click en guardar.
+                <div class="guide_img">
+                    <img src="../../../../../../assets/images/media/images/mailing_guide/guide_5.png" alt="guide_5"/>  
+                </div> 
+                <h5>Cargar plantillas:</h5>
+                Para cargar una plantilla hacemos click en el botón "Plantillas" y seleccionamos el título de la plantilla que queremos cargar.
+                <div class="guide_img">
+                    <img src="../../../../../../assets/images/media/images/mailing_guide/guide_6.png" alt="guide_6"/>  
+                </div> 
+                Todos los campos se llenarán automáticamente con los valores de la plantilla. 
+                <div class="guide_img">
+                    <img src="../../../../../../assets/images/media/images/mailing_guide/guide_7.png" alt="guide_7"/>  
+                </div> 
+                Si queremos, podemos hacer cambios en nuestra plantilla  y guardarlos haciendo click en "Guardar".  
+            </div>
+            <p class="sub-title">Usando condicionales</p>
+            <div class="par">
+                Una posibilidad extra de personalización es el uso de condicionales. Gracias a esta característica podemos crear secciones diferentes del documento según reglas que nosotros mismos podemos definir.
+                <br>
+                Al activar los condicionales, nuestra área de texto inmediatamente se dividirá en secciones. La sección superior e inferir funcionan como siempre y las podemos usar para agregar un encabezado y un final que será igual para todos los casos.
+                La magia sucede en las secciones encerradas en azul. Inicialmente tenemos una, pero podemos agregar las que sean necesarias haciendo click en el botón <strong>[ + Nuevo caso ]</strong>. 
+                <div class="guide_img">
+                    <img src="../../../../../../assets/images/media/images/mailing_guide/guide_17.png" alt="guide_17"/>  
+                </div>
+                Funciona de una forma muy simple: primero seleccionamos un criterio de evaluación (una columna de nuestra tabla) y en cada caso hacemos una comparación. Todos los casos que no coincidan con ninguna regla irán al <strong>Caso por defecto</strong>.
+                <div class="guide_img">
+                    <img src="../../../../../../assets/images/media/images/mailing_guide/guide_18.png" alt="guide_18"/>  
+                </div>
+                En nuestro ejemplo compararemos “Resultado” y agregaremos dos casos: “Primero” y “Segundo”. De esta forma tendremos diferentes versiones del documento según el valor de nuestro excel
+            </div>
+        </div>
+    </div>
+</div>

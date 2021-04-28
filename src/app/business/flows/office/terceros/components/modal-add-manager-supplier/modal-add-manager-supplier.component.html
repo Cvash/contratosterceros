@@ -1,0 +1,142 @@
+<div style="position: relative;">
+    <button (click)="closeDialog()" class="close-qr"> <em class="flaticon2-delete"></em> </button>
+</div>
+<p class="text-center main-title">Registro de gestor tercero</p>
+<p class="text-center sub-title">Empresa: {{company.company_name}} - {{company.service}}</p>
+<p class="text-center sub-title">RUC: {{company.ruc}}</p>
+
+<mat-divider></mat-divider><br>
+<form [formGroup]="supplierForm.managerSupplier">
+    <div id="form_01" style="width: 100%;transition: 0.3s;" *ngIf="!formCondition">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <img src="../../../../../../../assets/images/media/formSections/one.png"
+                    class="img rounded mx-auto d-block" alt="one">
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <section style="padding-top:10px ;padding-bottom: 5px;">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 offset-md-2">
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <mat-label class="text-center">DNI o Nro de documento</mat-label>
+                        <input formControlName="nationalId" class="text-center" matInput
+                            placeholder="DNI o Nro de documento*">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <button mat-raised-button (click)="nextForm()" class="btn flaticon2-next btn_movistarceleste">
+                        Siguiente</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12" *ngIf="showMessageCondition">
+                    <p
+                        style="margin-top: 5px;padding: 5px;color: #ffffff;background-color: #5bc500;border-radius: 5px;">
+                        {{messageCondition}}</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="form_02" style="width: 100%;transition: 0.3s;" *ngIf="formCondition">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <img src="../../../../../../../assets/images/media/formSections/two.png"
+                    class="img rounded mx-auto d-block" alt="two">
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <section style="padding-top:10px ;padding-bottom: 5px;">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 ">
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <mat-label class="text-center">DNI o Nro de documento</mat-label>
+                        <input formControlName="nationalId"   class="text-center" matInput
+                            placeholder="DNI o Nro de documento*">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label class="text-center">Nombres</mat-label>
+                        <input formControlName="name"   matInput placeholder="Nombres*">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label class="text-center">Apellido paterno</mat-label>
+                        <input formControlName="lastName1"   matInput
+                            placeholder="Apellido paterno*">
+                    </mat-form-field>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label class="text-center">Apellido materno</mat-label>
+                        <input formControlName="lastName2"   matInput
+                            placeholder="Apellido materno*">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label class="text-center">Correo</mat-label>
+                        <input formControlName="mail"   matInput placeholder="Correo*">
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label class="text-center">Código de empleado (Propia empresa)</mat-label>
+                        <input formControlName="codeCompany"   matInput
+                            placeholder="Código de empleado (Propia empresa)">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label class="text-center">Fecha de Nacimiento</mat-label>
+                        <input formControlName="birthDate"   type="date" matInput
+                            placeholder="Nacimiento">
+                    </mat-form-field>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label class="text-center">Seleccionar Género</mat-label>
+                        <mat-select formControlName="gender"   placeholder="Género">
+                            <mat-option value="F">Femenino</mat-option>
+                            <mat-option value="M">Masculino</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <mat-form-field style="width: 100%;" appearance="fill">
+                        <mat-label>Actividad o puesto</mat-label>
+                        <input formControlName="activity"   matInput
+                            placeholder="Actividad o puesto">
+                    </mat-form-field>
+                </div>
+            </div>
+        </section>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <button mat-raised-button (click)="previousForm()" class="fas fa-arrow-circle-left btn btn_back"> Volver</button>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <button mat-raised-button (click)="addNewSupplier()" class="fas fa-check-circle btn btn_movistarceleste">
+                    Crear usuario</button>
+            </div>
+        </div>
+    </div>
+</form>

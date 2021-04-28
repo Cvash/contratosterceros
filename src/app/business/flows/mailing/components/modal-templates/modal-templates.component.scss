@@ -1,0 +1,169 @@
+.table {
+    width: 100%;
+    box-shadow: 0 0 0;
+}
+.table tr:nth-child(even) {
+  background-color: #f7f8fa;
+}
+.table td, .table th{
+  vertical-align: middle;
+  font-size: 13px;
+  padding: 0;
+  text-align: center;
+}
+.pd16{
+  padding: 0 16px;
+}
+.table tr{
+    height: 40px;
+}
+table th{
+  background-color: #00a9e0;
+  color: #fff;
+
+}
+.tabIconButton{
+  color: #aaa;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 0 4px;
+  font-size: 13px;
+  transition: ease-in-out .2s;
+}
+.tabIconButton:hover{
+  background-color: #eee;
+  cursor: pointer;
+}
+.pass_color{
+  color: #f59c00
+}
+.roles_color{
+  color:#00a9e0;
+}
+.inp_label{
+  margin-top: 9px;
+  margin-right: 10px;
+}
+.derecha{
+  display: flex;
+  flex-direction: row-reverse;
+}
+.cobt{
+    display: flex;
+    align-items: center;
+    padding: 0.65rem 1rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #74788d;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #f7f8fa;
+    border: 1px solid #e2e5ec;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    transition: ease-in-out .2s;
+}
+.cobt:hover{
+  background-color: #00a9e0;
+  border: 1px solid #00a9e0;
+  color: #fff;
+  cursor: pointer;
+}
+.btn_movistarceleste{
+    background-color: #00a9e0;
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: 600;
+    margin-left: 12px;
+}
+
+/*  MODALES  */
+
+.revocar_color{
+  color: rgb(233,66,108);
+}
+
+.btn_movistarceleste{
+  background-color:#00a9e0; 
+  color: #fff;
+  margin-top: 10px;
+}
+
+.modalheader{
+  display: flex;
+  background-color: #00a9e0;
+  border-radius: 3px;
+  padding: 5px;
+  padding-left: 15px;
+  color: #fff;
+  font-size: 17px;
+  line-height: 30px;
+  margin: 0;
+}
+.modalclosebutton{
+width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background: #ffffff42;
+  text-align: center;
+  color: #fff;
+  transition: ease-out 0.15s;
+  line-height: 32px;
+}
+.modalclosebutton i{
+  font-size: 10px;
+  display: block;
+  margin: auto;
+}
+.modalclosebutton:hover{
+  cursor: pointer;
+  background: #ffffff88;
+}
+.tab_container{
+  width: 600px;
+  max-height: 213px;
+  overflow: auto;
+  margin: auto;
+}
+.flex-col{
+  display: flex;
+  flex-direction: column;
+}
+.case{
+  width: 100%;
+  display: flex;
+}
+.case label{
+  line-height: 44px;
+  font-weight: 500;
+  width: 100px;
+}
+.input_case{
+  width: 100px;
+  margin-right: 15px;
+}
+.select_case{
+  width: 300px;
+}
+.cases{
+  padding: 10px 20px;
+  border: solid 1px #cdcdcd;
+  overflow: auto;
+  min-width: 540px;
+  max-height: 200px;
+}
+.btn_delete{
+  font-size: 16px;
+  border-radius: 3px;
+  border: solid 1px #d2d2d2;
+  margin: auto;
+  color: #ce837e;
+  background-color: #f2f3f8;
+  transition: ease-in-out .15s;
+}
+.btn_delete:hover{
+  background-color: #E9426D;
+  color: #fff;
+}

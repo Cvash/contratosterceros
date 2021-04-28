@@ -1,0 +1,119 @@
+<div class="container">
+    <div class="titlecomp">
+        <div style="display: flex;">
+            <div>
+                <p class="main-title">Registro de datos</p>
+                <p class="sub-title">Tu salud es lo primero</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <form [formGroup]="formReactive.supplierForm">
+        <div *ngIf="ready" class="cardtdp">
+            <div *ngIf="viewStatus===3 || viewStatus===2 || viewStatus===4">
+                <div class="form-baner-terceros">
+                    <div class="title-form-access" style="flex: 1 1; text-align: center;"><em class="flaticon-add-label-button"></em>
+                        {{noFormMessage}}</div>
+                </div>
+                <div *ngIf="viewStatus === 2" class="cardtdp-content">
+                    <p class="title-form-access">{{myName}}</p>
+                    <button mat-flat-button class=" btn button-terceros-skinny-primary" (click)="seeAccess()">Ver mi
+                        pase</button>
+                </div>
+            </div>
+
+            <mat-tab-group mat-align-tabs="center" *ngIf="dailyReview.pass===false && 
+            dailyReview.status==='1'" [(selectedIndex)]="activetab"
+                class="example-stretched-tabs">
+                <mat-tab label="1 - Sintomas">
+                    <div class="form-baner-terceros">
+                        <div style="flex: 1 1; text-align: center;">¿Has estado en contacto con algún paciente con
+                            coronavirus en los últimos 14 días?</div>
+                        <section>
+                            <mat-slide-toggle  (change)="changeToggle($event)"></mat-slide-toggle>
+                        </section>
+                    </div>
+                    <div class="cardtdp-content">
+                        <p class="title_question">¿Presentas alguno de los siguientes sintomas?</p>
+                        <ul class="form-list-sintomas">
+                            <li *ngFor="let s of sympForm">
+                                <div class="sintoma-icon"> <img style="width: 100%;" [src]="s.icon" alt="iconSymp"> </div>
+                                <div class="sintoma-text">{{s.description}}</div>
+                                <div (click)="changeSymptomOption(s.id,true)"
+                                    [ngClass]="{'sintoma-resp-active': s.option && s.touched}" class="sintoma-resp">Sí
+                                </div>
+                                <div (click)="changeSymptomOption(s.id,false)"
+                                    [ngClass]="{'sintoma-resp-active': !s.option && s.touched}" class="sintoma-resp">No
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="form-disclaimer-dj">
+                            <mat-checkbox  [checked]="false" (change)="changeCheckbox($event)" formControlName="chkConfirm">Confirmo que
+                                todos los datos expresados en esta plataforma constituyen una <strong>declaración jurada</strong>
+                                de mi parte.</mat-checkbox>
+                        </div>
+                        <div class="button-terceros-cont">
+                            <button class="btn btn_next" [disabled]="!formReactive.chkConfirm.value" mat-flat-button
+                                (click)="nextStep()">Continuar</button>
+                        </div>
+                    </div>
+
+                </mat-tab>
+                <mat-tab [disabled]='tab2disabled' label="2 - Ubicación">
+                    <div class="cardtdp-content">
+                        <p class="title_question">Responde las siguientes preguntas</p>
+                        <div class="form-terceros-questions">
+                            <label>¿En dónde se ubica tu lugar de trabajo?</label>
+                            <select (change)="changeCity($event)" formControlName="cityOption">
+                                <option value="" selected disabled>-- Seleccione 1 --</option>
+                                <option *ngFor="let op of cities" [value]="op.son">{{op.description}}</option>
+                            </select>
+                        </div>
+                        <div class="form-terceros-questions">
+                            <label>¿A qué sede de la compañía asistirá hoy?</label>
+                            <select formControlName="sedeOption">
+                                <option value="" selected disabled>-- Seleccione 1 --</option>
+                                <option *ngFor="let op2 of sedes" [value]="op2.value1">{{op2.description}}</option>
+                            </select>
+                        </div>
+                        <div class="form-terceros-questions">
+                            <label>¿En qué piso te encontrarás durante el día?</label>
+                            <input formControlName="stageOption" type="text" placeholder="Ej. Piso 3 y 8">
+                        </div>
+                        <div class="form-terceros-questions">
+                            <label>¿Qué tipo de medio de transporte usa?</label>
+                            <div style="display: flex;">
+                                <div (click)="changeTransportType('TTP_TDP')"
+                                    [ngClass]="{'sintoma-resp-active': transportType === 'TTP_TDP'}"
+                                    class="form-terceros-option">Privado</div>
+                                <div style="flex: 1 1;"></div>
+                                <div (click)="changeTransportType('TT_TDP')"
+                                    [ngClass]="{'sintoma-resp-active': transportType === 'TT_TDP'}"
+                                    class="form-terceros-option">Público</div>
+                            </div>
+                        </div>
+                        <div class="form-terceros-questions">
+                            <label>Especifíca el medio de transporte</label>
+                            <select formControlName="transportOption">
+                                <option value="" selected disabled>-- Seleccione 1 --</option>
+                                <option *ngFor="let op3 of transportsDetail" [value]="op3.value1">{{op3.description}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="button-terceros-cont">
+                            
+                            <button mat-flat-button
+                            class="btn btn_next"
+                            (click)="generateAccessPass()"
+                            >Generar ingreso</button>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </form>
+    <div *ngIf="!ready" style="text-align:center;">
+        Estamos preparando todo...
+    </div>
+</div>

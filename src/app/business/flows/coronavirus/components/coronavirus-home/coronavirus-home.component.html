@@ -1,0 +1,585 @@
+<div style="width: 100%;margin: 0 auto;">
+    <form [formGroup]="coronaForm.coronaFormReactive">
+        <span mat-dialog-title *ngIf="txtConditionStatus">
+            <mat-toolbar role="toolbar" class="task-header">
+                <img src="../../../../../../images/assets/media/logos/logo-movistar.png" width="50px" class="imgdialog"
+                    alt="logoMov">
+                <span> Aviso del Sistema</span>
+                <span class="fx-spacer"></span>
+                <em class="flaticon2-delete modalclosebutton" (click)="onCloseCoronaForm()" style="border: none;"></em>
+            </mat-toolbar>
+        </span>
+        <mat-card class="container_coronavirus">
+            <p class="text-center title-corona-form">Registro de Estado</p>
+            <hr>
+            <div class="row">
+                <div class="col-md-12" syle="padding-bottom:10px">
+                    <label for="name_emp">Empleado :</label>
+                    <input style="margin-left: 5px;" type="text" class="form-control text-center"
+                        formControlName="employeeName">
+
+                </div>
+            </div>
+
+            <hr>
+            <div id="formCoronavirus" class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div *ngIf="!conditionGeneral" class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label>Situación laboral :</label>
+                                    <mat-select [disabled]="conditionGeneral" [style.background-color]="backgroundColor"
+                                        formControlName="statusWork" class="form-control">
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let value of arrayCoronaStatus" [value]="value.id">
+                                            {{value.name}}</mat-option>
+                                    </mat-select>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div *ngIf="!conditionGeneral" class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                            <div class="form-group">
+                                <label>Fecha de situación laboral
+
+                                    :</label>
+                                <div class="form-inline">
+                                    <input class="text-center form-control col-xs-12 col-sm-12 col-md-12 col-lg-10"
+                                        [matDatepicker]="picker" formControlName="reasonDate" placeholder="YYYY-MM-DD"
+                                        [disabled]="conditionGeneral">
+                                    <mat-datepicker-toggle class="col-xs-12 col-sm-12 col-md-12 col-lg-2 btn-datepicker"
+                                        matSuffix [for]="picker">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!conditionGeneral" class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                            <div class="form-group">
+                                <label>Tipo de presencia :</label>
+                                <mat-select [disabled]="conditionGeneral" [style.background-color]="backgroundColor"
+                                    formControlName="typeWork" class="form-control">
+                                    <mat-option>None</mat-option>
+                                    <mat-option *ngFor="let value of arrayCoronaType" [value]="value.id">{{value.name}}
+                                    </mat-option>
+                                </mat-select>
+
+                            </div>
+                        </div>
+                        <div *ngIf="!conditionGeneral" class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                            <div class="form-group">
+                                <label>Fecha de tipo de presencia
+
+                                    :</label>
+                                <div class="form-inline">
+                                    <input class="text-center form-control col-xs-12 col-sm-12 col-md-12 col-lg-10"
+                                        [matDatepicker]="picker2" name="fecha2" formControlName="typeDate"
+                                        placeholder="YYYY-MM-DD" [disabled]="conditionGeneral">
+                                    <mat-datepicker-toggle class="col-xs-12 col-sm-12 col-md-12 col-lg-2 btn-datepicker"
+                                        matSuffix [for]="picker2">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="conditionGeneral">
+                        <div class="col-md-12">
+                            <div class="form-group">
+
+                                <label>Estado de salud:</label>
+                                <mat-select formControlName="healthPerson" class="form-control">
+                                    <mat-option>Seleccionar</mat-option>
+                                    <mat-option *ngFor="let value of arrayCoronaReason" [value]="value.id">
+                                        {{value.name}}
+                                    </mat-option>
+                                </mat-select>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" *ngIf="!conditionGeneral">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
+                            <div class="form-group">
+
+                                <label>Estado de salud:</label>
+
+                                <mat-select formControlName="healthPerson" class="form-control">
+                                    <mat-option>None</mat-option>
+                                    <mat-option *ngFor="let value of arrayCoronaReason" [value]="value.id">
+                                        {{value.name}}
+                                    </mat-option>
+                                </mat-select>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                            <div class="form-group">
+                                <label>Deshabilitar pase de ingreso:</label>
+                                <button class="btn btn-block bg-danger text-light"
+                                    (click)="removeAccess()">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Teléfono de contacto
+                                    :</label>
+                                <input type="text" formControlName="telef" class="form-control text-center"
+                                    placeholder="##########"
+                                    onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Dirección en caso de emergencia
+                                    :</label>
+                                <input type="text" formControlName="address" class="form-control text-center"
+                                    placeholder="Av venezuela 133 cdra 2 mz C">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="badge-primary" style="padding:10px;color:white;width: 100%;background-color: #E9426D;">
+                        <strong>Por favor bríndanos un contacto de emergencia :</strong></span>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nombre del contacto :</label>
+                                <input type="text" id="contact_warning" formControlName="contactWarning"
+                                class="form-control text-center" placeholder="#################"
+                                onkeypress="return !(event.charCode >= 48 && event.charCode <= 57)"
+                                >
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Teléfono del contacto :</label>
+                                <input type="text" id="contact_warning" formControlName="tefContactWarning"
+                                class="form-control text-center" placeholder="#################"
+                                onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <label><strong>Enfermedades crónicas(Seleccione todas las opciones que te apliquen)
+                            :</strong></label>
+                    <div class="row">
+
+                        <div class="col-100">
+                            <fieldset class="border-fieldset">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <fieldset>
+                                                <legend> </legend>
+                                                <div [style.background-color]="backgroundColor">
+                                                    <input [disabled]="conditionGeneral"
+                                                        [style.background-color]="backgroundColor" type="checkbox"
+                                                        id="chk02" formControlName="chk02" [value]="3">
+                                                    <label for="chk02"><strong>Trabajadores nacidos hasta 1960</strong>
+                                                    </label><br>
+                                                </div>
+                                                <input *ngIf="coronaForm.employeeGender.value==='F'" type="checkbox"
+                                                    name="chk00" formControlName="chk00" [value]="1"
+                                                    style="cursor:pointer">
+                                                <label *ngIf="coronaForm.employeeGender.value==='F'"
+                                                    for="chk00"><strong>Mujeres en estado de
+                                                        gestacion</strong></label><br>
+                                                <div>
+                                                    <label class="flaticon2-add-square label-standard"></label>
+                                                    <label style="padding-left: 10px;padding-right: 20px;">
+                                                        <strong>Enfermedad
+                                                            crónica</strong><br />( Selecciona todas las opciones que te
+                                                        apliquen ) :
+                                                    </label>
+
+
+                                                    <section id="chk01" class="container-cronicas">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-xs-12 col-md-12">
+                                                                <div style="width: 100%;margin-right:10px; "
+                                                                    class="form-inline">
+                                                                    <mat-form-field appearance="outline"
+                                                                        class="mat-form-style">
+                                                                        <mat-select
+                                                                            [disabled]="conditionLegalEntity===true && levelAccess===1"
+                                                                            formControlName="codeSelect" multiple>
+                                                                            <mat-option
+                                                                                (onSelectionChange)="getValues($event)"
+                                                                                class="font-style-mat-select"
+                                                                                *ngFor="let codeSelect of arrayCoronaNotGroup[0]"
+                                                                                [value]="codeSelect.id">
+                                                                                {{codeSelect.name}}
+                                                                            </mat-option>
+                                                                            <mat-optgroup
+                                                                                *ngFor="let group of arrayCoronaGroup"
+                                                                                [label]="textValidate(group.group)"
+                                                                                [disabled]="group.disabled">
+                                                                                <mat-option
+                                                                                    (onSelectionChange)="getValues($event)"
+                                                                                    class="font-style-mat-select"
+                                                                                    *ngFor="let codeSelect of group.group_detail"
+                                                                                    [value]="codeSelect.id">
+                                                                                    {{codeSelect.name}}
+                                                                                </mat-option>
+                                                                            </mat-optgroup>
+                                                                        </mat-select>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                                <div class="row">
+                                                    <div *ngIf="conditionEnfermedadesCardiovasculares"
+                                                        class="col-md-12">
+                                                        <label><strong>Otro tipo de Enfermedades cardiovasculares
+                                                                :</strong></label>
+                                                        <input type="text"
+                                                            [disabled]="conditionLegalEntity===true  && levelAccess===1"
+                                                            style="width: 100%;" formControlName="cardiovascularesSick"
+                                                            class="form-control"
+                                                            placeholder="Ingresar otro tipo de enfermedad"
+                                                            name="cardiovascularesSick">
+                                                    </div>
+                                                    <div *ngIf="conditionEnfermedadesPulmonares" class="col-md-12">
+                                                        <label><strong>Otro tipo de Enfermedades pulmonares cronicas
+                                                                :</strong></label>
+                                                        <input type="text"
+                                                            [disabled]="conditionLegalEntity  && levelAccess===1"
+                                                            style="width: 100%;"
+                                                            formControlName="pulmonaresCronicasSick"
+                                                            class="form-control"
+                                                            placeholder="Ingresar otro tipo de enfermedad"
+                                                            name="pulmonaresCronicasSick">
+                                                    </div>
+                                                    <div *ngIf="conditionEnfermedadesInmunosupresion" class="col-md-12">
+                                                        <label><strong>Otro tipo de Enfermedades de inmunosupresion
+                                                                :</strong></label>
+                                                        <input type="text"
+                                                            [disabled]="conditionLegalEntity  && levelAccess===1"
+                                                            style="width: 100%;" formControlName="inmunosupresionSick"
+                                                            class="form-control"
+                                                            placeholder="Ingresar otro tipo de enfermedad"
+                                                            name="inmunosupresionSick">
+                                                    </div>
+                                                </div><br>
+                                                <div *ngIf="conditionUploadDocument" class="form-inline">
+
+                                                    <section class="container_checkbox1" id="chk01">
+
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                                                <p
+                                                                    class="font-style flaticon2-medical-records label-obs">
+                                                                    Adjuntar documento :</p>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-4">
+                                                                <input type="text" name="txt_filename"
+                                                                    class="form-control" style="width: 100%;"
+                                                                    [style.background-color]="backgroundColor"
+                                                                    formControlName="filename" readonly>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-2"
+                                                                [hidden]="conditionLegalEntity && levelAccess===1">
+                                                                <button for="btn-file"
+                                                                    class="btn btn-block btn_savedatacondition"
+                                                                    (click)="btnfileCondition.click()"><em
+                                                                        class="flaticon2-clip-symbol"></em></button>
+                                                                <input
+                                                                    [disabled]="conditionLegalEntity  && levelAccess===1"
+                                                                    type="file" id="btn-file" name="btnfileCondition"
+                                                                    (change)="uploadFileHome($event)" #btnfileCondition>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-2">
+                                                                <button class="btn btn-block btn-download">
+                                                                    <em
+                                                                        class="flaticon2-download-2"></em>
+                                                                </button>
+                                                                <!-- <button for="btn-file"
+                                                                   
+                                                                    (click)="getFileAttach()"><em
+                                                                        class="btn flaticon2-download-2 btn-download"></em></button> -->
+                                                                </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="row">
+                                                            <span class="indication-info">
+                                                                <strong>Si tienes alguna consulta,duda o deseas realizar
+                                                                    alguna modificación de
+                                                                    las enfermedades crónicas reportadas comunícate con
+                                                                    Carlos Ramirez al
+                                                                    correo
+                                                                    carlos.ramirezla@telefonica.com</strong></span>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset *ngIf="!conditionGeneral">
+                                                <legend>Otros :</legend>
+                                                <input type="checkbox" name="chk03" id="chk03" formControlName="chk03"
+                                                    [value]="4" style="cursor:pointer">
+                                                <label for="chk03"><strong>Personal con licencia Sindical</strong>
+                                                </label><br>
+                                                <input type="checkbox" id="chk04" name="chk" formControlName="chk04"
+                                                    [value]="5" style="cursor:pointer">
+                                                <label for="chk04"><strong>Personal con Licencia por periodo de
+                                                        Lactancia</strong>
+                                                </label><br>
+                                                <input type="checkbox" name="chk" id="chk05" formControlName="chk05"
+                                                    [value]="6" style="cursor:pointer">
+                                                <label for="chk05"><strong>Personal Licencia Médica</strong>
+                                                </label><br>
+                                                <input type="checkbox" name="chk" id="chk06" formControlName="chk06"
+                                                    [value]="7" style="cursor:pointer">
+                                                <label for="chk06"><strong>Otras Licencias</strong>
+                                                </label><br>
+                                                <input type="checkbox" name="chk" formControlName="chk07" [value]="8"
+                                                    style="cursor:pointer" id="chk07">
+                                                <label for="chk07"><strong>Nuevos requerimientos Personas que necesita
+                                                        CITRIX/VPN
+                                                        para sumarse al trabajar remoto</strong>
+                                                </label><br>
+
+                                                <input type="checkbox" name="chk08" formControlName="chk08" id="chk08"
+                                                    [value]="10" style="cursor:pointer">
+                                                <label for="chk08"><strong>Contacto con persona con resultado
+                                                        positivo</strong>
+                                                </label>
+                                                <div class="form-group">
+                                                    <input type="checkbox" name="chk11" id="chk11"
+                                                        formControlName="chk11" [value]="3">
+                                                    <label for="chk11"><strong>Otro tipo de factor de riesgo</strong>
+                                                    </label><br>
+                                                    <input *ngIf="coronaForm.filename.value" type="text"
+                                                        class="form-control" formControlName="otherFactor"
+                                                        placeholder="Especificar otro tipo de factor de riesgos.">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5">
+                                                        <input type="checkbox" name="chk08" id="chk08"
+                                                            formControlName="chk08" [value]="9" style="cursor:pointer">
+                                                        <label for="chk08"><strong>Personal sin retorno al país</strong>
+                                                        </label>
+                                                    </div>
+                                                    <div *ngIf="coronaForm.chk08.value" class="col-md-7">
+                                                        <mat-select formControlName="countryId" class="form-control">
+                                                            <mat-option>Seleccionar</mat-option>
+                                                            <mat-option *ngFor="let value of arrayCoronaCountry"
+                                                                [value]="value.id">
+                                                                {{value.name}}</mat-option>
+                                                        </mat-select>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <br><br>
+                        <label class="text-center" style="margin-top: 10px;">
+                            <strong>¡En Movistar velamos por tu salud y
+                                de los que más quieres!. Ayúdanos a responder las siguientes preguntas:
+                            </strong></label>
+                        <div class="col-100" style="padding: 0px;">
+                            <fieldset class="contaier-transport">
+                                <div class="row" style="margin: 0px;">
+                                    <div class="col-md-12">
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="transportId"><strong># Selecciona el medio de transporte
+                                                    para ir a tu lugar de trabajo :</strong></label>
+                                            <mat-select id="transportId" formControlName="transportId"
+                                                class="form-control matSelect-transportType">
+                                                <mat-option *ngFor="let value of arrayCoronaTransport"
+                                                    [value]="value.id">{{value.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="contaier-imc">
+                                    <label><strong># Indícanos tu IMC : [ IMC = PESO / TALLA² ]</strong></label>
+                                    <p>Ingrese su peso y talla :</p>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text"
+                                                        [disabled]="coronaForm.imc.value > 0 && txtPreRegister===1 && levelAccess===1 && conditionLegalEntity===true"
+                                                        class="form-control" name="weight" id="weight"
+                                                        (change)="caculateImc()" formControlName="weight"
+                                                        placeholder="Colocar el peso en Kg"
+                                                        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                                    <p class="typeData-imc"><strong>Kg</strong></p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" [disabled]="coronaForm.imc.value > 0 && txtPreRegister===1
+                                                && levelAccess===1 && conditionLegalEntity===true" class="form-control"
+                                                        name="height" (change)="caculateImc()" formControlName="height"
+                                                        placeholder="Colocar la altura en cm"
+                                                        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                                    <p style="margin-left: 5px;margin-top: 7px;"><strong>Cm</strong></p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="imc" id="imc"
+                                                        (change)="caculateImc()" formControlName="imc" placeholder="imc"
+                                                        disabled
+                                                        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+
+                                                    <p style="margin-left: 5px;margin-top: 7px;"><strong>IMC</strong>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p *ngIf="coronaForm.height.value>=100&&coronaForm.height.value<=250?false:true">La
+                                        altura ingresada es incorrecta. No podra calcular si imc, ya que el rango de
+                                        valores aceptados se encuentra entre 100cm y 250cm. </p>
+                                    <p *ngIf="coronaForm.weight.value>=0&&coronaForm.weight.value<=250?false:true">El
+                                        peso ingresado es incorrecta. No podra calcular si imc, ya que el maximo peso
+                                        aceptado es 250kg. </p>
+
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div>
+                                            <div class="form-inline">
+                                                <label for="chk10"><strong># ¿Vives con alguien de o con exposición
+                                                        de Riesgo?</strong>
+                                                </label><br>
+                                                <fieldset>
+                                                    <legend> </legend>
+                                                    <mat-radio-group formControlName="chk10"
+                                                        (change)="showModalRelationship(coronaForm.chk10.value)"
+                                                        id="chk10">
+                                                        <mat-radio-button class="rbt-family" [value]="1">
+                                                            Sí
+                                                        </mat-radio-button>
+                                                        <mat-radio-button class="rbt-family" [value]="0">
+                                                            No
+                                                        </mat-radio-button>
+                                                    </mat-radio-group>
+
+
+                                                </fieldset>
+                                                <button class="btn btn_showRelataionship"
+                                                    (click)="showModalRelationship(2)"
+                                                    *ngIf="coronaForm.chk10.value===1?true:false"
+                                                    style="margin-left: 10px;">Agregar otra persona</button>
+                                            </div>
+                                            <section *ngIf="coronaForm.chk10.value===1" id="sect-4"
+                                                class="table-responsive">
+                                                <hr>
+                                                <table aria-describedby="tdp-family" class="table table-hover">
+                                                    <thead class="header-table">
+                                                        <tr>
+                                                            <th scope="fullname">Nombre completo </th>
+                                                            <th scope="relationship">Parentesco</th>
+                                                            <th scope="condition">Condiciones</th>
+                                                            <th scope="action">..</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody *ngFor="let value of arrayCoronaRelationshipValue"
+                                                        style="text-align: center;">
+                                                        <td>{{value.name}}</td>
+                                                        <td>{{value.id_relationship!=7?value.name_relationship:value.other_relationship}}
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-inline" style="vertical-align: middle;">
+                                                                <p *ngIf="value.id_family_condition_1===1?true:false">
+                                                                    Mayor a 60 años.</p>
+                                                                <p *ngIf="value.id_family_condition_1===1?true:false">
+                                                                    ,</p>
+                                                                <p *ngIf="value.id_family_condition_2===1?true:false">
+                                                                    Enfermedad crónica.</p>
+                                                                <p *ngIf="value.id_family_condition_2===1?true:false">
+                                                                    ,</p>
+                                                                <p *ngIf="value.id_family_condition_3===1?true:false">
+                                                                    Embarazo.</p>
+                                                                <p *ngIf="value.id_family_condition_3===1?true:false">
+                                                                    ,</p>
+                                                                <p *ngIf="value.id_family_condition_4===1?true:false">
+                                                                    Expuesto: Hospital, Policia , Militar.</p>
+                                                            </div>
+                                                        </td>
+                                                        <td><em class="flaticon2-delete remove-item"
+                                                                (click)="removeById(value.id)"></em></td>
+                                                    </tbody>
+                                                </table>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-100">
+                            <div class="form-group">
+                                <label>Comentario:</label><br>
+                                <textarea formControlName="comment" class="txt-area" matInput
+                                    placeholder="Por ejemplo: Tengo sintomas como resfrio,fiebre, etc."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="color: #954B97;padding: 5px;text-transform: uppercase;">
+                            Toda información que sea declarada y registrada a través de este portal web será empleada
+                            por la
+                            empresa con estricta reserva y dentro de las obligaciones de confidencialidad que impone la
+                            Ley de
+                            Protección de Datos Personales (Ley No. 29733), su reglamento y demás normas de desarrollo.
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" *ngIf="conditionGeneral">
+                        <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3">
+                            <button class="btn btn-block btn-primary" (click)="savePostCoronaRequest(flagValidation)"
+                                style="background-color: #5BC500;color: #ffffff;">Enviar</button>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="!conditionGeneral">
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            <button class="btn btn-block" (click)="savePostCoronaRequest(flagValidation)"
+                                style="background-color: #5BC500;color: #ffffff;">Enviar</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            <button class="btn btn-block" (click)="onCloseCoronaForm()"
+                                style="background-color: #954B97;color: #ffffff;">Salir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </form>
+</div>
+<!-- <div class="container">
+        <h2>NO DISPONIBLE</h2>
+    </div> -->

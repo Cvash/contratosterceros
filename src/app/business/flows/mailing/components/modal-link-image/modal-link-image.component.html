@@ -1,0 +1,35 @@
+<span class="modalheader mb-3 main-title">Insertar imagen con link
+    <span style="flex: 1 1 auto"></span>
+    <span  (click)="closeModal()" class="modalclosebutton"> <em class="flaticon2-delete"></em> </span>
+</span>
+<form [formGroup]="mailingForm.mailingFormGroup">
+    <div class="modal_body">
+        <div class="row">
+            <table aria-describedby="previewImages" style="width: 90%; margin: 20px auto;">
+                <thead><tr><th scope="any"></th><th scope="any2"></th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td class="tb_l">Imagen: </td>
+                        <td class="tb_r"> 
+                            <input type="file" (change)="changeimg($event)" > 
+                            <mat-spinner *ngIf="imgstatus === 1" diameter="20" style="margin: auto;" ></mat-spinner> 
+                            <em *ngIf="imgstatus === 2" style="color: #5BC500;" class="flaticon2-check-mark"></em>
+                            <em *ngIf="imgstatus === 3" style="color: #dc3545;" class="flaticon2-delete"></em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tb_l">Link</td>
+                        <td class="tb_r"> <input formControlName="link"> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="row">
+            <div style="flex: 1 1;"></div>
+            <button [disabled]="flagdis" (click)="insert()" mat-raised-button class="filebuton mb-3">
+                Insertar
+            </button>
+        </div>
+    </div>
+</form>

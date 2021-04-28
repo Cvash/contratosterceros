@@ -1,0 +1,33 @@
+.ancho-formulario {
+  width: 800px;
+}
+
+.borde-formulario {
+  border: 1px solid #00a9e0;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+// table th{
+//   background-color: #2AA5E7;
+//   padding: 2px 15px;
+//   vertical-align: middle;
+//   text-align: center;
+//   color: #ffffff;
+//   text-transform: uppercase;
+// }
+
+
+
+
+
+@media (max-width:800px){
+  .ancho-formulario {
+    width: 200px; 
+  }
+}

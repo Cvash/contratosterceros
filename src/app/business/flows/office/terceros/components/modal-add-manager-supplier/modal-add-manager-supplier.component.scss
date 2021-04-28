@@ -1,0 +1,93 @@
+/*mat form field*/
+::ng-deep .mat-form-field {
+    .mat-input-element {
+        color: slategray;
+    }
+    .mat-form-field-label {
+        color:  #000000;
+    }
+    .mat-form-field-underline {
+        background-color: #000000;
+    }
+    .mat-form-field-ripple {
+        background-color:  #000000;
+    }
+    .mat-form-field-required-marker {
+        color:  #000000;
+    }
+}
+.mat-form-field{
+    border-color: #00a9e0; 
+}
+/* Border */
+.mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline {
+	color: #00a9e0; 
+  }
+/* Font color */
+input.mat-input-element {
+	color: #00a9e0; 
+  }
+.search-doc{
+    background-color:#00a9e0; 
+    color: #fff;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border-color: #ffffff;
+}
+
+.close-qr{
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 12px;
+    border: none;
+    color: #979797;
+    font-size: 12px;
+}
+.newuser-container {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 13px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+.btn_movistarceleste{
+    background-color:#00a9e0; 
+    margin: auto;
+    color: #fff;
+    margin-top: 10px;
+    display: block; 
+}
+.btn_back{
+    background-color:#db5151; 
+    margin: auto;
+    color: #fff;
+    margin-top: 10px;
+    display: block;
+}
+
+// css Joao
+.main-title {
+	font-family: 'Telefonica Regular', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    color: #00a9e0;
+    font-size: 15px;
+    font-weight: normal;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    padding: 5px;
+    text-decoration: underline;
+}
+.sub-title{ 
+    font-family: 'Telefonica Regular', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    padding: 5px;
+}

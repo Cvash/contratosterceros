@@ -1,0 +1,33 @@
+<div style="position: relative;">
+    <button (click)="closeDialog()" class="close-qr"> <em class="flaticon2-delete"></em> </button>
+</div>
+<div [formGroup]="supplierForm.supplierAdmin">
+    <div class="mqr-cip-x">Acciones requeridas para:</div>
+    <p class="sub-title">{{supplier.name + ' ' +supplier.lastName1}}</p>
+    <p class="sub-title">DNI: {{supplier.nationalId}}</p>
+    <div class="qr-block">
+        <em style="color: #dd5d6a;font-size: 2
+        5px;" class="fas fa-temperature-high"></em>
+    </div>
+    <div class="timereg">
+        El usuario se encuentra deshabilitado ya qué: {{supplier.statusDetail}}
+    </div>
+    <div class="timereg">
+       Para habilitar a {{supplier.name + ' ' +supplier.lastName1}} se requiere adjuntar <strong>evidencia médica</strong> que sustente que está listo para volver al trabajo. Por favor adjunte dichos documentos a continuación:
+    </div>
+    <div class="form-disclaimer-dj">
+        <mat-checkbox formControlName="checkbox">Declaro que {{supplier.name + ' ' +supplier.lastName1}} pasó por un proceso de revisión médica.</mat-checkbox>
+    </div>
+    <div style="display: flex; flex-wrap: wrap;">
+        <div  class="inputfile_container">
+            <button (click)="clickAttachFile()" mat-raised-button class="btn filebuton">
+                Seleccionar documento
+            </button>
+            <div class="filename">{{filename}}</div>	            		
+            <input  #fileinput class="fileinput" type="file" accept=".pdf" />
+        </div>
+        
+        <button [disabled]="!fileloaded" (click)="sendRequest()" mat-flat-button class="btn btn-process-terceros">PROCESAR</button>
+    </div>
+    <input #atachfileInput accept="application/pdf" class="fileinput" type="file" (change)="attachFileChange($event)"/>     
+</div>

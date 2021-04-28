@@ -1,0 +1,240 @@
+
+.cardtdp{
+    width: 80%;
+    padding: 20px 0;
+    margin: 0 auto;
+    border-radius: 4px;
+    background: white;
+    color: rgba(0, 0, 0, 0.87);
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+.cardtdp-content{
+    padding: 30px;
+}
+.titlecomp{
+    margin: 0 20px;
+    /* padding: 30px; */
+    color: #565656;
+}
+.titlecomp h3{
+    margin: auto;
+}
+.titlecomp p{
+    margin: auto;
+}
+
+.form-list-sintomas{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 90%;
+}
+.form-list-sintomas li{
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    align-items: center;
+}
+.sintoma-icon{
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    font-size: 20px;
+    color: #00A9E0;
+    vertical-align: middle;
+    padding-top: -2.5px;
+}
+.sintoma-text{
+    color: #979797;
+    flex: 1 1;
+    margin-left: 10px;
+}
+.sintoma-resp{
+    border: 1px solid #EEEEEE;
+    box-sizing: border-box;
+    border-radius: 25px;
+    font-size: 12px;
+    line-height: 17px;
+    color: #979797;
+    width: 40px;
+    text-align: center;
+    margin: 0 5px;
+    padding: 1px;
+    transition: 0.3s;
+}
+.sintoma-resp:hover{
+    cursor: pointer;
+    background-color: #f3f3f3;
+}
+.sintoma-resp-active{
+    border: 2px solid #5bc500 !important;
+}
+.form-baner-terceros{
+    background: #f1f1f1;
+    color: #717171;
+    margin-bottom: 15px;
+    display: flex;
+    padding: 15px 8%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.button-terceros-cont{
+    text-align: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+}
+
+.form-terceros-questions{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.form-terceros-questions label{
+    color: #979797;
+    margin-bottom: 3px;
+}
+.form-terceros-questions input, .form-terceros-questions select{
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 10px;
+}
+.form-terceros-questions select:disabled{
+    background-color: #ddd;
+}
+.form-disclaimer-dj{
+    width: 90%;
+    margin: 30px auto;
+    text-align: center;
+    color: #979797;
+}
+.form-terceros-option{  
+    width: 45%;
+    margin: auto;
+    text-align: center;
+    border: solid 1px #ddd;
+    border-radius: 20px;
+    padding: 10px;
+    transition: ease 0.3s;
+}
+.form-terceros-option:hover{
+    cursor: pointer;
+    background-color: #f3f3f3;
+}
+
+.button-terceros-skinny-primary{
+    margin: 20px auto;
+    color: #fff;
+    display: block;
+    background-color: #5bc500;
+}
+.viewstatus_message{
+    text-align: center;
+    margin: 20px auto;
+}
+
+::ng-deep .mat-checkbox-layout {
+    white-space: normal !important;
+}
+::ng-deep .mat-checkbox-inner-container {
+    margin-top: 3px !important;
+}
+
+
+
+@media (max-width: 600px) {
+    .cardtdp {
+      margin: 0 auto;
+      width: 90%;
+      background-color: #5bc500;
+    }
+    .cardtdp-content{
+        padding: 10px;
+    }
+    .form-baner-terceros{
+        padding: 15px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .form-list-sintomas li{
+        font-size: .9rem;
+    }
+    h5{
+        font-size: 1rem;
+    }
+}
+
+// css joao
+.button-terceros-primary{
+    border-radius: 5px;
+    display: flex;
+    font-size: 15px;
+    background-color: #00a9e0;
+    color: #ffffff;
+}
+.title_question{ 
+    text-align: center;
+    text-decoration: underline;
+    color: #00A9E0;
+    font-size: 22.5px;
+}
+.title-form-access{ 
+    text-align: center;font-size: 18px;
+    padding: 5px;
+    
+}
+
+.main-title {
+	font-family: 'Telefonica Regular', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    color: #00a9e0;
+    font-size: 25px;
+    font-weight: normal;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px;
+}
+.sub-title{ 
+    font-family: 'Telefonica Regular', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px;
+}
+
+
+@media(max-width:500px){ 
+    .title_question{ 
+        font-size: 13px;
+    }
+    .main-title{
+        font-size: 18px;
+    }
+    .sub-title{
+        font: 13px;
+    }
+    .title-form-access{ 
+        font-size: 15px;
+    }
+
+}
+@media(max-width:750px){ 
+    .title_question{ 
+        font-size: 13px;
+    }
+    .title-form-access{ 
+        font-size: 17.5px;
+    }
+}
+
+@media(max-width:850px){ 
+
+    .title-form-access{ 
+        font-size: 17.5px;
+    }
+}

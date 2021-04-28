@@ -1,0 +1,213 @@
+<div class="container">
+  <div class="main-title-module-report">
+    <p class="main-title">Módulo de reporte para el sistema de Terceros</p>
+     <p class="sub-title">Generación de reportes en base a los servicios gestionados</p>
+     <mat-divider></mat-divider>
+</div><br>
+<form [formGroup]="reportForm.reportFormReactive">
+  <div class="main-form-report">
+    <mat-card style="box-shadow: 0px 0px 2px 1px #00a9e0;">
+     <div id="company" class="container-view-report">
+        <p class="main-title-form">Por favor ingresa los siguientes datos :</p>
+        <mat-divider></mat-divider>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12"> 
+            <div class="row" style="margin-top: 10px;">
+              <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                  <div class="form-group" style="width: 100%;">
+                      <p class="p-format">Empresa :</p>
+                      <mat-form-field  style="width:100%;">
+                          <mat-label>Seleccionar...</mat-label>
+                          <mat-select formControlName="companyId" (selectionChange)="findByIdCompany()">
+                            <mat-option class="text-center" [value]="0" *ngIf="conditionAll==1">Todas las empresas</mat-option>
+                            <mat-option class="text-center" *ngFor="let value of arrayCompanyOptions" [value]="value.id">{{value.name}}</mat-option>
+                            
+                          </mat-select>
+                          
+                        </mat-form-field>
+                  </div>
+                  <div class="form-group" style="width: 100%;">
+                    <p class="p-format">Servicio :</p>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Seleccionar..</mat-label>
+                        <mat-select formControlName="serviceId" (selectionChange)="getServiceCompany()">
+                          <mat-option [value]="0" *ngIf="conditionAll===1 && companyId===0">Todas los servicios</mat-option>
+                          <mat-option *ngFor="let value of findCompanyServiceOptions" [value]="value.id">{{value.name}}</mat-option>
+                        </mat-select>
+                        
+                      </mat-form-field>
+                </div>
+              </div>
+              <div class="show-image col-md-4 col-lg-4">
+              </div>
+              
+          </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 input-group">
+                <p class="p-format">Fecha de inicio : </p>
+                <mat-form-field color="accent">
+                    
+                    <input  matInput [matDatepicker]="picker1" formControlName="startDate"  [readonly]="true" placeholder="yyyy-mm-dd">
+                    <mat-datepicker-toggle matSuffix [for]="picker1" class="btn-datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 input-group">
+                <p class="p-format">Fecha de Fin :</p>
+                <mat-form-field  color="accent">
+                
+                    <input  matInput [matDatepicker]="picker2" formControlName="endDate" [readonly]="true" placeholder="yyyy-mm-dd">
+                    <mat-datepicker-toggle matSuffix [for]="picker2" class="btn-datepicker" ></mat-datepicker-toggle>
+                    <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                  </mat-form-field>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+                <button id="search-data" class="btn btn-block btn-search-data" (click)="showPreviewOrDownload('P')">Buscar</button>
+            </div>
+        </div>
+     </div>
+     </mat-card>
+</div>
+<br>
+<mat-card  [hidden]="arrayReportGeneral.length==0"  style="width: 95%;margin-left: auto;margin-right: auto;">
+   
+        <div id="showData" class="container-view-report">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <p style="font-size: 14px;">Resultado de busqueda :</p>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <button class="btn btn-block btn-search-data" (click)="showPreviewOrDownload('R')">Exportar datos</button>
+              </div>
+            </div>
+            <mat-divider></mat-divider>
+            <mat-form-field [hidden]="arrayReportGeneral.length==0" appearance="fill" style="width: 100%;">
+                <mat-label>Buscar..</mat-label>
+                <input matInput (keyup)="applyFilter($event)" formControlName="filter" placeholder="Puedes buscar por temperatura, dni, nombre, apellido" #input>
+            </mat-form-field>
+            <div class="table-responsive" style="margin-top: 10px;">
+                
+                  <table aria-describedby="reportData" mat-table class="table table-bordered table-hover" [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="DNI">
+                      <th scope="DNI" mat-header-cell *matHeaderCellDef mat-sort-header> DNI </th>
+                      <td mat-cell *matCellDef="let row"> {{row.dni}} </td>
+                    </ng-container>
+                
+                    <ng-container matColumnDef="NAME">
+                        <th scope="NAME" mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE </th>
+                        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                      </ng-container>
+                    
+                      <ng-container matColumnDef="LASTNAME1">
+                        <th scope="LASTNAME1" mat-header-cell *matHeaderCellDef mat-sort-header> APE.PATERNO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.lastName1}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="LASTNAME2">
+                        <th scope="LASTNAME2" mat-header-cell *matHeaderCellDef mat-sort-header> APE.MATERNO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.lastName2}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="SERVICENAME">
+                        <th scope="SERVICE" mat-header-cell *matHeaderCellDef mat-sort-header> SERVICIO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.serviceName}} </td>
+                      </ng-container>
+                
+                      <ng-container matColumnDef="DATEGENERATE">
+                        <th scope="DATESEARCH" mat-header-cell *matHeaderCellDef mat-sort-header > FECHA DE BUSQUEDA </th>
+                        <td mat-cell *matCellDef="let row"> {{row.dateGenerate}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="USERSTATUS">
+                        <th scope="USERSTATUS" mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO DE USUARIO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.userStatus}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="DOCMEDIC">
+                        <th scope="FILE" mat-header-cell *matHeaderCellDef mat-sort-header> SUSTENTO MEDICO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.docMedic}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="QRSTATUS">
+                        <th scope="ACCESSPASS" mat-header-cell *matHeaderCellDef mat-sort-header> PASE DE INGRESO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.qrStatus}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="QRHOUR">
+                        <th scope="HOUR" mat-header-cell *matHeaderCellDef mat-sort-header> HORA DE GENERACIÓN DEL PASE </th>
+                        <td mat-cell *matCellDef="let row"> {{row.qrHour}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="PERSONSTATUS">
+                        <th scope="DETAILS" mat-header-cell *matHeaderCellDef mat-sort-header> DETALLE DE SALUD </th>
+                        <td mat-cell *matCellDef="let row"> {{row.personStatus}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="REPORTHOUR">
+                        <th scope="REPORTHOUR" mat-header-cell *matHeaderCellDef mat-sort-header> HORA DEL REPORTE</th>
+                        <td mat-cell *matCellDef="let row"> {{row.reportHour}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="PERSONDOOR">
+                        <th scope="PERSONDOOR" mat-header-cell *matHeaderCellDef mat-sort-header> ¿SE PRESENTO EN LA PUERTA? </th>
+                        <td mat-cell *matCellDef="let row"> {{row.personDoor}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="CHECKING">
+                        <th scope="CHECKING" mat-header-cell *matHeaderCellDef mat-sort-header> ¿INGRESO AL LOCAL? </th>
+                        <td mat-cell *matCellDef="let row"> {{row.checking}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="HOURIN">
+                        <th scope="HOURAIN" mat-header-cell *matHeaderCellDef mat-sort-header> HORA DE INGRESO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.hourIn}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="TEMPIN">
+                        <th scope="TEMPIN" mat-header-cell *matHeaderCellDef mat-sort-header> TEMP. DE INGRESO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.tempIn}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="HOUROUT">
+                        <th scope="HOUROUT" mat-header-cell *matHeaderCellDef mat-sort-header> HORA DE SALIDA</th>
+                        <td mat-cell *matCellDef="let row"> {{row.hourOut}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="TEMPOUT">
+                        <th scope="TEMPOUT" mat-header-cell *matHeaderCellDef mat-sort-header> TEMP. DE SALIDA </th>
+                        <td mat-cell *matCellDef="let row"> {{row.tempOut}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="COUNTIN">
+                        <th scope="COUNTIN" mat-header-cell *matHeaderCellDef mat-sort-header> CANTIDAD DE INGRESO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.countIn}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="COUNTOUT">
+                        <th scope="COUNTOUT" mat-header-cell *matHeaderCellDef mat-sort-header> CANTIDAD DE SALIDA </th>
+                        <td mat-cell *matCellDef="let row"> {{row.countOut}} </td>
+                      </ng-container>
+    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                
+                    
+                    <tr class="mat-row" *matNoDataRow>
+                      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                  </table>
+                
+                  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+         </div>
+
+</mat-card>
+</form>
+
+
+</div>

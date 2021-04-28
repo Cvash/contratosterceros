@@ -1,0 +1,69 @@
+.newuser-container {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+    
+  }
+  .btn_movistarceleste{
+    background-color:#00a9e0; 
+    margin: auto;
+    color: #fff;
+    margin-top: 10px;
+    display: block; 
+  }
+    
+  .example-container > * {
+    width: 100%;
+  }
+  
+  .modalheader{
+    display: flex;
+    background-color: #00a9e0;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 15px;
+    color: #fff;
+    line-height: 30px;
+    font-size: 17px;
+    margin: 0;
+  }
+  .modalclosebutton{
+    width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      background: #ffffff42;
+      text-align: center;
+      color: #fff;
+      transition: ease-out 0.15s;
+      line-height: 32px;
+  }
+  .modalclosebutton i{
+    font-size: 10px;
+    display: block;
+    margin: auto;
+  }
+  .modalclosebutton:hover{
+    cursor: pointer;
+    background: #ffffff88;
+  }
+  .search-doc{
+    background-color:#00a9e0; 
+    color: #fff;
+    cursor: pointer;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border-color: #ffffff;
+  }
+  .btn_back{
+    background-color:#db5151; 
+    margin: auto;
+    color: #fff;
+    margin-top: 10px;
+    display: block;
+  }
+
+.messageCondition{
+  margin-top: 5px;padding: 5px;color: #ffffff;background-color: #5bc500;border-radius: 5px;
+}

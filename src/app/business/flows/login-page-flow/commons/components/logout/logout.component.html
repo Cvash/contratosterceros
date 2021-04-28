@@ -1,0 +1,27 @@
+<div  style="width: 100%; margin-top: -10px;">
+    <section class="input-group dropdown-menu-back">
+        <em class="flaticon2-user icon-profile"></em>
+        <p class="user-name-pop-up emp-name">{{ emp===null?'ADMIN':emp.name.split("/")[0]}}</p>
+        <p
+            class="btn btn-link user-name-pop-up change-password"
+            (click)="showChangePassword()"
+        >
+            Cambiar Contraseña
+        </p>
+    </section>
+    <div class="clear-line"></div>
+    <div style="width: 100%;">
+        <section class="input-group" style="padding: 20px;">
+            <button
+                class="btn btn-view-profile align-my-profile"
+                (click)="showMyProfile()"
+            >
+                VER PERFIL
+            </button>
+
+            <button (click)="logout()" class="btn btn-view-logout">
+                CERRAR SESIÓN
+            </button>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<h1 mat-dialog-title class="main-title text-center">#QuédateEnCasa</h1>
+
+<mat-dialog-content>
+	<div style="display: flex;flex-wrap: wrap;justify-content: center;">
+		<div class="">
+			<form [formGroup]="requestForm" style="height: 400px !important;">
+				<!-- <form [formGroup]= "yoteayudoForm" (ngSubmit)="registrar(yoteayudoForm.value)"> -->
+				<div class="d-flex justify-content-center">
+					<div style="text-align: left;" class="mb-3 anuncio">
+						Ingresa tus datos y te llamamos gratis
+					</div>
+				</div>
+				<label for="" class="labels">Escribe tu DNI</label>
+				<div class="form-group">
+					<input formControlName="dni" id="dni" type="text" class="caja-texto" />
+				</div>
+				<label for="" class="labels">Escribe tu celular de contacto</label>
+				<div class="form-group">
+					<input formControlName="cel_contacto" id="cel_contacto" type="text" class="caja-texto" />
+				</div>
+				<label for="" class="labels">Escribe tu Correo Electrónico (Opcional)</label>
+				<div class="form-group">
+					<input formControlName="mail" id="mail" type="text" class="caja-texto" />
+				</div>
+				<mat-checkbox color="primary" formControlName="tratamiento_datos">
+					Autorizo el <span style="color: #039be5;">tratamiento de datos</span>
+				</mat-checkbox>
+
+				<div>
+					<div>
+						<mat-dialog-actions>
+							<button id="botonIncidente" [disabled]="requestForm.invalid" class="te-llamamos" type="submit" mat-button
+								mat-dialog-close mat-dialog-close="true" (click)="saveRequest(requestForm.value)">
+								Te llamamos
+							</button>
+						</mat-dialog-actions>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</mat-dialog-content>

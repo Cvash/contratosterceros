@@ -1,0 +1,188 @@
+<h2 mat-dialog-title class="titulo text-center main-title">Formulario para editar Planes</h2>
+	<div class="d-flex justify-content-center">
+		<div class="">
+			<form class="card tarjeta-plan" [formGroup]="PlanForm">
+				<div class="card-body cabecera" style="padding: 0 20px;">
+					<!-- <div>
+						<input formControlName="id" disabled type="number" placeholder="Id Plan" class="mb-1"
+							value="{{ data.plan.id }}" />
+					</div> -->
+					<div style="display: flex;flex-wrap: wrap;justify-content: center;">
+						<img src="../../../../../../../../assets/images/media/logos/logo-movistar.png" alt="logo-movistar" width="100px" height="100px">
+					</div>
+					<div class="form-group row">
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							
+							<label class="detalles-planes" for="plan_type">Tipo de Plan</label>
+							<input formControlName="plan_type" id="plan_type" type="text" class="form-control text-center" placeholder="Tipo Plan"
+									value="{{ data.plan.plan_type }}" />
+						
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<label class="detalles-planes" id="cant_mbps">Velocidad en Mbps</label>
+							<input formControlName="cant_mbps" id="cant_mbps" class="form-control m-1" type="text" placeholder="Cantidad megas"
+								value="{{ data.plan.cant_mbps }}" />
+							
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<label class="detalles-planes" for="emb_price"> Precio Embajador : S/</label>
+							<input formControlName="emb_price" id="emb_price" type="text" class="form-control" placeholder="Precio embajador"
+								value="{{ data.plan.emb_price }}" />
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<label class="detalles-planes" for="regular_price">Precio Regular: S/</label>
+							<input formControlName="regular_price" class="form-control m-1" id="regular_price" type="text" placeholder="Precio regular"
+								value="{{ data.plan.regular_price }}" />
+						</div>
+						
+					</div>
+					<div class="btn-block">
+						<button class="btn call-button">Lo quiero</button>
+					</div>
+				</div>
+				<!-- <div class="d-flex justify-content-center" *ngIf="mostrarInformacionPlanesForm" style="transition: height 2s;">
+          <img src="../../../../../../../assets/images/beneficios_planes.PNG"
+            style="width: 95%; border-bottom: 1px solid #f4f4f3;" alt="">
+        </div> -->
+				<div style="border-bottom: 1px solid #f4f4f3;" style="transition: height 2s; padding: 2px 5px;">
+					<div class="ml-3 mt-3">
+						<div class="d-flex align-items-center mb-4">
+							<div id="bullet">
+								<img src="../../../../../../../assets/images/emb-wifi.png" alt="Telefonica" />
+								<p class="detalles-planes">Velocidad de internet</p>
+							</div>
+							<div class="form-group row">
+								
+								<div class="col-xs-12 col-sm-12 col-md-6">
+									<strong>	<label class="detalles-planes" for="max_descarga">Máxima descarga</label>
+										<input formControlName="max_descarga" class="form-control" id="max_descarga" type="text" placeholder="Máxima descarga" value="{{ data.plan.max_descarga }}" />Mbps</strong>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-6">
+									<label class="detalles-planes" for="max_subida" >Máxima de subida</label>
+									<input formControlName="max_subida" id="max_subida" type="text" class="form-control" placeholder="Máxima subida" value="{{ data.plan.max_subida }}" />Mbps
+								</div>
+							</div>
+						</div>
+						<div class="d-flex align-items-center mb-4">
+							<div class="row">
+								<div class="col-md-6">
+									<div id="bullet">
+										<img src="../../../../../../../assets/images/emb-modem.png" alt="Telefonica" />
+										<p class="detalles-planes">Modem</p>
+									</div>
+									<div class="form-group">
+									
+											<label class="detalles-planes"><strong>Módem Smart WiFi</strong></label>
+											<input formControlName="modem" type="text" class="form-control" placeholder="Modem" value="{{ data.plan.modem }}" />
+										
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div id="bullet">
+										<img src="../../../../../../../assets/images/emb-celular.png" alt="Telefonica" />
+										<p class="detalles-planes">Líneas Móviles</p>
+									</div>
+									<div class="form-group">
+									
+											<label class="detalles-planes"><strong>Gb ilimitados</strong></label>
+											<input formControlName="lineas_moviles" class="form-control" type="text" placeholder="Líneas Móviles"
+												value="{{ data.plan.lineas_moviles }}" />
+										
+									</div>
+								</div>
+							</div>
+
+							
+						</div>
+						
+						<div class="d-flex align-items-center mb-4">
+
+							<!-- second secction-->
+							<div class="row">
+								<div class="col-md-6">
+									<div id="bullet">
+										<img src="../../../../../../../assets/images/emb-tv.png" alt="Telefonica" />
+										<p class="detalles-planes">TV</p>
+									</div>
+									<div class="form-group">
+										<input formControlName="tv" class="form-control" type="text" placeholder="TV" value="{{ data.plan.tv }}" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div id="bullet">
+										<img src="../../../../../../../assets/images/emb-telefono.png" alt="Telefonica" />
+										<p class="detalles-planes">Línea Fija</p>
+									</div>
+									<div class="form-group">
+										<input formControlName="linea_fija" class="form-control" type="text" placeholder="Línea fija"
+											value="{{ data.plan.linea_fija }}" />
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="d-flex align-items-center mb-4">
+							
+							<div class="form-group row">
+								<div class="col-md-6">
+									<img src="../../../../../../../assets/images/emb-gbinternacional.png" alt="Telefonica" />
+									<div class="detalles-planes">GB Internacionales</div>
+								<div>
+									<input formControlName="gb_international" class="form-control" type="text" placeholder="Gb internacionales"
+										value="{{ data.plan.gb_international }}" />
+								</div>
+								</div>
+								<div class="col-md-6">
+									<img src="../../../../../../../assets/images/emb-wspinternacional.png" alt="Telefonica" />
+									<div class="detalles-planes">WhatsApp Internacional</div>
+									<div>
+										<input formControlName="wsp_international" class="form-control" type="text" placeholder="WhatsApp internacional"
+											value="{{ data.plan.wsp_international }}" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div style="display: flex;flex-wrap: wrap;justify-content: center;">
+							
+							<div class="form-group row">
+								<div class="col-md-6">
+									<img src="../../../../../../../assets/images/emb-sms.png" alt="Telefonica" />
+									<div class="detalles-planes text-center">SMS ilimitado</div>
+								</div>
+								<div class="col-md-6">
+									<img src="../../../../../../../assets/images/emb-pasagigas.png" alt="Telefonica" />
+									<div class="detalles-planes">Pasagigas</div>
+						
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="d-flex justify-content-center">
+								<div class="beneficios-exclusivos">Beneficios exclusivos</div>
+							</div>
+							<div class="d-flex justify-content-center mt-2 mb-4">
+								<img src="../../../../../../../assets/images/apps.png" alt="apps" />
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="d-flex justify-content-center">
+					<div class="d-flex justify-content-center mb-3 mr-3">
+						<button type="submit" mat-raised-button color="primary"  class="btn" (click)="savePlan(PlanForm.value)">
+							Actualizar
+						</button>
+					</div>
+					<div class="d-flex justify-content-center mb-3">
+						<button mat-raised-button color="warn" mat-dialog-close mat-dialog-close="false" class="">
+							Cancelar
+						</button>
+					</div>
+				</div>
+				
+			</form>
+		</div>
+	</div>

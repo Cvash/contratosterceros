@@ -1,0 +1,340 @@
+<div class="">
+  <div class="col-12 d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
+     
+      <div class="d-flex justify-content-center pb-5">
+        <div class="d-flex justify-content-center">
+          <div style="display: inline-block; font-size: 30px; padding-top: 20px;">Formulario de Afiliados</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 d-flex justify-content-center pb-5">
+    <div class="row d-flex justify-content-center">
+     
+      <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center col-12 borde-formulario">
+          <form [formGroup]="afiliadosForm" style="display: inline-block" class="pb-3 ancho-formulario">
+              <div class="form-group">
+                <label for="street1_id" class="control-label">Nombres</label>
+                <mat-form-field appearance="outline" style="display: block !important">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput placeholder="Ej: Alexander Príncipe" formControlName="name"
+                    id="mail_titular" type="text" class="" [class.is-invalid]="
+                      afiliadosForm.get('name')
+                        .touched &&
+                        afiliadosForm.get('name')
+                        .invalid
+                    " />
+                  <mat-icon matSuffix>person_pin</mat-icon>
+                  <mat-error *ngIf="afiliadosForm.get('name').invalid">
+                    Nombre es <strong>requerido</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>    
+          
+              <div class="form-group"> 
+                  <label for="street1_id" class="control-label">Apellido Paterno</label>
+                  <mat-form-field appearance="outline" style="display: block !important">
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input matInput placeholder="Ej: Alexander Príncipe" formControlName="last_name_1"
+                      id="last_name_1" type="text" class="" [class.is-invalid]="
+                        afiliadosForm.get('last_name_1')
+                          .touched &&
+                        afiliadosForm.get('last_name_1')
+                          .invalid
+                      " />
+                    <mat-icon matSuffix>person_pin</mat-icon>
+                    <mat-error *ngIf="afiliadosForm.get('last_name_1').invalid">
+                      Apellido paterno es <strong>requerido</strong>
+                    </mat-error>
+                  </mat-form-field>
+              </div>                    
+                                      
+              <div class="form-group">
+                  <label for="street2_id" class="control-label">Apellido Materno</label>
+                  <mat-form-field appearance="outline" style="display: block !important">
+                    <mat-label>Apellido Materno</mat-label>
+                    <input matInput placeholder="Ej: Alexander Príncipe" formControlName="last_name_2"
+                      id="last_name_2" type="text" class="" [class.is-invalid]="
+                        afiliadosForm.get('last_name_2')
+                          .touched &&
+                        afiliadosForm.get('last_name_2')
+                          .invalid
+                      " />
+                    <mat-icon matSuffix>person_pin</mat-icon>
+                    <mat-error *ngIf="afiliadosForm.get('last_name_1').invalid">
+                      Apellido materno es <strong>requerido</strong>
+                    </mat-error>
+                  </mat-form-field>
+              </div>    
+          
+              <div class="form-group">
+                  <label for="city_id" class="control-label">Documento</label>
+                  <mat-form-field appearance="outline" style="display: block !important">
+                    <mat-label>Documento</mat-label>
+                    <input matInput placeholder="Ej: Alexander Príncipe" formControlName="documento"
+                      id="documento" type="text" class="" [class.is-invalid]="
+                        afiliadosForm.get('documento')
+                          .touched &&
+                        afiliadosForm.get('documento')
+                          .invalid
+                      " />
+                    <mat-icon matSuffix>assignment</mat-icon>
+                    <mat-error *ngIf="afiliadosForm.get('documento').invalid">
+                      Documento es <strong>requerido</strong>
+                    </mat-error>
+                  </mat-form-field>
+              </div>   
+              
+              <div class="form-group">
+                <label for="city_id" class="control-label">Correo electrónico</label>
+                <mat-form-field appearance="outline" style="display: block !important">
+                  <mat-label>Correo electrónico</mat-label>
+                  <input matInput placeholder="Ej: Alexander Príncipe" formControlName="mail"
+                    id="mail" type="text" class="" [class.is-invalid]="
+                      afiliadosForm.get('mail')
+                        .touched &&
+                      afiliadosForm.get('mail')
+                        .invalid
+                    " />
+                  <mat-icon matSuffix>alternate_email</mat-icon>
+                  <mat-error *ngIf="afiliadosForm.get('mail').invalid">
+                    Correo electrónico es <strong>requerido</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div> 
+
+            <!-- <label for="city_id" class="control-label" style="display: block;">Tipo embajador</label>
+            <mat-form-field appearance="fill" style="width: 800px;">
+              <mat-label>Tipo Embajador</mat-label>
+              <mat-select name="tipo" (change)="onSelectTipo($event.target.value)">
+                <mat-option value="{{ tipo.name }}" *ngFor="let tipo of tiposEmbajador" >
+                  {{tipo.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+
+            <label for="city_id" class="control-label" style="display: block;">Tipo embajador</label>
+            <div class="form-group">
+              <select name="Tipo" id="Tipo" class="form-control" (change)="onSelectTipo($event.target.value)">
+                <option selected="true">Seleccione la consulta</option>
+                <option value="{{ tipo.name }}" *ngFor="let tipo of tiposEmbajador; index as i">
+                  {{ tipo.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="city_id" class="control-label">Empresa</label>
+              <mat-form-field appearance="outline" style="display: block !important">
+                <mat-label>Empresa</mat-label>
+                <input matInput placeholder="Ej: Alexander Príncipe" formControlName="empresa"
+                  id="empresa" type="text" class="" [class.is-invalid]="
+                    afiliadosForm.get('empresa')
+                      .touched &&
+                    afiliadosForm.get('empresa')
+                      .invalid
+                  " />
+                <mat-icon matSuffix>build</mat-icon>
+                <mat-error *ngIf="afiliadosForm.get('empresa').invalid">
+                  Empresa es <strong>requerido</strong>
+                </mat-error>
+              </mat-form-field>
+              <button type="button" [disabled]="afiliadosForm.invalid" class="btn btn-primary btn-lg btn-block" (click)="saveAfiliadoForm(afiliadosForm.value)">
+                Registrar
+              </button>
+              <!-- <button [disabled]="yoteayudoForm.invalid" id="botonIncidente" class="boton-continuar"
+                type="submit" (click)="saveIncident(yoteayudoForm.value)">
+                Registrar
+              </button> -->
+            </div> 
+            
+
+          
+        
+              
+                 
+              
+          </form>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="col-12 d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
+     
+      <div class="d-flex justify-content-center pb-3 pt-5">
+        <div class="d-flex justify-content-center">
+          <div style="display: inline-block; font-size: 30px; padding-top: 20px;">Tabla de embajadores</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="d-flex justify-content-center mt-4">
+    <div class="mr-5">
+      <button (click)="initData()" class="btn btn-success mb-4">
+        Refrescar
+      </button>      
+    </div>
+    <div>
+       <button mat-raised-button (click)="showReporteExcel()">Reporte</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center">
+      <div class="row d-flex justify-content-center">
+       
+        <div class="d-flex justify-content-center pb-3 pt-5">
+          <div class="d-flex justify-content-center borde-formulario">
+            <mat-form-field class="">
+              <mat-label>Filtro</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Valor a filtrar" #input>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="col-12 d-flex justify-content-center">
+      <div class="col-12 pt-4">
+        <div class="ml-2 mt-5 mat-elevation-z8">
+          <table aria-describedby="table1" mat-table [dataSource]="dataSourceEmbajador" matSort>
+
+
+            <ng-container matColumnDef="Id">
+              <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+                ID
+              </th>
+
+              <td mat-cell *matCellDef="let element" style="font-size: 12px">
+                {{ element.id }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Documento">
+              <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+                Documento
+              </th>
+              <td mat-cell *matCellDef="let element" style="font-size: 12px">
+                {{ element.documento }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Nombre">
+              <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+                Nombre
+              </th>
+              <td mat-cell *matCellDef="let element" style="font-size: 12px">
+                {{ element.name }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Apellido_Paterno">
+              <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+                Apellido Paterno
+              </th>
+              <td mat-cell *matCellDef="let element">
+                  {{ element.last_name_1 }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Apellido_Materno">
+              <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+                Apellido Materno
+              </th>
+              <td mat-cell *matCellDef="let element" style="font-size: 12px">
+                {{
+                element.last_name_2
+                }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Mail">
+              <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+                Mail
+              </th>
+              <td mat-cell *matCellDef="let element" style="font-size: 12px">
+                {{
+                element.mail
+                }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Empresa">
+              <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+                Empresa
+              </th>
+              <td mat-cell *matCellDef="let element" style="font-size: 12px">
+                {{
+                element.empresa
+                }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Tipo">
+              <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+                Mail
+              </th>
+              <td mat-cell *matCellDef="let element" style="font-size: 12px">
+                {{
+                element.tipo
+                }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Estado">
+              <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+                Estado
+              </th>
+              <td mat-cell *matCellDef="let element" style="font-size: 12px">
+                {{
+                element.estado
+                }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Acciones">
+              <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+              <td mat-cell *matCellDef="let element" style="padding-left: 15px; padding-top: 5px">
+                <div class="btn-group bg-danger">
+                  <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <mat-icon>list</mat-icon>
+                  </button>
+                  <div class="dropdown-menu">
+                          <span><button class="dropdown-item accion-iniciar-atencion flaticon2-writing"
+                             >
+                              Dialog prueba
+                            </button></span>
+                            <!-- <span><button class="dropdown-item accion-no-corresponde flaticon2-poll-symbol"
+                              (click)="cambiarEstadoEmbajador(element)">
+                              Deshabilitar Usuario Embajador
+                            </button></span> 
+                            <span><button class="dropdown-item accion-eliminar flaticon2-trash"
+                              (click)="borrarIncident_Details(element.id)">
+                              Eliminar
+                            </button></span>  -->
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="Columns_Emabajador"></tr>
+            <tr mat-row *matRowDef="let row; columns: Columns_Emabajador"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+  
+</div>

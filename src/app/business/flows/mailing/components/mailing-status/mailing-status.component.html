@@ -1,0 +1,111 @@
+<div class="container-mailing">
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Bandeja de salida</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="pd16">        
+            <div [hidden]="flagLoadingData"> 
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Buscar por...</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="..." #input>
+                  </mat-form-field>
+                <div style="overflow-x: scroll;">
+                    <table aria-describedby="templateTables" mat-table [dataSource]="dataSource"
+                [multiTemplateDataRows]="true" class="table">
+                    
+                    <ng-container matColumnDef="id">
+                        <th scope="id" mat-header-cell *matHeaderCellDef > Id </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="template">
+                        <th scope="templ" mat-header-cell *matHeaderCellDef > Plantilla </th>
+                        <td mat-cell *matCellDef="let element"> {{element.templatename?element.templatename:"-"}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="sent_at">
+                        <th scope="startSend" mat-header-cell *matHeaderCellDef > Enviado el </th>
+                        <td mat-cell *matCellDef="let element"> {{jsDate(element.created_at)}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="sent_by">
+                        <th scope="sendFrom" mat-header-cell *matHeaderCellDef > Enviado por </th>
+                        <td mat-cell *matCellDef="let element"> {{element.sent_by}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="status">
+                        <th scope="status" mat-header-cell *matHeaderCellDef > Estado </th>
+                        <td mat-cell *matCellDef="let element" 
+                        [ngClass]="(element.id_status===3)?'tumbs-status-success':(element.id_status===2)?'tumbs-status-error':'tumbs-status-process'"
+                        >{{getStatusSent(element.id_status)}}</td>
+                        
+                    </ng-container>
+
+                    <ng-container matColumnDef="total">
+                        <th scope="emailsNum" mat-header-cell *matHeaderCellDef > Nro. mails </th>
+                        <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="ratios">
+                        <th scope="success-errors" mat-header-cell *matHeaderCellDef > Éxitos/Fallos </th>
+                        <td mat-cell *matCellDef="let element">
+                            <div *ngIf="element.id_status !== 1">
+                                <span title="Enviados" class="success">{{element.success}} </span>/ 
+                                <span title="Fallos" class="fails">{{element.fails}} </span>
+                            </div>
+                            <div *ngIf="element.id_status === 1">
+                                <button (click)="checkCurrentStatus(element.id)" class="check_Statusmailing">Ver</button>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="expandedDetail">
+                        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                            <div class="detail_container" [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'">
+                                <table aria-describedby="statusSendMails" *ngIf="flagShow" class="minitable">
+                                    <tr><th scope="id1"></th><th scope="id2"></th><th scope="id3"></th><th scope="id4"></th></tr>
+                                    <tr *ngFor="let sentMail of detalle">
+                                        <td>
+                                            <em class="minitableicon flaticon2-next"></em>                                            
+                                            {{sentMail.correo}}
+                                        </td>                                        
+                                        <td><span [ngClass]="'status_'+sentMail.id_status">{{ getStatusDetaill(sentMail.id_status) }}</span> </td>
+                                        <td> </td>
+                                        <td><span class="link" (click)="showMailDetails(sentMail)">Ver</span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="loader">
+                        <td class="sinborde" mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                            <div class="detail_container" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                                <mat-progress-bar *ngIf="!flagShow" color="accent" mode="query"></mat-progress-bar>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr [ngClass]="element === expandedElement ? 'selectedrow' : ''" 
+                        mat-row *matRowDef="let element; columns: displayedColumns;"
+                        class="example-element-row"
+                        [class.example-expanded-row]="expandedElement === element"
+                        (click)="element.id_status !== 1 ? expandElement(element): null"  >
+                    </tr >
+                    <tr mat-row *matRowDef="let row; columns: ['loader']" class="example-detail-row"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                    </table>
+                </div>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+       
+            </div>
+            <div *ngIf="flagLoadingData" > Cargando datos... </div>
+           </mat-card-content>
+        <ul style="list-style: none;">
+            <li > <span class="success">EC:</span>  Envios correctos</li>
+            <li > <span class="fails">EF:</span>  Envios fallidos</li>
+            <li > <span class="pending">EP:</span>  Envios pendientes</li>
+        </ul>
+    </mat-card>
+</div> 
+</div>

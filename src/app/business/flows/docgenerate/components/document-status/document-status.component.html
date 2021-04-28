@@ -1,0 +1,71 @@
+<div class="container-document">
+    <div class="titlecomp">
+        <p class="main-title">Generador de documentos</p>
+        <p class="sub-title">Creación documentos dinámicos y personalizados</p>
+        <hr>
+    </div>
+    <mat-card class="cuerpo">
+        <mat-card-content>
+            <div [hidden]="flagLoadingData">
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Buscar documentos...</mat-label>
+                    <input matInput (keyup)="applyFilterStatus($event)" placeholder="...">
+                </mat-form-field>
+                <div style="overflow: hidden;">
+                    <table class="table table-hover" aria-describedby="statusDataSource" mat-table
+                    [dataSource]="dataSource" multiTemplateDataRows>
+    
+                    <!-- COLUMNS -->
+                    <ng-container matColumnDef="id">
+                        <th class="format-th align-col" scope="id" mat-header-cell *matHeaderCellDef> Id </th>
+                        <td class="format-td align-col" mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="title">
+                        <th class="format-th align-col" scope="template" mat-header-cell *matHeaderCellDef> Plantilla </th>
+                        <td class="format-td align-col" mat-cell *matCellDef="let element"> {{element.title}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="created_at">
+                        <th class="format-th align-col" scope="createdAt" mat-header-cell *matHeaderCellDef> Creado el </th>
+                        <td class="format-td align-col" mat-cell *matCellDef="let element"> {{jsDateDocument(element.created_at)}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="created_by">
+                        <th class="format-th align-col" scope="createdBy" mat-header-cell *matHeaderCellDef> Creado por </th>
+                        <td class="format-td align-col" mat-cell *matCellDef="let element"> {{element.created_by}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="status">
+                        <th class="format-th align-col" scope="status" mat-header-cell *matHeaderCellDef> Estado </th>
+                        <td class="format-td align-col" mat-cell *matCellDef="let element" 
+                        [ngClass]="(element.id_status===3)?'tumbs-status-success':(element.id_status===2)?'tumbs-status-error':'tumbs-status-process'"
+                        >{{getStatusDoc(element.id_status)}}
+                        </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="total">
+                        <th class="format-th align-col" scope="document" mat-header-cell *matHeaderCellDef> Nro. documentos </th>
+                        <td class="format-td align-col" mat-cell *matCellDef="let element"> {{element.total}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="ratios">
+                        <th class="format-th align-col" scope="download" mat-header-cell *matHeaderCellDef> Descargar </th>
+                        <td class="format-td align-col" mat-cell *matCellDef="let element">
+                            <button *ngIf="element.id_status == 3" class="docgen_status_download"
+                                (click)="downloadfiles(element.filename)"> <em class="fas fa-download"></em>
+                                {{element.filename}} </button>
+                        </td>
+                    </ng-container>
+                    <!-- DEFINICIÓN DE LA TABLA -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row">
+                    </tr>
+                </table>
+                </div>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+            <div *ngIf="flagLoadingData"> Cargando datos... </div>
+        </mat-card-content>
+    </mat-card>
+</div>

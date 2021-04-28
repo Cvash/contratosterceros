@@ -1,0 +1,152 @@
+<div class="text-center mb-5 main-title" style="font-size: 30px;"> Reportes</div>
+<div class="d-flex justify-content-center">
+	<table aria-describedby="reportExcel" class="table table-hover">
+		<thead>
+			<tr class="d-flex justify-content-center">
+        <th scope="col"><strong>Total de afiliados creados</strong></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="d-flex justify-content-center">
+				<td><button class="btn bg-inprogress" mat-raised-button (click)="exporter1.exportTable('xlsx')">Reporte Excel 1</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+<div class="d-none">
+  <div class="col-12 d-flex justify-content-center">
+    <div class="col-12 pt-4">
+      <div class="ml-2 mt-5 mat-elevation-z8">
+        <table aria-describedby="table1" mat-table [dataSource]="dataSourceEmbajador" matSort #exporter1="matTableExporter" matTableExporter>
+  
+  
+          <ng-container matColumnDef="Id">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+              ID
+            </th>
+  
+            <td mat-cell *matCellDef="let element" style="font-size: 12px">
+              {{ element.id }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Documento">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+              Documento
+            </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 12px">
+              {{ element.documento }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Nombre">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+              Nombre
+            </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 12px">
+              {{ element.name }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Apellido_Paterno">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+              Apellido Paterno
+            </th>
+            <td mat-cell *matCellDef="let element">
+                {{ element.last_name_1 }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Apellido_Materno">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+              Apellido Materno
+            </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 12px">
+              {{
+              element.last_name_2
+              }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Mail">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+              Mail
+            </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 12px">
+              {{
+              element.mail
+              }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Empresa">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+              Empresa
+            </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 12px">
+              {{
+              element.empresa
+              }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Tipo">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+              Mail
+            </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 12px">
+              {{
+              element.tipo
+              }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Estado">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+              Estado
+            </th>
+            <td mat-cell *matCellDef="let element" style="font-size: 12px">
+              {{
+              element.estado
+              }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Acciones">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+            <td mat-cell *matCellDef="let element" style="padding-left: 15px; padding-top: 5px">
+              <div class="btn-group bg-danger">
+                <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <mat-icon>list</mat-icon>
+                </button>
+                <div class="dropdown-menu">
+                        <span><button class="dropdown-item accion-iniciar-atencion flaticon2-writing"
+                           >
+                            Dialog prueba
+                          </button></span>
+                          <!-- <span><button class="dropdown-item accion-no-corresponde flaticon2-poll-symbol"
+                            (click)="cambiarEstadoEmbajador(element)">
+                            Deshabilitar Usuario Embajador
+                          </button></span> 
+                          <span><button class="dropdown-item accion-eliminar flaticon2-trash"
+                            (click)="borrarIncident_Details(element.id)">
+                            Eliminar
+                          </button></span>  -->
+                </div>
+              </div>
+            </td>
+          </ng-container>
+  
+  
+          <tr mat-header-row *matHeaderRowDef="Columns_Emabajador"></tr>
+          <tr mat-row *matRowDef="let row; columns: Columns_Emabajador"></tr>
+        </table>
+  
+        <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

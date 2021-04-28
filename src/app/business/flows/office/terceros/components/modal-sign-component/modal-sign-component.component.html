@@ -1,0 +1,17 @@
+<div class="modal-banner-top">Firma digital
+    <button  (click)="closeModal()" class="close-onbanner"><em class="flaticon2-delete" style="border-style: none;"></em></button>
+</div>
+<p style="text-align: center;">Por favor, firma dentro del recuadro:</p>
+<div class="sign-container">
+    <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+</div>
+<p style="text-align: center; color: #979797;">Esta firma digiital tiene el mismo valor que una firma física. </p>
+
+<div class="row mt-2">
+    <div class="col-md-6">
+        <button mat-flat-button class="btn btn-block button-terceros-secondary" (click)="clearSign()" >Limpiar</button>
+    </div> 
+    <div class="col-md-6">
+        <button mat-flat-button class="btn btn-block button-terceros-primary" (click)="saveSign()" >Confirmar firma</button>
+    </div>       
+</div>

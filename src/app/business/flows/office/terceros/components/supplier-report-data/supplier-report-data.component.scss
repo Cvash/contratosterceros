@@ -1,0 +1,147 @@
+h1,h2,h3,h4,h5{
+    color: #00a9e0;
+}
+.container-view-report{
+    width:100%;
+    padding: 5px;
+}
+.label-datepicker{
+    color: #00a9e0;font-size: 15px;text-align: center;
+}
+.subcontainer-view-report{
+    width:100%;
+}
+.btn-datepicker{
+    background-color:#00a9e0;color: #ffffff;padding: 5px;border-radius: 5px;
+}
+.border-datepicker{
+    border: 2px solid #c3c3c3;
+    color: #00a9e0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+}
+.btn-search-data{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color:#00a9e0;
+    color: #ffffff;
+    transition: 0.3s;
+    width: 100%;
+   
+}
+
+.p-format{
+    color: #00a9e0;
+    font-size: 15px;
+    margin-top: 10px;
+}
+table th{
+    background-color: #00a9e0;
+    color: #ffffff;
+    text-align: center;
+   
+    padding: 5px;
+}
+table td{
+    background-color: #c0bcbc;
+    color: #000000;
+    text-align: center;
+    
+    padding: 5px;
+}
+
+.main-title-module-report{
+    width: 95%;margin-left: auto;margin-right: auto;
+}
+
+// css Joao
+.main-title {
+	font-family: 'Telefonica Regular', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    color: #00a9e0;
+    font-size: 25px;
+    font-weight: normal;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px;
+    text-decoration: underline;
+}
+.sub-title{ 
+    font-family: 'Telefonica Regular', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px;
+}
+.main-title-form{
+    font-family: 'Telefonica Regular', Helvetica, Arial, Verdana, Tahoma, sans-serif;
+    color: #00a9e0;
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 5px;
+}
+.main-form-report{
+    width: 90%;margin-left: auto;margin-right: auto;
+}
+.show-image{
+    display: block;
+    background-image: url('../../../../../../../assets/images/media/logos/logo-movistar-terceros.png');
+    background-size: 280px 250px;
+    background-position: center;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    background-repeat: no-repeat;
+}
+@media(max-width:850px){
+
+    .show-image{
+        display: block;
+        width: 180px;
+        height: 180px;
+    }
+}
+
+@media(max-width:760px){
+    .show-image{
+        display: none;
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media(max-width:750px){
+
+    .p-format{
+        margin-top: 18px;
+    }
+}
+@media(max-width:500px){ 
+
+    .show-image{
+        display: none;
+    }
+
+    .main-title{
+        font-size: 18px;
+    }
+    .sub-title{
+        font-size: 13px;
+    }
+
+}
+@media(max-width:600px){ 
+
+    .main-form-report{
+        width: 90%;
+        margin: 0 auto;
+    }
+
+}   

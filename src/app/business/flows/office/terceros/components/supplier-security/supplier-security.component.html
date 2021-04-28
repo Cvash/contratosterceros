@@ -1,0 +1,162 @@
+<block-ui>
+    <div class="titlecomp">
+        <div style="display: flex;">
+            <div>
+                <p class="main-title">Registro de Ingreso</p>
+                <p class="sub-title"> Validación de requerimientos de salud</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+    
+    <form [formGroup]="security.securityForm">
+        <div class="cardtdp">
+            <div class="cardtdp-header">Identificar usuario</div> 
+            <div [hidden]="!qrscan" class="cardtdp-content">              
+                <p class="title_question">SCANEAR QR</p>
+                <div class="mqr-cip">Centre la cámara</div>
+                <div class="qr-scaner qr-scan-area" >
+                    <!-- <qr-scanner
+                             
+                             [debug]="false"
+                             [canvasWidth]="700"
+                             [canvasHeight]="580" 
+                             [stopAfterScan]="false"
+                             [updateTime]="500">
+                     </qr-scanner> -->
+                    
+                     <zxing-scanner #scanner start="true" muted="true" autofocus="true" [device]="selectedDevice"  
+                     [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']" (scanSuccess)="handleQrCodeResult()" [enable]="scannerEnabled"></zxing-scanner>
+                     <!--  <div class="qr-area">
+                        <div class="area"></div>
+                    </div>
+                    <div class="qr-bar-scanner">
+
+                    </div> -->
+                    </div>
+                <!-- <span>
+                    <p>Plataforma : {{platform}}</p>
+                </span>
+                <span>
+                    <p>OS : {{os}}</p>
+                </span>
+                <span>
+                    <p>Media : {{rptMedia}}</p>
+                </span>
+                <span>
+                    <p>Rpt : {{rpt}}</p>
+                </span>
+                <ul>
+                    <li *ngFor="let value of videoDevices">
+                        {{value.label}}
+                        {{value.kind}}
+                    </li>
+                </ul> -->
+                <div class="button-terceros-cont" style="width: 200px; margin: auto;">
+                    <button mat-flat-button class="btn button-terceros-primary" (click)="cancelQRread()" >Volver</button>
+                </div>
+            </div>  
+            <div *ngIf="!qrscan" class="cardtdp-content row">
+                <div class="col-md-6">
+                    <div class="panel-search-terceros">
+                        <label class="panel-terceros-label">Buscar por DNI </label>
+                        <div class="terceros-searcher">
+                            <input placeholder="Número de DNI" formControlName="document"><button
+                            (click)="searchDataByNationalId(user.id,'DNI',security.securityForm.get('document').value,'')" class="panel-ser-button"><em class="fa fa-search"></em> Buscar</button> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="panel-terceros-label">Buscar por QR</label>
+                    <div class="button-terceros-cont">
+                        <button mat-flat-button class="btn button-terceros-primary" (click)="readQR()" >Scanear QR</button>
+                    </div>
+                </div>
+                <div class="search-result-cont">
+                    <label class="search-result-title">Resultado de la búsqueda:</label>
+                    <div style="text-align: center; font-size: 16px; padding: 20px; color: #aaa; " *ngIf="!searchResult">
+                        <em style="display: block; font-size: 80px; color: #aaa;" class="fas fa-search-minus"></em>
+                        {{searchMessage}}
+                    </div>
+                    <div *ngIf="searchResult && dailyReview.status!=='0'">
+                        <div class="row-qr-resulr">                    
+                            <div *ngIf="dailyReview.entryPass.employee.nationalType === 'E'" class="col-md-4 access-graph" style="padding: 10px 0;">
+                                <img style="height: 90px; width: 90px; background-color: #00a9e0;border-radius: 60px;" src="../../../../../../../assets/images/media/logos/logo-movistar.png" alt="logoMov"/>         
+                                <div style="padding: 10px;color: #00a9e0;font-weight: 500;">Personal Movistar</div>    
+                            </div>
+                            <div *ngIf="dailyReview.entryPass.employee.nationalType === 'S'" class="col-md-4 access-graph" style="padding: 10px 0;">
+                                <img style="height: 90px; width: 90px; background-color: #00a9e0;border-radius: 60px;" src="../../../../../../../assets/images/media/logos/terceros.png" alt="logoTercero"/>         
+                                <div style="padding: 10px;color: #00a9e0;font-weight: 500;">Personal tercero</div>    
+                            </div>
+                            <div  class="col-md-4">
+                                <div class="row-qr-title" >Datos Personales</div>
+                                <div class="mqr-info">
+                                    <div> <strong>Nombre:</strong> {{dailyReview.entryPass.employee.name}}</div>
+                                </div>
+                                <div class="mqr-info">
+                                    <div> <strong>Nro Documento:</strong> {{dailyReview.entryPass.employee.nationalId}}</div>
+                                </div>
+                                <div *ngIf="dailyReview.entryPass.employee.company" class="mqr-info">
+                                    <div> <strong>Empresa/Cargo:</strong> {{dailyReview.entryPass.employee.company}}</div>
+                                </div>
+                                
+                            </div>
+                            <div *ngIf="dailyReview.status === '2'" class="col-md-4 access-graph">
+                                <em class="fas fa-check-circle" style="font-size: 80px;"></em>         
+                                <div>CUMPLE</div>
+                                <div>requerimientos</div>               
+                            </div>
+                            <div *ngIf="dailyReview.status === '3' || dailyReview.status === '4'" class="col-md-4 access-graph-x">
+                                <em class="far fa-window-close" style="font-size: 80px;"></em>         
+                                <div>Sospechoso de</div>
+                                <div>contagio</div>               
+                            </div>
+                            <div *ngIf="dailyReview.status === '1'" class="col-md-4 access-graph-p">
+                                <em class="fas fa-question-circle" style="font-size: 80px;"></em>         
+                                <div>Formulario</div>
+                                <div>Pendiente</div>               
+                            </div>                    
+                        </div>
+                       
+                        <div *ngIf="dailyReview.status === '2' || dailyReview.status === '4'" class="row-qr-resulr">
+                            <div class="row-qr-title">Requerimientos adicionales de ingreso:</div>
+                            <div class="form-terceros-questions">
+                                <label>Medición de la temperatura:</label>
+                                <input formControlName="temperature" type="number" placeholder="Grados">
+                            </div>
+                            <div *ngIf="userType == 'S'" class="form-terceros-questions">
+                                <label>Equipo de protección personal</label>
+                                <div style="display: flex;">
+                                    <div (click)="changeEpp(true)"  [ngClass]="{'form-terceros-option-active': epps && eppTouched}" class="form-terceros-option">SÍ</div>
+                                    <div style="flex: 1 1;"></div>
+                                    <div (click)="changeEpp(false)" [ngClass]="{'form-terceros-option-active': !epps  && eppTouched}" class="form-terceros-option">NO</div>
+                                </div>                   
+                            </div> 
+                            
+                            <div class="form-terceros-questions" style="width: 95%;">
+                                <label>Observaciones adicionales (Opcional):</label>
+                                <textarea formControlName="observations" type="text" placeholder="Observaciones"></textarea>
+                            </div>
+                            <div style="margin-top: 30px; display: flex; flex-wrap: wrap; width: 100%;">
+                                <div class="form-terceros-questions" style="width: 95%;">      
+                                    <label>Tipo de movimiento:</label>
+                                    <div style="display: flex;">
+                                        <div (click)="changeMovetype('inp')" *ngIf="dailyReview.status==='2'" [ngClass]="{'form-terceros-option-active': typeMove === 'inp'}" class="form-terceros-option">Ingreso</div>
+                                        <div style="flex: 1 1;"></div>
+                                        <div (click)="changeMovetype('out')" [ngClass]="{'form-terceros-option-active': typeMove === 'out'}" class="form-terceros-option">Salida</div>
+                                    </div>
+                                </div>
+                                <div  class="col-lg-12 center-items">
+                                    <button mat-flat-button class="btn button-terceros-primary" (click)="saveCheckInOut()" >Registrar Datos</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                       
+                    </div>
+                </div>
+                <button  *ngIf="searchResult" (click)="searchClear()" class="terc-btn-cls">Limpiar</button>
+            </div>
+        </div>
+    </form>
+</block-ui>

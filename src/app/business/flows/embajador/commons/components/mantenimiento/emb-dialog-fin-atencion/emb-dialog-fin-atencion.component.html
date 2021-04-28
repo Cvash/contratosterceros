@@ -1,0 +1,95 @@
+<div class="d-flex justify-content-center" style="overflow: auto;">
+  <div>
+    <!-- <div>{{data.lista_quiebres | json}}</div> -->
+    <form [formGroup]="quiebreRegistradoForm">
+      <div class="d-flex justify-content-center">
+        <div style="text-align: left;" class="mb-3 anuncio">
+          Fin de atención
+        </div>
+      </div>
+       <div class="mb-4">
+        <label for="" class="labels">Escribe un comentario final acerca del quiebre</label>
+        <textarea formControlName="comentario_final" class="form-control mb-4" id="comentario_inicio_atencion" rows="3" placeholder=""></textarea>
+
+        <div class="mb-4 mt-4">
+          <label for="" class="labels">Motivo</label>
+            <select name="motivo" id="motivo" class="select-ajuste custom-select custom-select-sm mb-3" (change)="onSelectMotivo($event.target.value)">
+              <option selected="true" disabled="disabled">Seleccione el motivo</option>
+              <option value="{{ motivo.id }}" *ngFor="let motivo of lista_motivos; index as i">{{ motivo.name }}</option>
+            </select>
+        </div>
+    
+        <div class="mb-4">
+              <label for="" class="labels">Submotivo</label>
+              <select name="submotivo" id="submotivo" class="select-remedy custom-select custom-select-sm mb-3" (change)="onSelectSubMotivo($event.target.value)">
+                <option selected="true" disabled="disabled">Seleccione el submotivo</option>
+                <option value="{{ submotivo.id }}" *ngFor="let submotivo of lista_submotivos2; index as i">{{ submotivo.name }}</option>
+              </select>
+        </div>
+        <hr>
+        
+        <label for="" class="labels">¿Se hizó ajuste?</label>
+        <select name="ajuste" id="ajuste" class="select-ajuste custom-select custom-select-sm mb-3" (change)="onSelectAjuste($event.target.value)">
+          <option selected="true" value="sinvalorAjuste">Seleccione la respuesta</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+        <div *ngIf="ajuste == 'Si'">
+          <label for="" class="labels">Ingrese el importe</label>
+          <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control" formControlName="importe_ajuste" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <label for="" class="labels">Observaciones</label>
+          <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control" formControlName="observacion_ajuste" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <hr>
+        </div>
+       </div>
+        <div class="mb-4">
+          <label for="" class="labels">¿Se atendió remedy?</label>
+        <select name="remedy" id="remedy" class="select-remedy custom-select custom-select-sm mb-3" (change)="onSelectRemedy($event.target.value)">
+          <option selected="true" value="sinvalorRemedy">Seleccione la respuesta</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+        <div *ngIf="remedy == 'Si'">
+          <label for="" class="labels">Ingrese el código</label>
+          <div class="input-group input-group-sm mb-3" >
+            <input type="text" class="form-control" formControlName="codigo_remedy" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <hr>
+        </div>  
+        </div>
+
+        <div class="mb-4">
+          <label for="" class="labels">¿Se realizó DoIt?</label>
+        <select name="doit" id="DoIt" class="select-doit custom-select custom-select-sm mb-3" (change)="onSelectDoit($event.target.value)">
+          <option selected="true" value="sinvalorDoit">Seleccione la respuesta</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+        <div *ngIf="doit == 'Si'">
+          <label for="" class="labels">Ingrese el código</label>
+          <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control" formControlName="codigo_doit" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          <hr>
+        </div>
+        </div>
+
+     <div class="d-flex justify-content-center mt-5">
+      <div class="d-flex justify-content-center mr-3" style="display: inline-block!; float: right;">
+        <button type="submit" [disabled]="quiebreRegistradoForm.invalid" mat-button mat-raised-button color="primary" (click)="updateFinAtencion(quiebreRegistradoForm.value)">
+          Guardar
+        </button>
+      </div>
+      <div class="d-flex justify-content-center" style="display: inline-block;" >
+        <button mat-dialog-close mat-dialog-close="false" mat-raised-button color="warn">
+          Cancelar
+        </button>
+      </div>
+     </div>
+    </form>
+  </div>
+</div>

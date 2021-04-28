@@ -1,0 +1,142 @@
+<div>
+    <mat-card  [formGroup]="checkingForm.coronaCheckingForm" class="container-form">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <mat-card-title class="main-title">Control de Asistencia</mat-card-title>
+                <mat-card-subtitle class="sub-title">Módulo de manejo de asistencia de empleados</mat-card-subtitle>
+            </div>
+            <div class="col-md-4">
+                <p class="font-style">Generar Reportes</p>
+                <div class="d-flex">
+                    <button class="btn btn-block cor_inputreport" (click)="showCheckingReportCovid19()">Generar</button>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <p class="font-style">Seleccionar archivo</p>
+                <div class="d-flex">
+                    <label for="btn-file" class="btn btn-block btn_savedatamasive">Registrar datos</label>
+                    <input type="file" id="btn-file" name="btnfileinput" (change)="onFileChange($event)" #btnfileinput>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider><br>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md-8">
+                    <p class="font-style">Buscar por rango de fecha :</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            <div class="form-inline">
+                                <input class="text-center form-control col-xs-12 col-sm-10 col-md-10 col-lg-10"
+                                    [matDatepicker]="picker1" name="fecha1"
+                                    formControlName="startDate" placeholder="Desde...">
+                                <mat-datepicker-toggle class="col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker" matSuffix
+                                    [for]="picker1">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            <div class="form-inline">
+                                <input class="text-center form-control col-xs-12 col-sm-10 col-md-10 col-lg-10"
+                                    [matDatepicker]="picker2"  name="fecha2"
+                                    formControlName="endDate" placeholder="Hasta...">
+                                <mat-datepicker-toggle class="col-xs-12 col-sm-2 col-md-2 col-lg-2 btn-datepicker" matSuffix
+                                    [for]="picker2">
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <p class="font-style"></p><br>
+                    <button class="btn btn-block btn_savedatamasive"
+                        (click)="showData(checkingForm.startDate.value,checkingForm.endDate.value)">Buscar</button>
+                </div>
+            </div>
+    
+        </mat-card-content>
+    </mat-card>
+    <br>
+    <mat-card class="container-form">
+        <mat-card-content>
+    
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="font-style">Buscar empleado :</p>
+                    <input class="inputSearchChecking" matInput (keyup)="applyFilter($event)"
+                        placeholder="Buscar por Nombre, Apellido, CIP">
+                </div>
+            </div>
+    
+            <div class="table-responsive">
+                <table aria-describedby="assistTable" class="table table-bordered" mat-table [dataSource]="dataSource"
+                    matSort>
+    
+    
+                    <ng-container matColumnDef="CIP">
+                        <th scope="cip" class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header> CIP </th>
+                        <td mat-cell *matCellDef="let row"> {{row.cip}} </td>
+                    </ng-container>
+    
+    
+                    <ng-container matColumnDef="EMPLEADO">
+                        <th scope="employeeId" class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            EMPLEADO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.id_employee}} </td>
+                    </ng-container>
+    
+    
+                    <ng-container matColumnDef="FECHA DE ASISTENCIA">
+                        <th scope="assistDate" class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            FECHA DE ASISTENCIA
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{row.datemark}} </td>
+                    </ng-container>
+    
+    
+                    <ng-container matColumnDef="HORA DE ASISTENCIA">
+                        <th scope="assistHour" class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header> HORA
+                            DE ASISTENCIA
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{row.hourmark}} </td>
+                    </ng-container>
+    
+    
+                    <ng-container matColumnDef="FORMATO DE ASISTENCIA">
+                        <th scope="formatAssist" class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            FORMATO DE ASISTENCIA
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{row.typemark}} </td>
+                    </ng-container>
+    
+    
+                    <ng-container matColumnDef="COMENTARIO">
+                        <th scope="comment" class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            COMENTARIO </th>
+                        <td mat-cell *matCellDef="let row"> {{row.comment}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="ACCIONES">
+                        <th scope="action" class="background_th" mat-header-cell *matHeaderCellDef mat-sort-header> ACCIONES
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <em class="flaticon2-delete remove-item" (click)="removeDataAssistManagement(row.id)"></em>
+                        </td>
+                    </ng-container>
+    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                    </tr>
+                </table>
+    
+                <mat-paginator [pageSizeOptions]="[10, 20, 30,40,50,100]" [pageSize]="5" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<!-- <div class="container">
+    <h2>NO DISPONIBLE</h2>
+</div> -->

@@ -1,0 +1,100 @@
+<section class="text-center changepassword-icon" id="header-icon" style="flex: 1 1;">
+    <em  class="flaticon2-delete close-icon" (click)="onNoClick()"></em>
+    <p class="user-name-pop-up">Registro de la persona de riesgo con la que vives</p>
+</section>
+<form [formGroup]="relationshipForm.relationshipFormReactive">
+    
+    <!-- <div class="row" style="background-color: #D3D4D3;">
+        <div class="col-md-2 text-center" style="padding: 10px;">
+            <img src="../../../../../../assets/images/media/logos/logo-movistar.png" width="50px" class="imgdialog"
+                alt="logoMovistar">
+        </div>
+        <div class="col-md-8 text-center" style="margin-top: auto;margin-bottom: auto;font-size: 20px;">
+            <p>Registro de la persona de riesgo con la que vives</p>
+        </div>
+        <div class="col-md-2 text-center" style="padding: 10px;" (click)="onNoClick()">
+            <em class="flaticon2-delete modalclosebutton" style="border: none;"></em>
+        </div>
+    </div> -->
+    <hr>
+    <section id="sect-1">
+        <div class="row">
+            <div class="col-md-8">
+                <label for="name" class="label-format">Nombre completo :</label>
+                <input type="text" id="name" name="name" formControlName="name" class="form-control"
+                    placeholder="Nombre completo...">
+            </div>
+            <div class="col-md-4">
+                <label id="relationshipF" class="label-format">Parentesco :</label>
+                <mat-select formControlName="relationshipF" class="form-control"
+                    (selectionChange)="showOtherRelationship()">
+                    <mat-option>Seleccionar...</mat-option>
+                    <mat-option *ngFor="let value of arrayCoronaRelationship" [value]="value.id">{{value.name}}
+                    </mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div *ngIf="conditionRealtionShip" class="row">
+            <div class="col-md-12">
+                <label for="otherRelationship" class="label-format">Especifica el tipo de Parentesco :</label>
+                <input type="text" id="otherRelationship" formControlName="otherRelationship" class="form-control"
+                    placeholder="Nombre completo...">
+            </div>
+        </div>
+    </section>
+    <section id="sect-2">
+        <hr>
+        <label class="label-format">Selecciona una o más condiciones :</label>
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div>
+                    <input type="checkbox" id="chk01" name="chk01" formControlName="chk01" [value]="1">
+                    <label for="chk01">Mayor a 60 años
+                    </label><br>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <input type="checkbox" id="chk02" name="chk02" formControlName="chk02" [value]="1">
+                    <label for="chk02">Enfermedad crónica
+                    </label><br>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <input type="checkbox" id="chk03" name="chk03" formControlName="chk03" [value]="1">
+                    <label for="chk03">Embarazo
+                    </label><br>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <input type="checkbox" id="chk04" name="chk04" formControlName="chk04" [value]="1">
+                    <label for="chk04">Expuesto: Hospital, Policia , Militar.
+                    </label><br>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="sect-3">
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="comment" class="label-format">Coloca tus observaciones o
+                        comentarios</label>
+                <textarea class="txt-area" id="comment" name="comment" formControlName="comment" placeholder="Padras utilizar esta seccion para : indicar alguna enfermedad crónica,
+        sugerencia, direcciones entre otras cosas.">
+        </textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <button class="btn btn-block btn_add" (click)="addFamily()">Agregar</button>
+            </div>
+        </div>
+    </section>
+</form>

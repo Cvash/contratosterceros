@@ -1,0 +1,129 @@
+<div class="container-document" style="overflow: hidden;">
+    <div class="titlecomp hidden-title">
+        <div style="display: flex;">
+            <div>
+                <p class="main-title">Generador de documentos</p>
+                <p class="sub-title">Creación documentos dinámicos y personalizados</p>
+            </div>
+            <div style="flex:1 1"></div>
+            <div>
+                <button (click)="modalUserGuide()" mat-raised-button class="filebuton2 btn">Guía de usuario</button>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <!-- mobile response -->
+    <div class="row  show-title">
+    <div class="col-xs-12 col-sm-12">
+        <div>
+            <p class="main-title">Generador de documentos</p>
+            <p class="sub-title">Creación documentos dinámicos y personalizados</p>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12">
+        <button (click)="modalUserGuide()" mat-raised-button class="filebuton2 btn">Guía de usuario</button>
+    </div>
+    </div>
+    <form [formGroup]="homeForm.documentHomeForm">
+        <mat-card class="cuerpo" >
+               <div>
+                <div class="row mb-4" style="margin-left: 18px;">
+                    <div class="col-md-6 pr-4">
+                        <p class="sub-title aling-response">Excel Base</p>
+                        <div class="inputfile_container aling-response">
+                            <button (click)="onClickFileButon()" mat-raised-button class="filebuton btn">
+                                {{flagFileCharged?'Excel':'Seleccionar'}}
+                            </button>
+                            <div (click)="onClickFileButon()" class="filename">{{inputFileText}}</div>
+                            <span title="Descartar" *ngIf='flagFileCharged' (click)='clearInputXLSX(1)'
+                                class="flaticon-circle closeicon"></span>
+                            <input #fileinput class="fileinput" (change)="onFileChange($event)" type="file" accept=".xlsx" />
+                        </div>
+                        <p class="reglas aling-response">* La tabla de datos debe estar en la hoja: <strong>Hoja1</strong>.</p>
+                    </div>
+                    
+                </div>
+                <!-- EDITR -->
+                <div style="margin-left: 22px;">
+                    <p class="sub-title aling-response" style="text-decoration: underline;">Documento:</p>
+                <div class="row">
+                    <div class="col-md-6 aling-response">
+                        <p>Utiliza "@" para palabras clave. <span (click)="showAvailables()" class="btn_verdisponibles">(Ver
+                                disponibles)</span> </p>
+                    </div>
+                </div>
+                </div>
+                <div class="row" style="overflow-x: scroll;">
+                    <div style="margin: auto;padding: 5px;">
+                        <!-- BOTONES -->
+                        <div class="form_row_2 ta_flex">
+                           <div class="row" style="width: 100%;">
+                            <div class="col-xs-12 col-md-12 form-inline" style="flex-wrap: wrap;display: flex;justify-content: center;" >
+                                <button (click)="generate()" class="mail_button"><em class="flaticon2-psd"></em> Generar</button>
+                            <button (click)="generatePreview()" class="mail_button"><em class="flaticon2-magnifier-tool"></em>
+                                Preview</button>
+                                <button *ngIf="!withCase" (click)="activeCase()" class="mail_button_case"><em
+                                    class="flaticon2-exclamation"></em> Con condición </button>
+                            <button *ngIf="withCase" (click)="disableCase()" class="mail_button_case"><em
+                                    class="flaticon2-line"></em>Sin condición</button>
+                            <button (click)="saveTemplate()" class="mail_button"><em class="flaticon-download-1"></em>Guardar</button>
+                            <button (click)="selectTemplate()" class="mail_button"><em
+                                    class="flaticon-layer"></em>Plantillas</button>
+                            </div>
+                            
+                            
+                            
+                           </div>
+                        </div>
+                        <!-- TÍTULO DE DOCUMENTO -->
+                        <div class="form_row_2 ta_center">
+                            <input formControlName="title" (change)="changeTitle()" [ngClass]="(templateId!==0)?'saved':'unsaved'"
+                                type="text" placeholder="Título de documento">
+                        </div>
+                        <!-- DOCUMENTO -->
+                        <div style="margin-left:auto;margin-right: auto;">
+                            <!-- EDITOR HEADER -->
+                            <angular-editor class="angmat_editor" formControlName="documentBody" [config]="editorConfig">
+                            </angular-editor>
+                            <!-- EDITOR CASES -->
+                            <div *ngIf="withCase" class="sections_doc">
+                                <div class="caseforheader">
+                                    <div style="line-height: 27px;">Evaluar:</div>
+                                    <select formControlName="caseVariable">
+                                        <option *ngFor="let head of hojaHeaders" [value]="'@'+head">{{head}}</option>
+                                    </select>
+                                    <div style="flex: 1 1;"></div>
+                                    <button (click)="addCase()" class="newcase">+ Nuevo caso</button>
+                                </div>
+                                <div *ngFor="let temp of documentArray; let i = index" class="section">
+                                    
+                                    <div style="overflow: hidden;">
+                                        <div class="casetitle">
+                                            <div *ngIf="!temp.default" style="line-height: 27px;"><strong>Caso</strong>:
+                                                {{caseVariableCondition}} =</div>
+                                            <input *ngIf="!temp.default" [(ngModel)]="temp.input" [ngModelOptions]="{standalone: true}" type="text" class="casevalue">
+                                            <div *ngIf="temp.default" style="line-height: 27px;"><strong>Caso por defecto</strong>
+                                            </div>
+                                            <div style="flex: 1 1;"></div>
+                                            <button *ngIf="!temp.default" (click)="dropCase(i)"
+                                                class="far fa-trash-alt  deletecase"></button>
+                                        </div>
+                                        <angular-editor style="width: 200px;" [(ngModel)]="temp.body" [ngModelOptions]="{standalone: true}" [config]="editorConfig"></angular-editor>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- EDITOR FOOTER -->
+                            <angular-editor *ngIf="withCase" formControlName="documentFooter" [config]="editorConfig">
+                            </angular-editor>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mt-2">
+                                <!-- 	<button (click)="openModalPreview()" mat-raised-button class="preview_button">Preview</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               </div>
+        </mat-card>
+    </form>
+</div>

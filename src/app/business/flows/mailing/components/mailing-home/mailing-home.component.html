@@ -1,0 +1,164 @@
+<div class="container-mailing">
+    <div class="titlecomp">
+        <div style="display: flex;">
+            <div>
+                <p class="main-title">RRHH Mailing</p>
+                <p class="sub-title">Envio de correos electrónicos masivos</p>
+            </div>
+            <div style="flex:1 1"></div>
+            <div>
+                <button (click)="modalUserGuide()" mat-raised-button class="filebuton2">Guía de usuario</button>
+            </div>
+        </div>
+        
+        <hr>
+    </div>
+    <form [formGroup]="mailingForm.mailingFormGroup">
+        <mat-card class="cuerpo" style="box-shadow: 0px 0px 2.5px 2px rgba(0,0,0,0.5);">
+            <mat-card-content>
+                <div class="row mb-4">
+                    <div class="col-md-6 pr-4">				
+                        <p class="sub-title"><strong>Excel Base</strong></p>
+                        <div  class="inputfile_container">
+                            <button (click)="onClickFileButon()" mat-raised-button class="filebuton">
+                                {{flagFileCharged?'Excel':'Seleccionar'}}
+                            </button>
+                            <div (click)="onClickFileButon()" class="filename">{{inputFileText}}</div>	
+                            <span title="Descartar" *ngIf='flagFileCharged' (click)='clearInputXLSX()' class="flaticon-circle closeicon"></span>				
+                            <input  #fileinput class="fileinput" (change)="onFileChange($event)" type="file" accept=".xlsx" />
+                        </div>
+                        <p class="reglas">* La tabla de datos debe estar en la hoja: <strong>Hoja1</strong>. Además, debe existir una columna <strong>Correo</strong> con el correo electrónico del destinatario. </p>
+                    </div>	
+                    <div class="col-md-6 pl-4" style="display: flex;flex-wrap: wrap;justify-content: center;">
+                        <p><strong>Adjuntos personalizados</strong></p>
+                        <p class="reglas">Para utilizar las opción de <strong>Adjunto personalizado</strong> es necesario que los archivos a los que se hacen referencia en el <strong>excel base</strong> hayan sido cargados previamente al sistema: </p>
+                    
+                        <div  class="">
+                            <button (click)="viewFileCharge()" mat-raised-button class=" btn btn-block filebuton2">
+                                Carga de archivos
+                            </button>
+                        </div>
+                        </div>				
+                </div>
+        <!--------------------------------------------------->
+                <p style="font-size: 15px;"><strong>Mensaje:</strong></p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Utiliza "@" para palabras clave. <span (click)="showAvailables()" class="btn_verdisponibles">(Ver disponibles)</span> </p>
+                    </div>	
+                </div>
+                <div class="row" style="overflow-x: scroll;">
+                    <div class="col-12">	
+                        <div class="form_row ta_flex" style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+                            <div class="col-xs-12 col-md-6 flex-aling-responsive-start form-inline">
+                                <button (click)="sendMails()" class="mail_button"><em class="flaticon2-send-1"></em> Enviar</button>
+                            <button [matMenuTriggerFor]="menu" class="mail_button"><em class="flaticon2-clip-symbol"></em>Adjuntar</button>					
+                            <mat-menu #menu="matMenu">
+                                <button (click)="clickAttachFile()" mat-menu-item>General</button>
+                                <button (click)="showCustomeAttach()" mat-menu-item>Perzonalizado</button>
+                            </mat-menu>
+                            <button (click)="clearContentMensaje()" class="mail_button"><em class="flaticon2-trash"></em> Descartar</button>
+                            <div class="flex_space"></div>
+                            </div>					
+                            <div class="col-xs-12 col-md-6 flex-aling-responsive flex-aling-responsive-end form-inline">
+                                <button [matMenuTriggerFor]="menu2" class="mail_button"><em class="flaticon-add"></em> Insertar</button>
+                            <mat-menu #menu2="matMenu">
+                                <button (click)="insert()" mat-menu-item>Link imagen</button>
+                            </mat-menu>
+                            <button (click)="saveTemplate()" class="mail_button"><em class="flaticon-download-1"></em> Guardar</button>
+            
+                            <button (click)="selectTemplate()" class="mail_button"><em class="flaticon-layer"></em> Plantillas</button>
+                        
+                            </div>
+                            </div>
+                        <div class="form_row ta_center">	
+                            <input formControlName="title" [ngClass]="(template.id!=0)?'saved':'unsaved'"  type="text" placeholder="Título de plantilla (Opcional)">	
+                        </div>
+                        <div class="form_row">
+                            <label for="to">Para:</label>	
+                            <input readonly value="@Correo" id="to" type="text">
+                        </div>
+                        <div class="form_row" style="overflow-x: scroll;">
+                            <label for="cc">CC:</label>	
+                            <input formControlName="cc" id="cc" type="text">
+                            <span (click)="showCC()" class="cco_button">CCO</span>
+                        </div>
+                        <div *ngIf="flagCC" class="form_row">
+                            <label for="cco">CCO:</label>	
+                            <input formControlName="cco" id="cco" type="text">
+                        </div>
+                        
+                        <!-- SUBJECT -->
+                        <div class="form_row">
+                            <input formControlName="subject" placeholder="Agregar un asunto" type="text">
+                        </div>	
+                        <!-- CUSTOM ATTACH -->
+                        <div *ngIf="flagAttach" class="form_row">
+                            <div class="cus_att_secc"><em class="fas fa-paperclip"></em>Adjunto:</div>	
+                            <input  formControlName="cusAttach" type="text">
+                        </div> 
+                        <!-- ATTACHMENT GEN-->
+                        <div *ngIf="atachedFiles.length > 0" class="form_row wrap">
+                            <div *ngFor="let file of atachedFiles;let i = index" class="atached_file">
+                                <em class="fas fa-file-upload"></em> <span class="atachfile_name">{{file.name}}</span> 
+                                <mat-spinner *ngIf="file.loading" diameter="20" style="margin: auto;" ></mat-spinner>
+                                <div (click)="removeFile(file.id)" *ngIf="!file.loading" class="atachd_x"> 
+                                    <span >x</span >
+                                </div>						
+                            </div>
+                        </div>	
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- EDITOR HEADER -->
+                        <angular-editor style="width: 100%;"  formControlName="body" [config]="editorConfig"></angular-editor>
+                        <!-- CASE EDITOR -->
+                        <div *ngIf="withCase" class="sections bg-danger" style="width: 100%;">
+                            <div class="caseforheader">
+                                <div style="line-height: 27px;">Evaluar:</div> 
+                                <select  formControlName="caseVariable">
+                                    <option *ngFor="let head of hojaHeaders" [value]="'@'+head">{{head}}</option>
+                                </select>
+                                <div style="flex: 1 1;"></div>
+                                <button (click)="addCase()" class="newcase">+ Nuevo caso</button>
+                            </div>
+                            <div *ngFor="let temp of templatesArray; let i = index" class="section" style="width: 100%;">
+                                <div class="casetitle" style="width: 100%;">
+                                    <div *ngIf="!temp.default" style="line-height: 27px;"><strong>Caso</strong>: {{caseVariableCondition}} =</div>
+                                    <input *ngIf="!temp.default" [(ngModel)]="temp.input" [ngModelOptions]="{standalone: true}" type="text" class="casevalue">
+                                    <div *ngIf="temp.default" style="line-height: 27px;width: 100%;"><strong>Caso por defecto</strong></div>
+                                    <div style="flex: 1 1;"></div>
+                                    <button *ngIf="!temp.default" (click)="dropCase(i)" class="ffar fa-trash-alt deletecase"></button>
+                                </div> 
+                                <angular-editor [(ngModel)]="temp.body" [ngModelOptions]="{standalone: true}" [config]="editorConfig"></angular-editor>
+                            </div>
+                        </div>
+                        <!-- EDITOR FOOTER -->
+                        <angular-editor style="width: 100%;" *ngIf="withCase" formControlName="tFoot" [config]="editorConfig"></angular-editor>
+                    </div>
+                </div>
+                <div class="row" *ngIf="hojaHeaders.length > 0">
+                    <div class="col-12">
+                        <div class="formulas">
+                            Condicionales: 
+                            <button *ngIf="!withCase" (click)="activeCase()" class="formula">Activar </button>
+                            <button *ngIf="withCase" (click)="disableCase()" class="formula">Desactivar </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <a mat-raised-button class="preview_button" (click)="previewMessage()" routerLink=".">Preview</a>
+                        
+                    </div>
+                    <div class="col-6 rigth-sec">
+                        <button mat-raised-button class="ml-2 send_button" (click)="sendMails()" >Enviar</button>
+                    </div>				
+                </div>  
+                <input #atachfileInput multiple="multiple" class="fileinput" type="file" (change)="attachFileChange($event)"/>
+            </mat-card-content>
+        </mat-card>
+        
+    </form>
+</div>

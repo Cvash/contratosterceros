@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-center" class="width: 70%;">
+  <div>
+    <!-- <div>{{data.lista_quiebres | json}}</div> -->
+    <form [formGroup]="quiebreRegistradoForm">
+      <div class="d-flex justify-content-center">
+        <div style="text-align: left;" class="mb-3 anuncio">
+          Comentario no corresponde
+        </div>
+      </div>
+      <label for="" class="labels">¿Porque no corresponde?</label>
+        <textarea formControlName="comentario_no_corresponde" class="form-control" id="comentario_inicio_atencion" rows="3" placeholder=""></textarea>
+
+      <div class="d-flex justify-content-center mt-5">
+        <div class="d-flex justify-content-center mr-3" style="display: inline-block!; float: right;">
+          <button type="submit" [disabled]="quiebreRegistradoForm.invalid" mat-button mat-raised-button color="primary" (click)="updateNoCorrespondeQuiebre(quiebreRegistradoForm.value)">
+            Guardar
+          </button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button mat-dialog-close mat-dialog-close="false" mat-raised-button color="warn">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

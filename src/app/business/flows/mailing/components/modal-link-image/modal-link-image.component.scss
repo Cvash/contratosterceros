@@ -1,0 +1,61 @@
+
+/*  MODALES  */
+.modal_body{
+    padding: 10px 20px;
+}
+  
+.modalheader{
+    display: flex;
+    background-color: #00a9e0;
+    border-radius: 3px;
+    padding: 5px;
+    padding-left: 15px;
+    color: #fff;
+    font-size: 17px;
+    line-height: 30px;
+    margin: 0;
+}
+.modalclosebutton{
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background: #ffffff42;
+    text-align: center;
+    color: #fff;
+    transition: ease-out 0.15s;
+    line-height: 32px;
+}
+.modalclosebutton i{
+    font-size: 10px;
+    display: block;
+    margin: auto;
+}
+.modalclosebutton:hover{
+    cursor: pointer;
+    background: #ffffff88;
+}
+
+.tb_l{
+    width: 100px;
+    padding: 10px;
+    text-align: right;
+    font-weight: 500;
+}
+.tb_r{
+    display: flex;
+    flex: 1;
+    padding: 10px;
+}
+.tb_r input{
+    width: 100%;
+    padding: 10px;
+}
+.filebuton{
+    background-color:  #00a9e0;
+    color: #fff;
+}
+.filebuton2{
+    background-color:  #ddd;
+    color: #323232;
+    margin-right: 10px;
+}

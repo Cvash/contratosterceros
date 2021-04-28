@@ -1,0 +1,29 @@
+
+<h2 mat-dialog-title>Gestores que aún no actualizan los datos ¡Contactarse con ellos!</h2>
+    <mat-dialog-content class="mat-typography">
+
+    <table class="table" style="text-align: center;">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">nombre</th>
+                <th scope="col">Fecha de ultima actualizacion</th>
+                <th scope="col">Telefono de whatsapp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>26/03/21</td>
+                <td>999999999</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Aceptar</button>
+</mat-dialog-actions>

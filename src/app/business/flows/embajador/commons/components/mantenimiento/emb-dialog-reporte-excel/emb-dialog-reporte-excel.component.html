@@ -1,0 +1,699 @@
+
+<div class="text-center mb-5 main-title" style="font-size: 30px;"> Reportes</div>
+<div class="d-flex justify-content-center">
+	<table aria-describedby="reportExcel" class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col"><strong>1. Atender los quiebres</strong></th>
+				<th scope="col"><strong>2. En proceso</strong></th>
+				<th scope="col"><strong>3. Registros</strong></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><button class="btn bg-start" mat-raised-button (click)="exporter1.exportTable('xlsx')">Reporte Excel 1</button></td>
+
+				<td><button class="btn bg-inprogress" mat-raised-button (click)="exporter2.exportTable('xlsx')">Reporte Excel 2</button></td>
+				
+				<td><button class="btn bg-success" mat-raised-button (click)="exporter3.exportTable('xlsx')">Reporte Excel 3</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+<div class="d-none">
+
+
+	<mat-horizontal-stepper #stepper>
+		<mat-step label="Atender" id="atenderQuiebre">
+
+			<div class="d-flex justify-content-center align-items-center mt-4">
+				<!-- <button mat-button matStepperPrevious class="btn btn-primary mr-5">Retroceder</button> -->
+				<button mat-raised-button matStepperNext color="primary">Siguiente</button>
+		 </div>
+
+			<div class="row d-flex justify-content-center">
+				<div>
+					<h1 style="font-size: 32px;" class="mt-4">1. Atender los quiebres</h1>
+				</div>
+			</div>
+
+			
+			
+
+			
+
+			<!-- <mat-form-field appearance="fill">
+				<input (keyup)="applyFilter($event.target.value)" matInput placeholder="Filter"/>
+			</mat-form-field> --> 
+
+			<div class="d-flex justify-content-center mt-5">
+				<mat-form-field>
+					<mat-label>Filter</mat-label>
+					<input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input />
+				</mat-form-field>
+			</div>
+			
+			
+			<div class="ml-2 mt-5 mat-elevation-z8">
+
+				<table aria-describedby="table2" mat-table [dataSource]="dataSourceIncidentDetails" matSort #exporter1="matTableExporter" matTableExporter>
+					 <!-- ID de la tabla dhr_red_incident_details -->
+					<ng-container matColumnDef="id">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id_dhr_red_incident.id }}</td> -->
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id }}</td>
+					</ng-container>
+					
+				  <!-- ID de la tabla dhr_red_incident -->
+					<!-- <ng-container matColumnDef="id_incidente">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Id Incidente</th>
+						<td mat-cell *matCellDef="let element"> {{ element.id_dhr_red_incident.id }}</td>
+					</ng-container> -->
+
+					<ng-container matColumnDef="Nombres">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Nombres</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.name_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="DNI">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.dni_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Correo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.mail_titular }} 
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Red">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Red</th>
+						<td mat-cell *matCellDef="let element">
+							 {{
+								element.id_dhr_red_incident.id_red_subcategory.id_red_category.id_red_type.name
+							}}
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerRutasQuiebres(element, userId)">Ver Rutas Quiebres</button> -->
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Caso">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Caso</th>
+						<td mat-cell *matCellDef="let element">
+							 {{
+								element.id_dhr_red_incident.id_red_subcategory.id_red_category.name
+							}}
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerRutasQuiebres(element, userId)">Ver Rutas Quiebres</button> -->
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Consulta">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Consulta</th>
+						<td mat-cell *matCellDef="let element">
+							 {{
+								element.id_dhr_red_incident.id_red_subcategory.name
+							}}
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerRutasQuiebres(element, userId)">Ver Rutas Quiebres</button> -->
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono_contacto">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Tel Contacto</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Nombre_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Embajador</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerDatosEmbajador(element, userId)">Ver Datos Embajador</button> -->
+							{{ element.id_dhr_red_incident.name_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Cell_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Celular Embajador</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerDatosEmbajador(element, userId)">Ver Datos Embajador</button> -->
+							{{ element.id_dhr_red_incident.cell_emb }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Mail_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Mail Embajador</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerDatosEmbajador(element, userId)">Ver Datos Embajador</button> -->
+							{{ element.id_dhr_red_incident.mail_emb }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Comentario">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Comentario</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerComentario(element.id_dhr_red_incident.description, userId)">Ver comentario</button> -->
+							{{ element.id_dhr_red_incident.description }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Creado">
+						<th scope="col" scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Creación</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.createdAt }}</td>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.createdAt.slice(0,10).split('-') }}</td> -->
+					</ng-container> 
+
+					<ng-container matColumnDef="Actualización" >
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Actualización</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.updatedAt | date:'short' }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Estado">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_status.name }}
+						</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="Columns_Incident_Details"></tr>
+					<tr mat-row *matRowDef="let row; columns: Columns_Incident_Details"></tr>
+				</table>
+
+				<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+			</div>
+
+
+			
+			
+		
+
+
+
+
+
+
+			<!-- SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP-->
+		</mat-step>
+		<mat-step label="En proceso">
+			
+			<div class="d-flex justify-content-center align-items-center mt-4">
+					<button mat-raised-button matStepperPrevious color="primary" class="mr-2">Retroceder</button>
+					<button mat-raised-button matStepperNext color="primary">Siguiente</button>
+			</div>
+
+			<div class="row d-flex justify-content-center">
+				<div>
+					<h1 style="font-size: 32px;" class="mt-4">2. En proceso</h1>
+				</div>
+			</div>
+
+			<div class="d-flex justify-content-center mt-4">
+				<div class="mr-5">
+					<button (click)="traerQuiebres()" class="btn btn-danger mb-4"> Refrescar </button>
+				</div>
+				<div>
+					<button mat-raised-button color="primary" (click)="exportAsXLSX()">Export
+					</button>
+				</div>
+				<div>
+					<button mat-raised-button (click)="exporter2.exportTable('xlsx')">Reporte Excel</button>
+				</div>
+			</div>
+
+			<mat-form-field>
+				<mat-label>Filter</mat-label>
+				<input matInput (keyup)="applyFilter2($event)" placeholder="Ex. ium" #input />
+			</mat-form-field>
+
+			<div class="ml-2 mt-5 mat-elevation-z8">
+				
+
+				<table aria-describedby="table3" mat-table [dataSource]="dataSourceIncidentDetails2" matSort #exporter2="matTableExporter" matTableExporter>
+					<!-- ID de la tabla dhr_red_incident_details -->
+					<ng-container matColumnDef="id">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id_dhr_red_incident.id }}</td> -->
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id }}</td>
+					</ng-container>
+					
+				  <!-- ID de la tabla dhr_red_incident -->
+					<!-- <ng-container matColumnDef="id_incidente">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Id Incidente</th>
+						<td mat-cell *matCellDef="let element"> {{ element.id_dhr_red_incident.id }}</td>
+					</ng-container> -->
+
+					<ng-container matColumnDef="Nombres">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Nombres</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.name_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="DNI">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.dni_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Correo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.mail_titular }} 
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Red">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Red</th>
+						<td mat-cell *matCellDef="let element">
+							 {{
+								element.id_dhr_red_incident.id_red_subcategory.id_red_category.id_red_type.name
+							}}
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerRutasQuiebres(element, userId)">Ver Rutas Quiebres</button> -->
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Caso">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Caso</th>
+						<td mat-cell *matCellDef="let element">
+							 {{
+								element.id_dhr_red_incident.id_red_subcategory.id_red_category.name
+							}}
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerRutasQuiebres(element, userId)">Ver Rutas Quiebres</button> -->
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Consulta">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Consulta</th>
+						<td mat-cell *matCellDef="let element">
+							 {{
+								element.id_dhr_red_incident.id_red_subcategory.name
+							}}
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerRutasQuiebres(element, userId)">Ver Rutas Quiebres</button> -->
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono_contacto">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Tel Contacto</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Nombre_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Embajador</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerDatosEmbajador(element, userId)">Ver Datos Embajador</button> -->
+							{{ element.id_dhr_red_incident.name_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Cell_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Celular Embajador</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerDatosEmbajador(element, userId)">Ver Datos Embajador</button> -->
+							{{ element.id_dhr_red_incident.cell_emb }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Mail_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Mail Embajador</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerDatosEmbajador(element, userId)">Ver Datos Embajador</button> -->
+							{{ element.id_dhr_red_incident.mail_emb }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Comentario">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Comentario</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerComentario(element.id_dhr_red_incident.description, userId)">Ver comentario</button> -->
+							{{ element.id_dhr_red_incident.description }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Creado">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Creación</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id_dhr_red_incident.createdAt }}</td>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.createdAt.slice(0,10).split('-') }}</td> -->
+					</ng-container> 
+
+					<ng-container matColumnDef="Actualización" >
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Actualización</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.updatedAt | date:'short' }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Estado">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_status.name }}
+						</td>
+					</ng-container>
+					
+					<ng-container matColumnDef="Comentario_inicio_atencion">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Comentario inicio atención</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.comentario_inicio_atencion }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Motivo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Motivo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_incident_submotivo.id_dhr_incident_motivo.name }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Submotivo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Submotivo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_incident_submotivo.name }}
+						</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="Columns_Incident_Details2"></tr>
+					<tr mat-row *matRowDef="let row; columns: Columns_Incident_Details2"></tr>
+				</table>
+
+				<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+			</div>
+		</mat-step>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<mat-step label="Registros">
+
+			<div class="d-flex justify-content-center align-items-center mt-4">
+				<button mat-raised-button matStepperPrevious color="primary" >Retroceder</button>
+				<!-- <button mat-button matStepperNext class="btn btn-primary">Siguiente</button> -->
+		 </div>
+
+			<div class="row d-flex justify-content-center">
+				<div>
+					<h1 style="font-size: 32px;" class="mt-4">3. Registros</h1>
+				</div>
+			</div>
+
+			<div class="d-flex justify-content-center mt-4">
+				<div class="mr-5">
+					<button (click)="traerQuiebres()" class="btn btn-danger mb-4"> Refrescar </button>
+				</div>
+				<div>
+					<button mat-raised-button color="primary" (click)="exportAsXLSX()">Export
+					</button>
+				</div>
+				<div>
+					<button mat-raised-button (click)="exporter3.exportTable('xlsx')">Reporte Excel</button>
+				</div>
+			</div>
+
+			<!-- <mat-form-field appearance="fill">
+				<input (keyup)="applyFilter3($event.target.value)" matInput placeholder="Filter" />
+			</mat-form-field> -->
+
+			<mat-form-field>
+				<mat-label>Filter</mat-label>
+				<input matInput (keyup)="applyFilter3($event)" placeholder="Ex. ium" #input />
+			</mat-form-field>
+			
+
+			<div class="ml-2 mt-5 mat-elevation-z8">
+				
+				<table aria-describedby="table4" mat-table [dataSource]="dataSourceIncidentDetails3" matSort #exporter3="matTableExporter" matTableExporter>
+					<!-- ID de la tabla dhr_red_incident_dertails -->
+					<ng-container matColumnDef="id">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id_dhr_red_incident.id }}</td> -->
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id }}</td>
+					</ng-container>
+					
+				  <!-- ID de la tabla dhr_red_incident -->
+					<!-- <ng-container matColumnDef="id_incidente">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Id Incidente</th>
+						<td mat-cell *matCellDef="let element"> {{ element.id_dhr_red_incident.id }}</td>
+					</ng-container> -->
+
+					<ng-container matColumnDef="Nombres">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Nombres</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.name_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="DNI">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>DNI</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.dni_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Correo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.mail_titular }} 
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Red">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Red</th>
+						<td mat-cell *matCellDef="let element">
+							 {{
+								element.id_dhr_red_incident.id_red_subcategory.id_red_category.id_red_type.name
+							}}
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerRutasQuiebres(element, userId)">Ver Rutas Quiebres</button> -->
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Caso">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Caso</th>
+						<td mat-cell *matCellDef="let element">
+							 {{
+								element.id_dhr_red_incident.id_red_subcategory.id_red_category.name
+							}}
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerRutasQuiebres(element, userId)">Ver Rutas Quiebres</button> -->
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Consulta">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Consulta</th>
+						<td mat-cell *matCellDef="let element">
+							 {{
+								element.id_dhr_red_incident.id_red_subcategory.name
+							}}
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerRutasQuiebres(element, userId)">Ver Rutas Quiebres</button> -->
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Teléfono_contacto">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Tel Contacto</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_incident.cell_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Nombre_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Embajador</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerDatosEmbajador(element, userId)">Ver Datos Embajador</button> -->
+							{{ element.id_dhr_red_incident.name_titular }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Cell_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Celular Embajador</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerDatosEmbajador(element, userId)">Ver Datos Embajador</button> -->
+							{{ element.id_dhr_red_incident.cell_emb }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Mail_embajador">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Mail Embajador</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerDatosEmbajador(element, userId)">Ver Datos Embajador</button> -->
+							{{ element.id_dhr_red_incident.mail_emb }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Comentario">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Comentario</th>
+						<td mat-cell *matCellDef="let element">
+							<!-- <button class="btn btn-primary" style="font-size: 12px;" (click)="showVerComentario(element.id_dhr_red_incident.description, userId)">Ver comentario</button> -->
+							{{ element.id_dhr_red_incident.description }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Creado">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Creación</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.id_dhr_red_incident.createdAt }}</td>
+						<!-- <td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.createdAt.slice(0,10).split('-') }}</td> -->
+					</ng-container> 
+
+					<ng-container matColumnDef="Actualización" >
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Actualización</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">{{ element.updatedAt | date:'short' }}</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Estado">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_red_status.name }}
+						</td>
+					</ng-container>
+					
+					<ng-container matColumnDef="Comentario_inicio_atencion">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Comentario inicio atención</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.comentario_inicio_atencion }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Motivo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Motivo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_incident_submotivo.id_dhr_incident_motivo.name }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Submotivo">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Submotivo</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.id_dhr_incident_submotivo.name }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="No_corresponde">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>No corresponde</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.comentario_no_corresponde }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="No_contacto">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>No contacto</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.comentario_no_contacto }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="No_FFTT">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>No FFTT</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.comentario_no_fftt }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Comentario_final">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Comentario final</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.comentario_final }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Se_hizo_ajuste">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>¿Se hizo ajuste?</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.se_hizo_ajuste }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Importe_ajuste">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Importe ajuste</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.importe_ajuste }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Observacion_ajuste">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Observacion ajuste</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.observacion_ajuste }}
+						</td>
+					</ng-container>
+					
+					<ng-container matColumnDef="Se_atendio_remedy">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>¿Se atendió remedy?</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.se_atendio_remedy }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Codigo_remedy">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Código remedy</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.codigo_remedy }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Se_realizo_doit">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>¿Se hizo doit?</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.se_realizo_doit }}
+						</td>
+					</ng-container>
+
+					<ng-container matColumnDef="Codigo_doit">
+						<th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Código Doit</th>
+						<td mat-cell *matCellDef="let element" style="font-size: 12px;">
+							{{ element.codigo_doit }}
+						</td>
+					</ng-container>
+
+					
+
+					<tr mat-header-row *matHeaderRowDef="Columns_Incident_Details3"></tr>
+					<tr mat-row *matRowDef="let row; columns: Columns_Incident_Details3"></tr>
+				</table>
+
+				<mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+			</div>
+
+			<!-- TERCER STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP SEGUNDO STEP-->
+
+
+
+		</mat-step>
+	</mat-horizontal-stepper>
+</div>

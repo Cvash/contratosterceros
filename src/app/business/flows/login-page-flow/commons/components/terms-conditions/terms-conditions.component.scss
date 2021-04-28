@@ -1,0 +1,51 @@
+.main-title{
+    width: 100%;background-color: #00a9e0;color: #ffffff;
+}
+
+.link-success:hover{
+    cursor: pointer;
+    color: #fff !important;
+    background-color: #5bc500;
+}
+
+.link-success{
+    font-weight: 600;
+    border: solid 2px #5bc500;
+    padding: 3px 10px;
+    color: #5bc500 !important;
+    background: #fff;
+    text-decoration: none !important;
+    margin: 5px;
+    transition: ease 0.3s;
+    width: 250px;
+}
+/*#fa0a8a*/
+.link-cancel:hover{
+    cursor: pointer;
+    color: #fff !important;
+    background-color: #fa0a8a;
+}
+
+.link-cancel{
+    font-weight: 600;
+    border: solid 2px #fa0a8a;
+    padding: 3px 10px;
+    color: #fa0a8a !important;
+    background: #fff;
+    text-decoration: none !important;
+    margin: 5px;
+    transition: ease 0.3s;
+    width: 250px;
+}
+// Background border
+.mat-checkbox .mat-checkbox-frame {
+    border-color: black;
+    background-color: #dddddd
+}
+
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 18px;
+    height: 18px;
+}

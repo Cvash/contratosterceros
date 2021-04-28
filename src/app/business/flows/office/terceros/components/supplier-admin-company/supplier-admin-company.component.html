@@ -1,0 +1,305 @@
+<div [formGroup]="formAdmin.managerCompanyForm" style="width: 90%;margin-left: auto;margin-right: auto;">
+    <div class="titlecomp">
+        <div style="display: flex;">
+            <div>
+                <p class="main-title">Panel de administración </p>
+                <p class="sub-title">Administración de terceros</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+    
+    <div [hidden]="newService" class="cardtdp">
+        <div class="cardtdp-header"> Registro de empresa
+            
+        </div>
+        <div class="cardtdp-content">
+            <div class="formcomp-container">
+                <div style="width: 100%;">
+                    <div class="col-xs-12 co-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3" style="padding: 20px;"
+                        *ngIf="!formCondition && !newService">
+                        <p class="sub-title text-center">Datos de empresa
+                        </p>
+                        <div class="newuser-container">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <img src="../../../../../../assets/images/media/formSections/organization.png"
+                                        class="img rounded mx-auto d-block" alt="organization">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 5px;">
+                                <div class="col-xs-12 col-sm-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <mat-label>Ingresar ruc de la empresa</mat-label>
+                                        <input formControlName="ruc" matInput placeholder="RUC">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 offset-md-3">
+                                    <button mat-raised-button (click)="nextForm()"
+                                        class="flaticon2-next btn btn-block btn_movistarceleste"> Siguiente</button>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12" *ngIf="showMessageCondition">
+                                    <p
+                                        style="margin-top: 5px;padding: 5px;color: #ffffff;background-color: #5bc500;border-radius: 5px;">
+                                        {{messageCondition}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-8 offset-md-2">
+                                    <button mat-raised-button (click)="previousTableCompanyService()"
+                                        class="flaticon-presentation-1 btn btn-block btn_newCompanyService"> Mostrar empresas registradas</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="formCondition===true" class="formcomp-container">
+                <div style="width: 100%;">
+                    <div class="row" style="width: 100%;">
+                        <!--action form a y b-->
+                        <div class="col-xs-12 col-sm-12 col-md-6" style="padding: 20px;">
+                            <h6 style="border-bottom: #5bc500 solid 3px;padding: 5px 10px;">Datos de empresa</h6>
+                            <div class="newuser-container">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Ruc</mat-label>
+                                    <input [disabled]="formDisabled" formControlName="ruc" matInput placeholder="RUC">
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Razón Social</mat-label>
+                                    <input [disabled]="formDisabled" formControlName="companyName" matInput
+                                        placeholder="Razón Social">
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Alias (opcional)</mat-label>
+                                    <input [disabled]="formDisabled" formControlName="alias" matInput
+                                        placeholder="Alias (opcional)">
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Actividad</mat-label>
+                                    <input [disabled]="formDisabled" formControlName="activity" matInput
+                                        placeholder="Actividad">
+                                </mat-form-field>
+                                <div class="row" *ngIf="foundCondition">
+                                    <div class="col-md-12 col-lg-12">
+                                        <p
+                                            style="margin-top: 5px;padding: 5px;color: #ffffff;background-color: #5bc500;border-radius: 5px;">
+                                            {{messageCondition}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6" style="padding: 20px;width: 100%;"
+                            *ngIf="formCondition==true && actionForm == 'B'">
+                            <h6 style="border-bottom: #5bc500 solid 3px;padding: 5px 10px;">Datos de Servicio</h6>
+                            <div class="newuser-container">
+    
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Nombre del servicio</mat-label>
+                                    <input formControlName="serviceName" matInput placeholder="Nombre del servicio">
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Descripción del servicio</mat-label>
+                                    <input formControlName="description" matInput
+                                        placeholder="Descripción del servicio">
+                                </mat-form-field>
+    
+    
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Persona de contacto</mat-label>
+                                    <input formControlName="contactName" [disabled]="conditionService" matInput
+                                        placeholder="Persona de contacto">
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Número de contacto</mat-label>
+                                    <input formControlName="contactNumber" [disabled]="conditionService" matInput
+                                        placeholder="Número de contacto">
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Correo de contacto</mat-label>
+                                    <input formControlName="contactMail" [disabled]="conditionService" matInput
+                                        placeholder="Correo de contacto">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+    
+    
+                </div>
+                <div class="row" *ngIf="foundCondition">
+                    <div class="col-xs-12 col-sm-12 col-md-4">
+                        <button mat-raised-button (click)="previousForm()" class="btn flaticon2-back btn_back"> Volver</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4">
+                        <button mat-raised-button (click)="createCompanyService()"
+                            class="fas fa-check-circle btn btn_movistarceleste">Guardar</button>
+                    </div>
+
+                </div> <br>
+                <div class="row" *ngIf="!foundCondition">
+                    <div class="col-xs-12 col-sm-12 col-md-4">
+                        <button mat-raised-button (click)="previousForm()" class="btn flaticon2-back btn_back"> Volver</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4">
+                        <button mat-raised-button (click)="createCompanyService()"
+                            class="fas fa-check-circle btn btn_movistarceleste">Guardar</button>
+                    </div>
+                </div><br>
+            </div>
+        </div>
+    </div>
+    
+    <div [hidden]="!newService" class="cardtdp">
+        <div class="cardtdp-header"> Lista de empresas</div>
+        <div class="cardtdp-content">
+            <div class="panel-search-terceros">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                        <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>Buscar servicios...</mat-label>
+                            <input matInput (keyup)="applyFilter($event)"
+                                placeholder="Ejemplo: Buscar por razon social, nombre de servicio, datos del contacto.."
+                                #input>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <button class="btn btn-block btn_newCompanyService" (click)="showAddNewCompanyService('E')">Agregar
+                            nueva empresa/servicio</button>
+                    </div>
+                </div>
+            </div>
+            <div style="overflow: auto;"> 
+                    <mat-tab-group mat-align-tabs="center">
+                        <mat-tab label="Servicios Propios">
+                            <table aria-describedby="adminCompanyOwn" class="terceros-table table-bordered" mat-table [dataSource]="dataSource">
+        
+                                <ng-container matColumnDef="RUC" >
+                                    <th scope="RUC" mat-header-cell *matHeaderCellDef> RUC </th>
+                                    <td mat-cell *matCellDef="let element">
+                                    
+                                    {{element.ruc}} </td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="R_SOCIAL">
+                                    <th scope="COMPANY_CODE" mat-header-cell *matHeaderCellDef> Razón Social </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.company_name}} </td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="SUPPLIER">
+                                    <th scope="SERIVCE" mat-header-cell *matHeaderCellDef> Servicio </th>
+                                    <td mat-cell *matCellDef="let element" style="flex-wrap: nowrap;width: 150px;">
+                                        <span *ngIf="flagFoundAdminRole" class="sticker-company" style="display: {{element.display}};background-color:{{element.background}};">
+                                            {{element.condition}}
+                                            </span>
+                                            <div class="clearfix"></div>    
+                                    {{element.service}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="GESTOR">
+                                    <th scope="MANAGER" mat-header-cell *matHeaderCellDef> Gestor Tercero </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span *ngIf="element.idManager != null">{{element.managerMail}}</span>
+                                        <button *ngIf="element.idManager == null" (click)="asignManager(element)"
+                                            class="link-edit">Asignar</button></td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="STATUS">
+                                    <th scope="STATUS" mat-header-cell *matHeaderCellDef> Estado </th>
+                                    <td mat-cell *matCellDef="let element" style="color:#000000;">
+                                        <strong class="text-success">{{element.status?'Activo':'Inactivo'}}</strong> </td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="ADDGESTOR">
+                                    <th scope="ADDGESTOR" mat-header-cell *matHeaderCellDef>Gestor TDP</th>
+                                    <td mat-cell *matCellDef="let element" style="color:#000000;">
+                                        <button (click)="asignManagerGestor(element)"
+                                            class="add-gestor">Asignar</button>
+                                            <button (click)="showManagerGestor(element)"
+                                            class="view-gestor">Ver</button>
+                                    </td>
+                                </ng-container>
+                
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>    
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        
+                        </mat-tab>
+               
+                            
+                            <div>
+                                <!-- <mat-tab   [disabled]="lstCompaniesOther.length==0?true:false"  label="Servicios Otros"> 
+                                    <div class="table-responsive">
+                                        <table aria-describedby="adminCompanyOther" class="terceros-table table-bordered" mat-table [dataSource]="dataSourceOther">
+                
+                                            <ng-container matColumnDef="RUC">
+                                                <th scope="RUC" mat-header-cell *matHeaderCellDef> RUC </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.ruc}} </td>
+                                            </ng-container>
+                            
+                                            <ng-container matColumnDef="R_SOCIAL">
+                                                <th scope="COMPANY_CODE" mat-header-cell *matHeaderCellDef> Razón Social </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.company_name}} </td>
+                                            </ng-container>
+                            
+                                            <ng-container matColumnDef="SUPPLIER">
+                                                <th scope="SERVICE" mat-header-cell *matHeaderCellDef> Servicio </th>
+                                                <td mat-cell *matCellDef="let element"> {{element.service}} </td>
+                                            </ng-container>
+                            
+                                            <ng-container matColumnDef="GESTOR">
+                                                <th scope="MANAGER" mat-header-cell *matHeaderCellDef> Gestor Tercero </th>
+                                                <td mat-cell *matCellDef="let element">
+                                                    <span *ngIf="element.idManager != null">{{element.managerMail}}</span>
+                                                    <button *ngIf="element.idManager == null" (click)="asignManager(element)"
+                                                        class="link-edit">Asignar</button></td>
+                                            </ng-container>
+                            
+                                            <ng-container matColumnDef="STATUS">
+                                                <th scope="STATUS" mat-header-cell *matHeaderCellDef> Estado </th>
+                                                <td mat-cell *matCellDef="let element" style="color:#000000;">
+                                                    <strong>{{element.status?'Activo':'Inactivo'}}</strong> </td>
+                                            </ng-container>
+                            
+                                            <ng-container matColumnDef="ADDGESTOR">
+                                                <th scope="MANAGER" mat-header-cell *matHeaderCellDef>Gestor TDP</th>
+                                                <td mat-cell *matCellDef="let element" style="color:#000000;">
+                                                    <button (click)="asignManagerGestor(element)"
+                                                        class="add-gestor">Asignar</button>
+                                                        <button (click)="showManagerGestor(element)"
+                                                        class="view-gestor">Ver</button>
+                                                </td>
+                                            </ng-container>
+                            
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                        </table> 
+                                    </div>   
+                                    <mat-paginator #OtherCompanyServices [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                
+                                </mat-tab> -->
+                            </div>     
+                      </mat-tab-group>
+                   
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+     
+</div>

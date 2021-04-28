@@ -1,0 +1,58 @@
+<h2 mat-dialog-title class="titulo text-center animated fadeIn fast">Datos fin de atención</h2>
+<mat-dialog-content class="animated fadeIn fast">
+  <div class="d-flex justify-content-center">
+    <table aria-describedby="finAtencion" class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Comentario final</th>
+          <th scope="col">Se hizo ajuste?</th>
+          <th scope="col">Importe ajuste</th>
+          <th scope="col">Observacion ajuste</th>
+          <th scope="col">¿Se atendió remedy?</th>
+          <th scope="col">Código remedy</th>
+          <th scope="col">¿Se realizó Doit?</th>
+          <th scope="col">Código Doit</th>
+          <th scope="col">Usuario atención</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>{{data.datos_fin_atencion.comentario_final}}</strong></td>
+          <td><strong>{{data.datos_fin_atencion.se_hizo_ajuste}}</strong></td>
+          <td >{{data.datos_fin_atencion.importe_ajuste}}</td>
+          <td >{{data.datos_fin_atencion.observacion_ajuste}}</td>
+
+          <td><strong>{{data.datos_fin_atencion.se_atendio_remedy}}</strong></td>
+          <td>{{data.datos_fin_atencion.codigo_remedy}}</td>
+
+          <td><strong>{{data.datos_fin_atencion.se_realizo_doit}}</strong></td>
+          <td>{{data.datos_fin_atencion.codigo_doit}}</td>
+
+          <!-- <td>{{data.datos_fin_atencion.id_dhr_red_incident.id_dhr_user.name}} {{data.datos_fin_atencion.id_dhr_red_incident.id_dhr_user.last_name_1}}</td> -->
+          <!-- <td>{{ data.user.relatedParty.name.split("/")[0] }} {{ data.user.relatedParty.name.split("/")[1] }} </td> -->
+        </tr>
+        <!-- <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr> -->
+      </tbody>
+    </table>
+
+    
+  </div>
+
+	<div class="d-flex justify-content-center">
+		<div>
+			<button mat-raised-button color="warn" mat-dialog-close mat-dialog-close="true">
+				Salir
+			</button>
+		</div>
+	</div>
+</mat-dialog-content>

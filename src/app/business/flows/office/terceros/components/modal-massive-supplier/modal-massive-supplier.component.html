@@ -1,0 +1,58 @@
+<p class="modalheader">Carga masiva de empleados
+    <span style="flex: 1 1 auto"></span>
+    <span (click)="onNoClick()" class="modalclosebutton" style="float: right;"><em class="flaticon2-delete"></em> </span>
+</p>
+<div [formGroup]="supplierForm.supplierAdmin" style="padding: 10px;">
+    <strong>Formato de carga:</strong> <a target="_blank"  rel="noopener noreferrer" href="https://drive.google.com/open?export=download&id=1lG8dq0begT_vENOyPPXLDNZastbAFovb" class="download-btn"><em class="far fa-file-excel"></em> descargar</a> 
+    <br>
+    <strong>Archivo:</strong>    <input  #fileinput style="padding: 5px;" type="file" accept=".xlsx" (change)="onFileChange($event)">
+    <strong  style="margin-left: 10px;">Servicios disponibles:</strong> <mat-form-field class="text-center">
+        <mat-label class="text-center text-primary"></mat-label>
+        <mat-select formControlName="serviceId" [disabled]="conditionService">
+            <mat-option>Seleccinar servicio..</mat-option>
+          <mat-option *ngFor="let value of suppliersCompanyService" [value]="value.id">
+            {{value.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    <div class="preview-cont">
+        <div class="tabletitle">Preview:</div>
+        <table  aria-describedby="managerSupplier" class="preview-table">
+            <thead>
+                <tr>
+                    <th scope="dni" style="color: #ffffff;">DNI</th>
+                    <th scope="nombre" style="color: #ffffff;">Nombre</th>
+                    <th scope="apellidos" style="color: #ffffff;">Apellidos</th>
+                    <th scope="codigo" style="color: #ffffff;">Codigo</th>
+                    <th scope="correo" style="color: #ffffff;">Correo</th>
+                    <th scope="nacimiento" style="color: #ffffff;">Nacimiento</th>
+                    <th scope="genero" style="color: #ffffff;">Genero</th>
+                    <th scope="actividad" style="color: #ffffff;">Actividad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dato of hojaDatos">
+                    <td>{{dato.nationalId}}</td>
+                    <td>{{dato.name}}</td>
+                    <td>{{dato.lastName1 + ' ' + dato.lastName2}}</td>
+                    <td>{{dato.codeCompany}}</td>
+                    <td>{{dato.mail}}</td>
+                    <td>{{dato.birthdate}}</td>
+                    <td>{{dato.gender}}</td>
+                    <td>{{dato.activity}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="errors.length > 0" class="errorlog">
+        <div class="tabletitle">Lista de errores:</div>
+        <ul>
+            <li *ngFor="let error of errors">{{error}}</li>
+        </ul>
+    </div>
+    <div style="display: flex;">
+        <button (click)="onNoClick()" class="btn-clear"><em class="flaticon2-delete"></em> Cancelar</button>
+        <div style="flex: 1 1;"></div>
+        <button (click)="saveCorrects()" class="btn-charge"> <em class="fas fa-cloud-upload-alt"></em> Cargar correctos</button>
+    </div>
+</div>

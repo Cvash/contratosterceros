@@ -1,0 +1,53 @@
+<div style="position: relative;">
+    <button (click)="closeDialog()" class="close-qr"> <em class="flaticon2-delete"></em> </button>
+</div>
+
+<div *ngIf="resultStatus === 2">
+    <h5 style="text-align: center;  margin-top: 10px;">{{name}}</h5>
+    <div class="mqr-cip">{{defaultTitle}}</div>
+    <div class="qr-block">
+        <em style="color: #5bc500;" class="fa fa-thumbs-up"></em>
+    </div>
+    <div class="timereg">
+        Hora de registro: <strong>{{hour | date : 'shortTime' }}</strong>
+    </div>
+    <div *ngIf="showdefaultMessage">
+        <p style="text-align: center; margin-top: 20px; color: #00A9E0;font-size: 15px;">¡<strong>Todo salió bien</strong>!</p>
+        <p style="color: #979797;">El usuario cumple con los requerimientos, por lo que se le debe permitir el acceso.</p>
+    </div>
+    <div class="center-items">
+        <button mat-flat-button class="btn button-terceros-primary" (click)="closeDialog()" >Aceptar</button>
+    </div>
+</div>
+<div *ngIf="resultStatus !==2 && resultStatus>2">
+    <h5 style="text-align: center; margin-top: 10px;">{{name}}</h5>
+    <div class="mqr-cip-x">{{defaultTitle}}</div>
+    <div *ngIf="defaultResult" class="qr-block">
+        <div *ngIf="defaultIcon" class="form-inline">
+            <em  style="color: rgb(0,169,224);" class="fa fa-thumbs-up"></em>
+            <em style="color: #dd5d6a;" class="fas fa-temperature-high"></em>
+        </div>
+        <div *ngIf="!defaultIcon" class="text-center">
+            <em style="color: #dd5d6a;" class="fas fa-temperature-high"></em>
+        </div>
+    </div>
+    <div *ngIf="!defaultResult" class="qr-block">
+        <div *ngIf="defaultIcon" class="form-inline">
+            <em  style="color: rgb(0,169,224);" class="fa fa-thumbs-up"></em>
+            <em style="color: #dd5d6a;" class="fa fa-exclamation-triangle"></em>
+        </div>
+        <div *ngIf="!defaultIcon" class="text-center">
+            <em style="color: #dd5d6a;" class="fa fa-exclamation-triangle"></em>
+        </div>
+    </div>
+    <div class="timereg">
+        Hora de registro: <strong>{{hour | date : 'shortTime' }}</strong>
+    </div>
+    <div>
+        <p class="subtitle-form">¡Cuidemos nuestra <strong>salud</strong>!</p>
+        <p style="color: #979797;">{{defaultMessage}}<strong> Su supervisor ya fue notificado.</strong></p>
+    </div>
+    <div class="center-items">
+        <button mat-flat-button class="btn button-terceros-primary" (click)="closeDialog()" >Aceptar</button>
+    </div>
+</div>

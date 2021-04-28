@@ -14,13 +14,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
+import { ComponentsModule } from './components/components.module';
 
+import { BaseHistoricaComponent } from './pages/base-historica/base-historica.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { FavoritosComponent } from './pages/favoritos/favoritos.component';
+import { GestoresComponent } from './pages/gestores/gestores.component';
+import { MapasComponent } from './pages/mapas/mapas.component';
+import { PeriodoVigenteComponent } from './pages/periodo-vigente/periodo-vigente.component';
 import { TablaComponent } from './pages/tabla/tabla.component';
 import { UserComponent } from './pages/user/user.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-
-
-
+import { DialogContentExampleDialogComponent } from './pages/popup/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { VerGestoresComponent } from './pages/popup/ver-gestores/ver-gestores.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -29,11 +37,19 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     AppComponent,
     TablaComponent,
     UserComponent,
-    DashboardComponent
+    DashboardComponent,
+    BaseHistoricaComponent,
+    PeriodoVigenteComponent,
+    MapasComponent,
+    GestoresComponent,
+    FavoritosComponent,
+    DialogContentExampleDialogComponent,
+    VerGestoresComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ComponentsModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatSliderModule,
@@ -42,7 +58,13 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     MatDatepickerModule,
     MatFormFieldModule,
     MatDialogModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule,
+    HttpClientModule,
+    MatPaginatorModule
+  ],
+  exports: [
+    ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

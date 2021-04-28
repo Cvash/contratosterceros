@@ -1,0 +1,431 @@
+.boton-continuar {
+	display: block;
+	padding: 15px 60px;
+	border-radius: 5px;
+	background: #ffffff;
+	text-align: center;
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 22px;
+	margin: 30px auto;
+	cursor: pointer;
+	border: none;
+}
+
+// .imagen-background {
+//   background: lightblue url("../../../../../../../assets/images/slider1.jfif") no-repeat fixed center;
+// }
+
+.nav-yoteayudo {
+	font-size: 18px;
+	border-radius: 38px;
+	// background-color: #1ca9e0;
+}
+
+.nav-yoteayudo:hover {
+	color: #fff;
+	background-color: #1ca9e0;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+	color: #fff;
+	background-color: #1ca9e0;
+}
+
+.numero-facturacion {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 40px;
+	text-align: center;
+	color: #019bf2;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.example-header-image {
+	background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+	background-size: cover;
+	height: 30px;
+	width: 30px;
+}
+
+.tarjeta-plan {
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+		0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+.call-button {
+	display: inline-block;
+	font-weight: 400;
+	color: #fff;
+	cursor: pointer;
+	-ms-user-select: none;
+	user-select: none;
+	border: 0 solid transparent;
+	padding: 0 15px;
+	font-size: 1em;
+	line-height: 48px;
+	width: 100%;
+	height: 48px;
+	background-color: #019bf2;
+	border-radius: 40px;
+	text-decoration: none;
+	transition: all ease 0.4s;
+}
+
+.precio-embajador {
+	display: block;
+	font-size: 35px;
+	font-weight: 700;
+	line-height: 1.2;
+	color: #019bf2;
+}
+
+.label-embajador {
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 20px;
+	color: #86888c;
+	display: block;
+}
+
+.precio-regular {
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 20px;
+	color: #019bf2;
+	display: block;
+}
+
+.cantidad-mbps {
+	font-size: 38px;
+	font-weight: 700;
+	line-height: 35px;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	color: #019bf2;
+	margin-top: 12px;
+	justify-content: left;
+}
+
+.tipo-plan {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background: #e9426d;
+	border-radius: 45%;
+	color: #fff;
+	width: 98px;
+	height: 98px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.plan-type {
+	font-weight: bold;
+	font-size: 22px;
+	line-height: 34px;
+}
+
+.cabecera {
+	position: relative;
+	background-color: #fff;
+	text-align: left;
+	padding: 40px 20px 25px;
+	border-bottom: 1px solid #f4f4f3;
+}
+
+.ver-detalle {
+	display: block;
+	width: 100%;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.2;
+	padding: 24px 20px;
+	background-color: transparent;
+	border: 0;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	color: #019bf2;
+	outline: 0;
+	transition: all ease 0.4s;
+}
+
+.detalles-planes {
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.2;
+	color: #019bf2 !important;
+	margin: 0;
+	margin-bottom: 4px;
+}
+
+.beneficios-exclusivos {
+	display: block;
+	font-size: 16px;
+	font-weight: 300;
+	margin: 0;
+	margin-bottom: 15px;
+	color: #019bf2;
+	text-align: center;
+}
+
+.complementar-experiencia {
+	font-size: 40px;
+	margin-top: 50px;
+}
+
+.costo-instalacion {
+	border: 2px solid #009bf1;
+	border-radius: 5px;
+	padding: 25px 53px 25px 53px;
+	width: 100%;
+	font-size: 15px;
+	color: #009bf1;
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+
+.pidelo-como-trio {
+	font-size: 40px;
+	color: #fff;
+	max-width: 710px;
+	line-height: 57px;
+}
+
+.migrar-trio {
+	font-size: 24px;
+	color: #fff;
+}
+
+.que-debo-hacer {
+	font-size: 40px;
+	padding-top: 50px !important;
+}
+
+.bloques-premium {
+	font-size: 40px;
+	margin-top: 50px;
+	color: #fff;
+	max-width: 800px;
+	line-height: 60px;
+	position: relative;
+	z-index: 2;
+	bottom: 400px;
+}
+
+.importante1,
+.importante2,
+.importante3,
+.importante4,
+.importante5 {
+	font-size: 18px;
+}
+
+.contenido1,
+.contenido2,
+.contenido3,
+.contenido4,
+.contenido5 {
+	max-width: 300px;
+	font-size: 18px;
+	line-height: 24px;
+}
+
+.conoce-facturacion {
+	font-size: 40px;
+	margin-top: 50px;
+}
+
+.imagen-facturacion {
+	width: 328px;
+	height: 99px;
+}
+
+.preguntas-frecuentes-hogar {
+	font-size: 40px;
+	margin-top: 50px;
+}
+
+.pregunta1,
+.pregunta2,
+.pregunta3,
+.pregunta4,
+.pregunta5,
+.pregunta6,
+.pregunta7,
+.pregunta8,
+.pregunta9 {
+	color: #50535a;
+	font-size: 18px;
+}
+
+.respuesta1,
+.respuesta2,
+.respuesta3,
+.respuesta4,
+.respuesta5,
+.respuesta6,
+.respuesta7,
+.respuesta8,
+.respuesta9 {
+	font-size: 18px;
+}
+
+.disfruta-corporativos {
+	max-width: 780px;
+	font-size: 20px;
+	line-height: 25px;
+}
+
+.img-repetidor-smart {
+	height: 156px;
+}
+
+.repetidor-smart {
+	font-size: 18px;
+}
+
+.repetidor-mensual {
+	font-size: 18px;
+}
+
+.incluye-cableado {
+	font-size: 18px;
+	max-width: 300px;
+}
+
+.disfruta-movistar {
+	font-size: 18px;
+	max-width: 300px;
+}
+
+.alto-imagen {
+	height: 202px;
+}
+
+@media (max-width: 600px) {
+	.complementar-experiencia {
+		font-size: 22px;
+		margin-top: 30px;
+	}
+	.costo-instalacion {
+		padding: 15px 20px 15px 20px;
+		width: 100%;
+		font-size: 15px;
+		color: #009bf1;
+		font-weight: bold;
+		margin-bottom: 30px;
+	}
+	.pidelo-como-trio {
+		font-size: 28px;
+		line-height: 37px;
+	}
+	.migrar-trio {
+		font-size: 18px;
+	}
+	.que-debo-hacer {
+		font-size: 28px;
+		padding-top: 50px !important;
+	}
+	.bloques-premium {
+		font-size: 18px;
+		margin-top: 20px;
+		max-width: 800px;
+		line-height: 25px;
+		position: relative;
+		z-index: 2;
+		bottom: 100px;
+	}
+	.importante1,
+	.importante2,
+	.importante3,
+	.importante4,
+	.importante5 {
+		font-size: 15px !important;
+		margin-bottom: 0px;
+	}
+	.contenido1,
+	.contenido2,
+	.contenido3,
+	.contenido4,
+	.contenido5 {
+		max-width: 300px;
+		font-size: 15px;
+		line-height: 22px;
+		margin-top: 0px;
+		margin-bottom: 40px;
+	}
+	.conoce-facturacion {
+		font-size: 28px;
+		margin-top: 40px;
+	}
+	.imagen-facturacion {
+		width: 340px;
+		height: 89px;
+	}
+	.preguntas-frecuentes-hogar {
+		font-size: 24px;
+		margin-top: 40px;
+	}
+	.pregunta1,
+	.pregunta2,
+	.pregunta3,
+	.pregunta4,
+	.pregunta5,
+	.pregunta6,
+	.pregunta7,
+	.pregunta8,
+	.pregunta9 {
+		font-size: 14px;
+	}
+	.respuesta1,
+	.respuesta2,
+	.respuesta3,
+	.respuesta4,
+	.respuesta5,
+	.respuesta6,
+	.respuesta7,
+	.respuesta8,
+	.respuesta9 {
+		font-size: 14px;
+	}
+	.disfruta-corporativos {
+		max-width: 780px;
+		font-size: 16px;
+		line-height: 22px;
+	}
+	.img-repetidor-smart {
+		height: 100px;
+		margin-top: 60px;
+	}
+	.repetidor-smart {
+		font-size: 16px;
+	}
+	.repetidor-mensual {
+		font-size: 18px;
+	}
+	.incluye-cableado {
+		font-size: 16px;
+		max-width: 300px;
+	}
+	.disfruta-movistar {
+		font-size: 16px;
+		max-width: 300px;
+	}
+	.alto-imagen {
+		height: 120px;
+	}
+}

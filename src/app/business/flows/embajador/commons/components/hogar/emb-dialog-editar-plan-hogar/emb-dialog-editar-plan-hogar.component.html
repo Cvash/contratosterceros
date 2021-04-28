@@ -1,0 +1,117 @@
+<h2 mat-dialog-title class="titulo text-center main-title">Formulario para editar Planes</h2>
+	<div class="d-flex justify-content-center">
+		<div class="">
+			<form class="card tarjeta-plan" [formGroup]="PlanFormHogar">
+				<div class="card-body cabecera" style="padding: 0 20px;">
+					<div style="display: flex;flex-wrap: wrap;justify-content: center;">
+						<img src="../../../../../../../../assets/images/media/logos/logo-movistar.png" alt="logo" width="100px" height="100px">
+					</div>
+					<div class="row form-group">
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<label class="detalles-planes" for="plan_type">Tipo de Plan</label>
+							<input formControlName="plan_type" class="form-control" id="plan_type" type="text" placeholder="Tipo Plan" value="{{ data.plan.plan_type }}"/>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<label class="detalles-planes" for="cant_mbps">Velocidad en Mbps*</label>
+							<input formControlName="cant_mbps" class="form-control" id="cant_mbps" type="text" class="form-control" placeholder="Cantidad Megas"
+									value="{{ data.plan.cant_mbps }}" />
+							
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<label class="detalles-planes" for="emb_price"> Precio Embajador : S/</label>
+							<input formControlName="emb_price" type="text" class="form-control" placeholder="Precio embajador"
+							value="{{ data.plan.emb_price }}" />
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6">
+							<label class="detalles-planes" for="regular_price">Precio Regular: S/</label>
+							<input formControlName="regular_price" type="text" class="form-control" placeholder="Precio regular"
+							value="{{ data.plan.regular_price }}" />
+							
+						</div>
+					</div>
+
+					<div class="btn-block">
+						<button class="call-button">Lo quiero</button>
+					</div>
+				</div>
+				<div class="d-flex justify-content-center">
+					<img src="../../../../../../../assets/images/beneficios_hogar_4x.PNG"
+						style="width: auto; border-bottom: 1px solid #f4f4f3; width: 270px;" alt="beneficios" />
+				</div>
+				<div style="border-bottom: 1px solid #f4f4f3;">
+					<div class="mt-3 p-2">
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-6 form-group">
+								<label class="detalles-planes">
+									<img src="../../../../../../../assets/images/Bono.png" alt="Telefonica" />
+									Bono</label>
+								<input formControlName="bono" type="text" class="form-control" placeholder="Bono" value="{{ data.plan.bono }}" />
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-6 form-group">
+								<label class="detalles-planes">
+									<img src="../../../../../../../assets/images/emb-tv.png" alt="Telefonica" />
+									TV</label>
+								<input formControlName="tv" type="text" class="form-control" placeholder="TV" value="{{ data.plan.tv }}" />
+
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-6 form-group">
+								<label class="detalles-planes">
+									<img src="../../../../../../../assets/images/emb-modem.png" alt="Telefonica" />
+									<strong>Módem Smart WiFi</strong></label>
+									<input formControlName="modem" type="text" class="form-control" placeholder="Modem" value="{{ data.plan.modem }}" />
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-6 form-group">
+								<label class="detalles-planes">
+									<img src="../../../../../../../assets/images/emb-telefono.png" alt="Telefonica" />
+									Línea Fija</label>
+									<input formControlName="linea_fija" type="text" class="form-control" placeholder="Línea fija"
+									value="{{ data.plan.linea_fija }}" /> 
+							</div>
+						</div>
+						
+						<div class="d-flex align-items-center" style="margin-bottom: 33px;">
+							<div style="display: flex;flex-wrap: wrap;justify-content: center;text-align: center;">
+								<img src="../../../../../../../assets/images/emb-wifi.png" alt="Telefonica" />
+							<div class="detalles-planes">Velocidad de internet</div>
+							</div>
+							<div style="display: flex;flex-wrap: wrap;justify-content: center;" class="ml-2">
+								<div>
+									<strong>Máxima descarga
+										<input formControlName="max_descarga" class="form-control" type="text" placeholder="Máxima descarga"
+											value="{{ data.plan.max_descarga }}" />
+										Mbps</strong>
+								</div>
+								<div>
+									Máxima de subida
+									<input formControlName="max_subida" class="form-control" type="text" placeholder="Máxima subida"
+										value="{{ data.plan.max_subida }}" />
+									Mbps
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				
+				<div class="d-flex justify-content-center">
+					<div class="d-flex justify-content-center mb-3 mr-3">
+						<button type="submit" mat-raised-button color="primary" class="btn" 
+							(click)="savePlan(PlanFormHogar.value)">
+							Actualizar
+						</button>
+					</div>
+					<div class="d-flex justify-content-center mb-3">
+						<button mat-raised-button color="warn" mat-dialog-close mat-dialog-close="false" class="btn btn-danger">
+							Cancelar
+						</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>

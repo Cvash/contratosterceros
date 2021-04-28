@@ -1,0 +1,42 @@
+<h2 mat-dialog-title class="titulo text-center">Datos del quiebre</h2>
+
+<mat-dialog-content>
+	<div class="d-flex justify-content-center">
+    
+    <table aria-describedby="table1" class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col"><strong>Estado:</strong></th>
+          <td>{{data.element.id_dhr_red_status.name}} </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><strong>Fecha ultima actualización:</strong></th>
+          <td>{{data.element.updatedAt | date:'dd-MM-yyyy h:mm:ss a'}}</td>  
+        </tr>
+        <tr>
+          <th scope="row"><strong>Comentario sobre el proceso del quiebre</strong></th>
+          <td>{{data.element.comment}}</td>
+        </tr>
+        <tr>
+          <th scope="row"><strong>Motivo:</strong></th>
+          <td>{{data.element.id_dhr_incident_submotivo.name}}</td>
+        </tr>
+        <tr>
+          <th scope="row"><strong>Submotivo</strong></th>
+          <td>{{data.element.id_dhr_incident_submotivo.id_dhr_incident_motivo.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    
+  </div>
+  <div class="d-flex justify-content-center">
+    <div>
+      <button mat-raised-button color="warn" mat-dialog-close mat-dialog-close="true">
+        Salir
+      </button>
+    </div>
+  </div>
+</mat-dialog-content>

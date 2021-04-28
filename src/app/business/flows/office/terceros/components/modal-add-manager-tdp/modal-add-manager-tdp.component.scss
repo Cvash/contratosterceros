@@ -1,0 +1,60 @@
+
+.add-gestor{
+    font-weight: 600;
+    border: solid 2px #b80843;
+    background: #fff;
+    padding: 3px 10px;
+    color: #b80843 !important;
+    text-decoration: none !important;
+    margin: 5px;
+    transition: ease 0.3s;
+}
+.add-gestor:hover{
+    cursor: pointer;
+    color: #fff !important;
+    background-color: #b80843;
+}
+// tabla
+.terceros-table{
+    width: 100%;
+    //border: solid 1px #ddd;
+}
+.terceros-table tr{
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+.terceros-table td {
+    padding: 5px;
+    text-align: center;
+}
+.terceros-table th{
+    text-align: center;
+    padding: 5px;
+    background-color: #00a9e0;
+    color: #ffffff;
+    font-size: 13px;
+   
+}
+.return-panel{
+    text-align: center;
+    padding: 5px;
+    background-color: #b80843;
+    color: #ffffff;
+    font-size: 13px;
+}
+.search-employee{
+    display: block;padding: 5px;border-radius: 5px;background-color: #00a9e0;color: #ffffff;padding-top:5px;cursor: pointer;font-size: 15px;
+}
+.main-title{
+    display: block;background-color: #00a9e0;color: #ffffff;font-size: 15px;
+}
+.show-description{
+    text-align: justify;font-size: 13px;color: #00a9e0;margin-top: 5px;padding: 5px;border:1px groove #00a9e0;border-radius: 5px;
+}
+.container-steps{
+    display: block;border-radius: 5px;border-color: #b80843;width: 100%;
+}
+
+.close-add-manager-tdp{ 
+    float: right;cursor: pointer;color: #ffffff;margin-right: 2px;font-size: 25px;margin-bottom: 5px;
+}

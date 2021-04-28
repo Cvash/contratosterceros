@@ -18,3 +18,39 @@
     outline: none;
     box-shadow: none;
 }
+/* Comienza la tabla del backend */
+#tabla1 {
+    overflow-x: scroll;
+    height: 500px;
+    width: 1275px;
+}
+#tabla1 table {
+    width: 400px;
+}
+/*  Inicio Termina la tabla del backend */
+
+/* Paginacion de la tabla  */
+.mat-form-field {
+    margin-right: 12px;
+  }
+
+  #pagination {
+      position: -webkit-sticky;
+      position: sticky;
+      right: 0;
+  }
+/* Fin Paginacion de la tabla  */
+
+.cont-pagination {
+    float: right;
+}
+
+.movistar-celeste {
+    background-color:  #2AA0EC;
+    color: #ffffff;
+}
+
+/* Botones de la tabla */
+.boton-movistar {
+    background-color: #2593B5;
+}

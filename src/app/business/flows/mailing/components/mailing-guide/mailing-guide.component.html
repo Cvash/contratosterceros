@@ -1,0 +1,143 @@
+<div class="cuerpo">
+    <div>
+        <p class="main-title">Contenido</p>
+        <ul>           
+            <li>Preparando el Excel</li>
+            <li>Enviando correos personalizados</li>
+            <li>Creando y guardando templates</li>
+            <li>Adjuntando archivos personalizados</li>
+            <li>Usando condicionales</li>
+        </ul>
+    </div>
+    <div>
+        <p class="sub-title">Preparando el excel</p>
+        <div class="par">
+            Lo primero que necesitamos es preparar el archivo Excel con la información que usaremos para generar los correos. Los datos deben ser ordenados en una tabla simple donde cada columna tenga un encabezado que la identifique. Podemos agregar las columnas que queramos siempre y cuando se respete la estructura de tabla. Las únicas restricciones del archivo son:
+            <ul class="guide_list">
+                <li>La hoja en la que está la información debe ser nombrada como "Hoja1".</li>
+                <li>Es obligatoria una columna con el encabezado "Correo" que contega los destinatarios.</li>                    
+                <li>Formatos especiales como fechas debe escribirse como texto (con el prefijo: ' )</li>
+            </ul>
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_1.png" alt="guide_1"/>  
+            </div>                    
+            En este ejemplo, nuestro archivo tiene 6 columnas: DNI, Correo, Copia, Nombre, Secreto y Fecha; y además, cumple con las tres restricciones.
+        </div>
+        <p class="sub-title">Enviando correos personalizados</p>
+        <div class="par">
+            Ahora que tenemos nuestro excel listo, el siguiente paso es cargarlo en la aplicación. Para eso vamos a la sección Mailing, buscamos el botón "<strong>seleccionar Excel</strong>" y cargamos nuestro libro.
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_2.png" alt="guide_2" />  
+            </div>  
+            La aplicación mapeará automáticamente nuestra tabla. Para validar que todo salió bien, podemos hacer click en <span style="color: #00a9e0;">(ver disponibles)</span>. Esto abrirá un pop-up con la lista de <strong>palabras clave</strong> disponibles. Una palabra clave tiene la forma ["@" + encabezado] y servirá para poder hacer referencia a una columna de nuestro archivo. En nuestro ejemplo, si queremos hacer referencia a la columna con los destinatarios tendríamos que escribir: @Correo.
+            <br><br>
+            Ahora que cargamos el archivo, ¡es momento de redactar el correo usando las palabras clave! 
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_3.png" alt="guide_3" />  
+            </div> 
+            Como vemos, podemos usar [@+encabezado] en cualquier parte del mail. En este caso usamos @Correo para el destinatario, @Copia para copiar a otro destinatario y @Nombre para saludar. Esto será reemplazado posteriormente por su respectivo valor. Además, podemos agregar copia (CC) y copia oculta (CCO) si lo necesitamos.
+            <br><br>
+            Antes de enviar los correos podemos generar una <strong>pre visualización</strong> para verificar que las palaras clave se están reemplazando correctamente.          
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_4.png" alt="guide_4" />  
+            </div> 
+            En nuestro ejemplo estamos pre visualizando la primera fila de la tabla de excel, que era el correo para Antony. Si es necesario, también podemos cambiar la pre visualización para ver las demás filas con el botón <span style="color: #00a9e0;"><strong>[>]</strong></span>. 
+            <br>
+            Si todo está bien, solo quedaría hacer click en enviar y listo. 
+            <div class="guide_hightlight">
+                <strong>¡Recuerda!</strong> Los correos se enviarán desde la <strong>nube</strong>, por lo que no es necesario dejar la aplicación abierta. 
+                En cualquier momento podemos revisar el estado de nuestro envío en la pestaña <strong>Status</strong>.</div>
+        </div>
+        <p class="sub-title">Creando y usando plantillas</p>
+        <div class="par">
+            Si además de correos personalizados, necesitamos que estos sean recurrentes, tenemos la posibilidad de crear plantillas. Las plantillas que guardemos serán almacenadas por la aplicación para usarlas las veces que sean necesarias en el futuro. 
+            <br>
+            No es necesario cargar un excel para crear una plantilla, las plantillas son independientes. Si luego cargamos una plantilla, debemos asegurarnos que nuestra hoja de excel contenga todas las columnas a las que estamos haciendo referencia.     
+            <p>Guardar plantilla:</p>
+            Para guardar una plantilla primero debemos ponerle un título con el que la identificaremos luego, y hacer click en guardar.
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_5.png" alt="guide_5" />  
+            </div> 
+            <p>Cargar plantillas:</p>
+            Para cargar una plantilla hacemos click en el botón "Plantillas" y seleccionamos el título de la plantilla que queremos cargar.
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_6.png" alt="guide_6" />  
+            </div> 
+            Todos los campos se llenarán automáticamente con los valores de la plantilla. 
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_7.png" alt="guide_7" />  
+            </div> 
+            Si queremos, podemos hacer cambios en nuestra plantilla  y guardarlos haciendo click en "Guardar".  
+        </div>
+        <p class="sub-title">Adjuntando archivos</p>
+        <div class="par">
+            Existen dos formas en las que podemos adjuntar archivos: archivos generales, que les llegarán a todos los destinatarios; y archivos personalizados, que se adjuntarán según nuestra tabla de excel.
+            <br>
+            Para los adjuntos tradicionales basta con hacer click en "Adjuntar" y seleccionar la opción "General". Luego seleccionamos el archivo y listo, el adjunto les llegará a todos los destinatarios de la lista.
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_8.png" alt="guide_8" />  
+            </div> 
+            <h5>Adjuntos personalizados</h5>
+            Para adjuntar archivos personalizados debemos seguir una serie de pasos antes de generar los correos.
+            <br>
+            Lo primero es saber qué archivos vamos a enviar a cada destinatario y cómo se llama el archivo. En nuestro ejemplo teníamos 5 destinatarios, así que vamos a enviarle un pdf diferente a cada uno. Imaginemos que a cada pdf lo nombramos con el DNI del usuario, ahora tendríamos que agregar el nombre de esos archivos a nuestro excel (incluyendo la extensión, e este caso ".pdf").
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_9.png" alt="guide_9" />  
+            </div> 
+            El siguiente paso es cargar los archivos al sistema. Para eso vamos a la sección "Adjuntos personalizados" y seleccionamos "carga de archivos".
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_10.png" alt="guide_10" />  
+            </div> 
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_11.png" alt="guide_11"/>  
+            </div> 
+            El la ventana emergente, seleccionamos "Agregar archivo" y buscamos todos nuestros archivos. 
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_12.png" alt="guide_12"/>  
+            </div> 
+            El estado nos mostrará si nuestro pdf se cargó correctamente. Una vez que tengamos un check en todos, ya estamos listos para enviar el correo.
+            <br>
+            Ahora, basta con elegir en el menú "Adjunto" la opción personalizado y con el uso de palabras clave hacer referencia a la columna de nuestra tabla donde colocamos el nombre de los adjuntos. En nuestro ejemplo, la columna era Adjunto, así que la referenciaremos colocando @Adjunto.
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_13.png" alt="guide_13" />  
+            </div> 
+            Eso es todo, ahora solo queda hacer click en enviar.
+        </div>
+        <p class="sub-title">Usando condicionales</p>
+        <div class="par">
+            Una posibilidad extra de personalización es el uso de condicionales. Gracias a esta característica podemos enviar contenido diferenciado a ciertos grupos de nuestros destinatarios según reglas que nosotros mismos podemos definir.
+            <br>
+            Es importante saber cuando usar esta característica, porque podríamos lograr un resultado similar agregando una columna a nuestra tabla con el contenido diferenciado y simplemente llamarlo usando una palabra clave.
+            <br>
+            <br>
+            Veamos un ejemplo. Imaginemos que se realizó un concurso y queremos informar a todos los participantes si ganaron o no. Entonces, creamos una columna resultados y la utilizamos con @Resultados. ¡Listo!, ya conseguimos lo que queríamos.
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_15.png" alt="guide_15"/>  
+            </div> 
+            Ahora, ¿qué pasa si queremos más personalización? por ejemplo, que el mensaje de felicitación tenga un color diferente, o agregar una imagen al mensaje de "sigue intentando". Para esos casos sí conviene usar los condicionales.
+            <br>
+            Primero, cambiemos nuestra columna <strong>Resultado</strong> para mostrar el puesto. 
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_16.png" alt="guide_16" />  
+            </div> 
+            Ahora, si cargamos el Excel podremos ver que en la parte inferior del cuerpo del mensaje se habilita una nueva opción: Condicionales.
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_17.png" alt="guide_17"/>  
+            </div> 
+            Al activar los condicionales, nuestra área de texto inmediatamente se dividirá en secciones. La sección superior e inferir funcionan como siempre y las podemos usar para agregar un encabezado y un pie de correo igual para todos los casos.
+            La magia sucede en las secciones encerradas en azul. Inicialmente tenemos una, pero podemos agregar las que sean necesarias haciendo click en el botón <strong>[ + Nuevo caso ]</strong>. 
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_17.png" alt="guide_17" />  
+            </div>
+            Funciona de una forma muy simple: primero seleccionamos un criterio de evaluación (una columna de nuestra tabla) y en cada caso hacemos una comparación. Todos los casos que no coincidan irán al <strong>Caso por defecto</strong>.
+            <div class="guide_img">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_18.png" alt="guide_18" />  
+            </div>
+            En nuestro ejemplo compararemos “Resultado” y agregaremos dos casos: “Primero” y “Segundo”. De esta forma le enviaremos un mensaje personalziado y con estilo al primer y segundo lugar del concurso. Los demás puestos caerán en <strong>Caso por defecto</strong> y solo recibirán una imagen. Los resultados serían como se muestra en la image:
+            <br>
+            <div class="guide_img_xl">
+                <img src="../../../../../../assets/images/media/images/mailing_guide/guide_19.png" alt="guide_19"/>  
+            </div>
+        </div>
+    </div>
+</div>
