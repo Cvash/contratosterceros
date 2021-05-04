@@ -2,6 +2,7 @@
 .buttom {
     margin-right: 15px;
     font-size: 1.2em;
+    
 }
 
 .espace {
@@ -44,13 +45,16 @@
 .cont-pagination {
     float: right;
 }
+.buttom-movistar {
+    margin-right: 1px;
+    font-size: 1.055em;
+    background-color: #065670;
+    color : #ffffff;
+}
 
 .movistar-celeste {
     background-color:  #2AA0EC;
     color: #ffffff;
 }
 
-/* Botones de la tabla */
-.boton-movistar {
-    background-color: #2593B5;
-}
+
