@@ -11,7 +11,7 @@ import { MapasComponent } from './pages/mapas/mapas.component';
 import { PeriodoVigenteComponent } from './pages/periodo-vigente/periodo-vigente.component';
 
 const routes: Routes = [
-  { path: '',               component: TablaComponent, pathMatch: 'full' },
+  { path: 'home',           component: TablaComponent, pathMatch: 'full' },
   { path: 'baseHistorica',  component: BaseHistoricaComponent },
   { path: 'favoritos',      component: FavoritosComponent },
   { path: 'gestores',       component: GestoresComponent },
@@ -21,6 +21,8 @@ const routes: Routes = [
   { path: 'tabla',          component: DashboardComponent },
   { path: '**', redirectTo: '' }
 ];
+
+
 
 @NgModule({
   imports: [

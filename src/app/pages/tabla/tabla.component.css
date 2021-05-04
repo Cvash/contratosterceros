@@ -64,31 +64,3 @@
 }
 
 
-
-		#menu{
-			background-color: #065670;
-            
-		}
-
-		#menu ul{
-			list-style: none;
-			margin: 4;
-			padding: 0;
-		}
-
-		#menu ul li{
-			display: inline-block;
-		}
-
-		#menu ul li a{
-			color: white;
-			display: block;
-			padding: 10px 10px;
-			text-decoration: none;
-		}
-
-		
-
-		.item-r{
-			float: right;
-		}
